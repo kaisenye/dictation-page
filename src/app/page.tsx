@@ -1,10 +1,13 @@
 import { Button } from '@/components/ui/button'
-import { ArrowDown, Zap } from 'lucide-react'
 import { FaApple } from 'react-icons/fa'
+import Navbar from '@/components/Navbar'
 
 export default function Home() {
   return (
     <div className="h-screen w-screen overflow-hidden bg-black">
+      {/* Navbar */}
+      <Navbar />
+
       {/* Video Banner Section - Full Screen */}
       <section className="relative h-full w-full">
         {/* Video Background */}
