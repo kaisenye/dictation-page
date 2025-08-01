@@ -1,5 +1,4 @@
 import { Button } from '@/components/ui/button'
-import { FaApple } from 'react-icons/fa'
 import Navbar from '@/components/Navbar'
 
 export default function Pricing() {
