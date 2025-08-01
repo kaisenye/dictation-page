@@ -1,4 +1,4 @@
-# TechFlow - Minimal Tech Product Landing Page
+# Romo - Minimal Tech Product Landing Page
 
 A clean, minimal tech product landing page with full-screen video banner and Mac download buttons.
 
