@@ -8,48 +8,55 @@ export default function Features() {
       {/* Content */}
       <div className="container mx-auto px-4 pt-36 pb-24">
         <div className="max-w-lg mx-auto">
-          <h1 className="text-2xl md:text-3xl font-bold mb-8 text-center">What do you get?</h1>
+          <h1 className="text-2xl md:text-3xl font-bold mb-8 text-center">What makes it different?</h1>
 
           <div className="grid md:grid-cols-1 gap-8">
-            <div className="bg-gray-900/50 p-6 rounded-lg border border-gray-800">
+            <div className="bg-neutral-900/50 p-6 rounded-lg border border-neutral-800">
               <h3 className="text-xl font-semibold mb-3">Local AI Assistant</h3>
               <p className="text-gray-300">
-                Powerful AI capabilities that run entirely on your device. No internet required, no data sent to
-                servers.
+                Say goodbye to cloud delays and privacy concerns. Everything runs right on your Mac — fast, secure, and
+                offline.
               </p>
             </div>
 
-            <div className="bg-gray-900/50 p-6 rounded-lg border border-gray-800">
-              <h3 className="text-xl font-semibold mb-3">Voice Dictation</h3>
+            <div className="bg-neutral-900/50 p-6 rounded-lg border border-neutral-800">
+              <h3 className="text-xl font-semibold mb-3">Smarter Voice Dictation</h3>
               <p className="text-gray-300">
-                Convert your speech to text with high accuracy. Perfect for writing, note-taking, and accessibility.
+                It doesn’t just transcribe — it listens. Autocorrects typos, formats as you speak, and adapts to how you
+                write emails, to-dos, or blog posts.
               </p>
             </div>
 
-            <div className="bg-gray-900/50 p-6 rounded-lg border border-gray-800">
-              <h3 className="text-xl font-semibold mb-3">Privacy Focused</h3>
+            <div className="bg-neutral-900/50 p-6 rounded-lg border border-neutral-800">
+              <h3 className="text-xl font-semibold mb-3">Understands Context</h3>
               <p className="text-gray-300">
-                Your data never leaves your device. All processing happens locally, ensuring complete privacy.
+                Know the difference between a task list and a journal entry. Automatically adjusts tone, structure, and
+                punctuation to fit your intent.
               </p>
             </div>
 
-            <div className="bg-gray-900/50 p-6 rounded-lg border border-gray-800">
-              <h3 className="text-xl font-semibold mb-3">Mac Optimized</h3>
+            <div className="bg-neutral-900/50 p-6 rounded-lg border border-neutral-800">
+              <h3 className="text-xl font-semibold mb-3">Built for macOS</h3>
               <p className="text-gray-300">
-                Built specifically for macOS with native performance. Supports both Apple Silicon and Intel processors.
+                Native performance. Zero bloat. Works beautifully on Apple Silicon and Intel — like it was made just for
+                your Mac (because it was).
               </p>
             </div>
 
-            <div className="bg-gray-900/50 p-6 rounded-lg border border-gray-800">
-              <h3 className="text-xl font-semibold mb-3">Offline Capable</h3>
+            <div className="bg-neutral-900/50 p-6 rounded-lg border border-neutral-800">
+              <h3 className="text-xl font-semibold mb-3">Truly Offline</h3>
               <p className="text-gray-300">
-                Works completely offline. No internet connection required for any features.
+                No internet? No problem. Dictate anywhere — airplane, cabin, basement bunker. Your data stays with you,
+                always.
               </p>
             </div>
 
-            <div className="bg-gray-900/50 p-6 rounded-lg border border-gray-800">
-              <h3 className="text-xl font-semibold mb-3">Easy Integration</h3>
-              <p className="text-gray-300">Seamlessly integrates with your existing workflow and applications.</p>
+            <div className="bg-neutral-900/50 p-6 rounded-lg border border-neutral-800">
+              <h3 className="text-xl font-semibold mb-3">Fits Right In</h3>
+              <p className="text-gray-300">
+                Drop your notes into Notion, email drafts into Apple Mail, or tasks into Things. It plays nice with your
+                workflow.
+              </p>
             </div>
           </div>
         </div>

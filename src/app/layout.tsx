@@ -13,8 +13,13 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Romo',
-  description: 'Romo',
+  title: "Romo - Don't type. Just Talk.",
+  description: 'Local AI assistant, dictation, and a friendly companion. Privacy-focused and built for Mac.',
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/apple-icon.png',
+  },
 }
 
 export default function RootLayout({

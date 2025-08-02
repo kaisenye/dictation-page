@@ -21,7 +21,7 @@ export default function About() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold mb-4">Privacy First</h2>
+              <h2 className="text-xl font-semibold mb-4">Privacy First</h2>
               <p className="text-gray-300 leading-relaxed">
                 We believe in the fundamental right to privacy. That&apos;s why Romo runs entirely on your local
                 machine. No data is sent to external servers, no cloud processing, no tracking. Your conversations, your
@@ -30,7 +30,7 @@ export default function About() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold mb-4">Built for Mac</h2>
+              <h2 className="text-xl font-semibold mb-4">Built for Mac</h2>
               <p className="text-gray-300 leading-relaxed">
                 Optimized for macOS, Romo takes full advantage of Apple&apos;s powerful hardware. Whether you&apos;re
                 using Apple Silicon or Intel processors, Romo delivers smooth, responsive performance that enhances your
