@@ -31,6 +31,7 @@ export default function Pricing() {
                 <li className="flex justify-center items-center">Smart Dictation</li>
                 <li className="flex justify-center items-center">Privacy Focused</li>
                 <li className="flex justify-center items-center">Offline Capable</li>
+                <li className="flex justify-center items-center">No Subscription</li>
               </ul>
 
               <div className="space-y-3">
@@ -63,13 +64,14 @@ export default function Pricing() {
                 </span>
               </div>
               <h2 className="text-xl font-bold mb-2">Pro</h2>
-              <div className="text-3xl font-bold mb-2">$29</div>
-              <p className="text-neutral-400 mb-6">One-time purchase</p>
+              <div className="text-3xl font-bold mb-2">$5</div>
+              <p className="text-neutral-400 mb-6">per month</p>
 
               <ul className="flex flex-col align-center justify-center gap-3 mb-8">
                 <li className="flex justify-center items-center">Everything in Free</li>
                 <li className="flex justify-center items-center text-indigo-300 font-bold">AI Agent Mode</li>
                 <li className="flex justify-center items-center">Lifetime Updates</li>
+                <li className="flex justify-center items-center">Cancel Anytime</li>
               </ul>
 
               <div className="space-y-3">
