@@ -12,7 +12,7 @@ export default function Features() {
 
           <div className="grid md:grid-cols-1 gap-8">
             <div className="bg-neutral-900/50 p-6 rounded-lg border border-neutral-800">
-              <h3 className="text-xl font-semibold mb-3">Local AI Assistant</h3>
+              <h3 className="text-xl font-semibold mb-3">Local AI Assistant!</h3>
               <p className="text-gray-300">
                 Say goodbye to cloud delays and privacy concerns. Everything runs right on your Mac — fast, secure, and
                 offline.
