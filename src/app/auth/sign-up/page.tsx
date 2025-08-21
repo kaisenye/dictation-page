@@ -4,40 +4,29 @@ import { useRouter } from "next/navigation"
 import Link from "next/link"
 import AuthLayout from "@/components/auth/auth-layout"
 import SignUpForm from "@/components/auth/sign-up-form"
+import { useAuth } from "@/components/auth/auth-provider"
 import type { SignUpFormData } from "@/lib/validations/auth"
 
 export default function SignUpPage() {
   const router = useRouter()
+  const { signUp } = useAuth()
 
   const handleSignUp = async (data: SignUpFormData) => {
     try {
-      // TODO: Replace with actual API call to your backend
       console.log("Sign up attempt:", data)
       
-      // Remove confirmPassword before sending to API
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { confirmPassword, ...apiData } = data
+      // Use Supabase authentication via our auth provider
+      // Note: confirmPassword is handled by client-side validation, 
+      // we don't need to send it to Supabase
+      const { error } = await signUp(data.email, data.password, data.name)
       
-      // Simulate API call
-      const response = await fetch("/api/auth/sign-up", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(apiData),
-      })
-
-      if (!response.ok) {
-        const error = await response.json()
-        throw new Error(error.message || "Account creation failed")
+      if (error) {
+        throw new Error(error)
       }
-
-      // TODO: Store auth tokens (localStorage, cookies, or state management)
-      // const result = await response.json()
-      // localStorage.setItem("accessToken", result.accessToken)
       
-      // Redirect to onboarding, dashboard, or email verification
-      router.push("/welcome") // Adjust redirect path as needed
+      // Success! User account created
+      // Supabase might require email verification, so redirect appropriately
+      router.push("/dashboard")
       
     } catch (error) {
       // Re-throw error so SignUpForm can display it

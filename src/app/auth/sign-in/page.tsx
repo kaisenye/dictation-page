@@ -4,36 +4,27 @@ import { useRouter } from "next/navigation"
 import Link from "next/link"
 import AuthLayout from "@/components/auth/auth-layout"
 import SignInForm from "@/components/auth/sign-in-form"
+import { useAuth } from "@/components/auth/auth-provider"
 import type { SignInFormData } from "@/lib/validations/auth"
 
 export default function SignInPage() {
   const router = useRouter()
+  const { signIn } = useAuth()
 
   const handleSignIn = async (data: SignInFormData) => {
     try {
-      // TODO: Replace with actual API call to your backend
       console.log("Sign in attempt:", data)
       
-      // Simulate API call
-      const response = await fetch("/api/auth/sign-in", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      })
-
-      if (!response.ok) {
-        const error = await response.json()
-        throw new Error(error.message || "Sign in failed")
-      }
-
-      // TODO: Store auth tokens (localStorage, cookies, or state management)
-      // const result = await response.json()
-      // localStorage.setItem("accessToken", result.accessToken)
+      // Use Supabase authentication via our auth provider
+      const { error } = await signIn(data.email, data.password)
       
-      // Redirect to dashboard or home page
-      router.push("/dashboard") // Adjust redirect path as needed
+      if (error) {
+        throw new Error(error)
+      }
+      
+      // Success! User will be automatically redirected by middleware
+      // to protected pages, but we can also manually redirect
+      router.push("/dashboard")
       
     } catch (error) {
       // Re-throw error so SignInForm can display it
