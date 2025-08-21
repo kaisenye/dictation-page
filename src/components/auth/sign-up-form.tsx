@@ -20,11 +20,11 @@ export default function SignUpForm({ onSubmit, isLoading = false }: SignUpFormPr
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isSubmitted },
     watch,
   } = useForm<SignUpFormData>({
     resolver: zodResolver(signUpSchema),
-    mode: "onBlur",
+    mode: "onSubmit", // Only validate when form is submitted
   })
 
   // Watch all fields for validation feedback
@@ -78,6 +78,8 @@ export default function SignUpForm({ onSubmit, isLoading = false }: SignUpFormPr
           disabled={isFormDisabled}
           isValid={isFieldValid("name", name || "")}
           hasError={!!errors.name}
+          showValidationOnlyAfterSubmit={true}
+          isSubmitted={isSubmitted}
           value={name || ""}
           {...register("name")}
           aria-invalid={!!errors.name}
@@ -99,6 +101,8 @@ export default function SignUpForm({ onSubmit, isLoading = false }: SignUpFormPr
           disabled={isFormDisabled}
           isValid={isFieldValid("email", email || "")}
           hasError={!!errors.email}
+          showValidationOnlyAfterSubmit={true}
+          isSubmitted={isSubmitted}
           value={email || ""}
           {...register("email")}
           aria-invalid={!!errors.email}
@@ -120,6 +124,8 @@ export default function SignUpForm({ onSubmit, isLoading = false }: SignUpFormPr
           disabled={isFormDisabled}
           isValid={isFieldValid("password", password || "")}
           hasError={!!errors.password}
+          showValidationOnlyAfterSubmit={true}
+          isSubmitted={isSubmitted}
           value={password || ""}
           {...register("password")}
           aria-invalid={!!errors.password}
@@ -151,6 +157,8 @@ export default function SignUpForm({ onSubmit, isLoading = false }: SignUpFormPr
           disabled={isFormDisabled}
           isValid={isFieldValid("confirmPassword", confirmPassword || "")}
           hasError={!!errors.confirmPassword}
+          showValidationOnlyAfterSubmit={true}
+          isSubmitted={isSubmitted}
           value={confirmPassword || ""}
           {...register("confirmPassword")}
           aria-invalid={!!errors.confirmPassword}

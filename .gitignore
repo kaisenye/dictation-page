@@ -42,3 +42,7 @@ next-env.d.ts
 
 # ai related
 .claude/
+
+# status tracking scripts
+update-status.bat
+update-status.sh
