@@ -1,31 +1,34 @@
 "use client"
 
+import { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import AuthLayout from "@/components/auth/auth-layout"
 import SignInForm from "@/components/auth/sign-in-form"
 import { useAuth } from "@/components/auth/auth-provider"
 import type { SignInFormData } from "@/lib/validations/auth"
+import { Button } from "@/components/ui/button"
+import { FaGoogle } from "react-icons/fa"
 
 export default function SignInPage() {
   const router = useRouter()
-  const { signIn } = useAuth()
+  const { signIn, signInWithOAuth, user } = useAuth()
+
+  // If already signed in, redirect to dashboard
+  useEffect(() => {
+    if (user) {
+      router.replace("/dashboard")
+    }
+  }, [user, router])
 
   const handleSignIn = async (data: SignInFormData) => {
     try {
-      console.log("Sign in attempt:", data)
-      
       // Use Supabase authentication via our auth provider
       const { error } = await signIn(data.email, data.password)
-      
       if (error) {
         throw new Error(error)
       }
-      
-      // Success! User will be automatically redirected by middleware
-      // to protected pages, but we can also manually redirect
       router.push("/dashboard")
-      
     } catch (error) {
       // Re-throw error so SignInForm can display it
       throw error
@@ -38,6 +41,25 @@ export default function SignInPage() {
       subtitle="Sign in to your account to continue"
     >
       <div className="space-y-6">
+        {/* OAuth Provider Sign-in */}
+        <Button
+          type="button"
+          variant="outline"
+          className="w-full"
+          onClick={async () => {
+            const { error } = await signInWithOAuth('google')
+            if (error) throw new Error(error)
+          }}
+        >
+          <FaGoogle className="mr-2 h-4 w-4" />
+          Continue with Google
+        </Button>
+
+        <div className="relative flex items-center justify-center">
+          <span className="text-xs text-neutral-500 px-2 bg-neutral-900/60">or</span>
+          <div className="absolute inset-x-0 top-1/2 h-px bg-neutral-800 -z-10" />
+        </div>
+
         <SignInForm onSubmit={handleSignIn} />
         
         {/* Sign Up Link */}

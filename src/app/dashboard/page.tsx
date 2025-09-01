@@ -1,13 +1,17 @@
 "use client"
 
+import { useRouter } from 'next/navigation'
 import { useAuth } from '@/components/auth/auth-provider'
 import { Button } from '@/components/ui/button'
 
 export default function DashboardPage() {
+  const router = useRouter()
   const { user, signOut } = useAuth()
 
   const handleSignOut = async () => {
     await signOut()
+    // Navigate to sign-in so middleware re-evaluates and the user leaves the protected page
+    router.replace('/auth/sign-in')
   }
 
   return (

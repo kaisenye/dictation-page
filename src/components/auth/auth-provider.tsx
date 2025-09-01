@@ -11,6 +11,7 @@ interface AuthContextType {
   signIn: (email: string, password: string) => Promise<{ error?: string }>
   signUp: (email: string, password: string, name: string) => Promise<{ error?: string }>
   signOut: () => Promise<void>
+  signInWithOAuth: (provider: 'google') => Promise<{ error?: string }>
 }
 
 // Create the context with undefined default (will be provided by AuthProvider)
@@ -119,6 +120,28 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
+  // OAuth sign-in (e.g., Google)
+  const signInWithOAuth = async (provider: 'google') => {
+    try {
+      setLoading(true)
+      const redirectTo = typeof window !== 'undefined' ? `${window.location.origin}/dashboard` : undefined
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider,
+        options: {
+          redirectTo,
+        },
+      })
+      if (error) {
+        return { error: error.message }
+      }
+      return {}
+    } catch {
+      return { error: 'An unexpected error occurred' }
+    } finally {
+      setLoading(false)
+    }
+  }
+
   // Provide auth state and functions to all child components
   const value = {
     user,
@@ -126,6 +149,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     signIn,
     signUp,
     signOut,
+    signInWithOAuth,
   }
 
   return (

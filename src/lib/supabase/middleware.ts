@@ -42,17 +42,22 @@ export async function updateSession(request: NextRequest) {
     '/features', 
     '/pricing',
     '/auth/sign-in',
-    '/auth/sign-up'
+    '/auth/sign-up',
+    '/auth/forgot-password',
+    '/auth/update-password',
+    '/terms',
+    '/privacy',
   ]
 
   // Define protected routes (require authentication)
   const isPublicRoute = publicRoutes.includes(request.nextUrl.pathname)
   const isAuthRoute = request.nextUrl.pathname.startsWith('/auth')
+  const isRecoveryRoute = request.nextUrl.pathname === '/auth/update-password'
   const isApiRoute = request.nextUrl.pathname.startsWith('/api')
   const isNextInternalRoute = request.nextUrl.pathname.startsWith('/_next')
 
   // Redirect authenticated users away from auth pages
-  if (user && isAuthRoute) {
+  if (user && isAuthRoute && !isRecoveryRoute) {
     const url = request.nextUrl.clone()
     url.pathname = '/dashboard' // Where authenticated users should go
     return NextResponse.redirect(url)
