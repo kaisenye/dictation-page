@@ -10,7 +10,7 @@
 
 2. **Add your video:**
 
-   - Place `demo-video.mp4` in the `public/` folder
+   - Place `demo.mp4` in the `public/` folder
    - Or update the video source in `src/app/page.tsx`
 
 3. **Start development:**
@@ -25,7 +25,7 @@
 
 - **Brand name**: Update "TechFlow" in `src/app/page.tsx`
 - **Download links**: Replace button URLs with actual download links
-- **Video**: Replace `demo-video.mp4` with your video file
+- **Video**: Replace `demo.mp4` with your video file
 
 ## Tech Stack
 

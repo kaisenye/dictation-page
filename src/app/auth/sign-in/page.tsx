@@ -1,40 +1,34 @@
 "use client"
 
+import { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import AuthLayout from "@/components/auth/auth-layout"
 import SignInForm from "@/components/auth/sign-in-form"
+import { useAuth } from "@/components/auth/auth-provider"
 import type { SignInFormData } from "@/lib/validations/auth"
+import { Button } from "@/components/ui/button"
+import { FaGoogle } from "react-icons/fa"
 
 export default function SignInPage() {
   const router = useRouter()
+  const { signIn, signInWithOAuth, user } = useAuth()
+
+  // If already signed in, redirect to dashboard
+  useEffect(() => {
+    if (user) {
+      router.replace("/dashboard")
+    }
+  }, [user, router])
 
   const handleSignIn = async (data: SignInFormData) => {
     try {
-      // TODO: Replace with actual API call to your backend
-      console.log("Sign in attempt:", data)
-      
-      // Simulate API call
-      const response = await fetch("/api/auth/sign-in", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      })
-
-      if (!response.ok) {
-        const error = await response.json()
-        throw new Error(error.message || "Sign in failed")
+      // Use Supabase authentication via our auth provider
+      const { error } = await signIn(data.email, data.password)
+      if (error) {
+        throw new Error(error)
       }
-
-      // TODO: Store auth tokens (localStorage, cookies, or state management)
-      // const result = await response.json()
-      // localStorage.setItem("accessToken", result.accessToken)
-      
-      // Redirect to dashboard or home page
-      router.push("/dashboard") // Adjust redirect path as needed
-      
+      router.push("/dashboard")
     } catch (error) {
       // Re-throw error so SignInForm can display it
       throw error
@@ -47,6 +41,25 @@ export default function SignInPage() {
       subtitle="Sign in to your account to continue"
     >
       <div className="space-y-6">
+        {/* OAuth Provider Sign-in */}
+        <Button
+          type="button"
+          variant="outline"
+          className="w-full"
+          onClick={async () => {
+            const { error } = await signInWithOAuth('google')
+            if (error) throw new Error(error)
+          }}
+        >
+          <FaGoogle className="mr-2 h-4 w-4" />
+          Continue with Google
+        </Button>
+
+        <div className="relative flex items-center justify-center">
+          <span className="text-xs text-neutral-500 px-2 bg-neutral-900/60">or</span>
+          <div className="absolute inset-x-0 top-1/2 h-px bg-neutral-800 -z-10" />
+        </div>
+
         <SignInForm onSubmit={handleSignIn} />
         
         {/* Sign Up Link */}
