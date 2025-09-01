@@ -19,11 +19,11 @@ export default function SignInForm({ onSubmit, isLoading = false }: SignInFormPr
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isSubmitted },
     watch,
   } = useForm<SignInFormData>({
     resolver: zodResolver(signInSchema),
-    mode: "onBlur", // Validate when user leaves a field
+    mode: "onSubmit", // Only validate when form is submitted
   })
 
   // Watch fields for validation feedback
@@ -71,6 +71,8 @@ export default function SignInForm({ onSubmit, isLoading = false }: SignInFormPr
           disabled={isFormDisabled}
           isValid={isFieldValid("email", email || "")}
           hasError={!!errors.email}
+          showValidationOnlyAfterSubmit={true}
+          isSubmitted={isSubmitted}
           value={email || ""}
           {...register("email")}
           aria-invalid={!!errors.email}
@@ -92,6 +94,8 @@ export default function SignInForm({ onSubmit, isLoading = false }: SignInFormPr
           disabled={isFormDisabled}
           isValid={isFieldValid("password", password || "")}
           hasError={!!errors.password}
+          showValidationOnlyAfterSubmit={true}
+          isSubmitted={isSubmitted}
           value={password || ""}
           {...register("password")}
           aria-invalid={!!errors.password}
