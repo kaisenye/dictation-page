@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useRouter } from "next/navigation"
 import AuthLayout from "@/components/auth/auth-layout"
 import { InputWithValidation } from "@/components/ui/input-with-validation"
@@ -17,7 +17,6 @@ export default function UpdatePasswordPage() {
   const [status, setStatus] = useState<"idle" | "updating" | "updated" | "error">("idle")
   const [error, setError] = useState<string | null>(null)
 
-  // If link sets a session, user will be authenticated. We keep this page accessible via middleware exception.
   const isValidPassword = (val: string) => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(val)
   const passwordsMatch = password.length > 0 && password === confirm
 
@@ -36,7 +35,6 @@ export default function UpdatePasswordPage() {
       const { error } = await supabase.auth.updateUser({ password })
       if (error) throw error
       setStatus("updated")
-      // Let user proceed to dashboard after a brief moment
       setTimeout(() => router.replace("/dashboard"), 800)
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to update password")
@@ -85,12 +83,12 @@ export default function UpdatePasswordPage() {
 
         {status === "updated" && (
           <div className="p-3 bg-green-900/20 border border-green-800 rounded-md">
-            <p className="text-sm text-green-400">Password updated. Redirecting…</p>
+            <p className="text-sm text-green-400">Password updated. Redirecting...</p>
           </div>
         )}
 
         <Button type="submit" className="w-full" disabled={status === "updating"}>
-          {status === "updating" ? "Updating…" : "Update password"}
+          {status === "updating" ? "Updating..." : "Update password"}
         </Button>
       </form>
     </AuthLayout>

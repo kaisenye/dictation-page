@@ -1,5 +1,5 @@
 import Navbar from '@/components/Navbar'
-import { Card, CardHeader, CardContent, CardTitle, CardDescription } from '@/components/ui/card'
+import { Card, CardContent, CardTitle, CardDescription } from '@/components/ui/card'
 import AppLogosScroller from '@/components/AppLogosScroller'
 
 export default function Features() {
@@ -41,7 +41,7 @@ export default function Features() {
                   <CardTitle className="text-2xl font-semibold text-white">Smart Voice Dictation</CardTitle>
                 </div>
                 <CardDescription className="text-base text-neutral-400">
-                  It doesn't just transcribe — it listens. Autocorrects typos, formats as you speak, and adapts to how
+                  It doesn&apos;t just transcribe — it listens. Autocorrects typos, formats as you speak, and adapts to how
                   you write emails, to-dos, or blog posts.
                 </CardDescription>
               </CardContent>
