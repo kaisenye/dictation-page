@@ -11,14 +11,14 @@ export default function Navbar() {
         >
           <FaRegCircle className="size-full mt-[2px]" />
         </Link>
-        <Link href="/about" className="text-white hover:text-gray-300 transition-colors text-sm font-medium">
-          About
-        </Link>
         <Link href="/features" className="text-white hover:text-gray-300 transition-colors text-sm font-medium">
           Features
         </Link>
         <Link href="/pricing" className="text-white hover:text-gray-300 transition-colors text-sm font-medium">
           Pricing
+        </Link>
+        <Link href="/about" className="text-white hover:text-gray-300 transition-colors text-sm font-medium">
+          About
         </Link>
       </div>
     </nav>

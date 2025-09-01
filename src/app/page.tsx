@@ -24,7 +24,7 @@ export default function Home() {
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
           {/* Logo and Title */}
           <div className="mb-8">
-            <h1 className="text-4xl md:text-4xl lg:text-5xl font-bold text-white mb-4">Don&apos;t type. Talk.</h1>
+            <h1 className="text-3xl md:text-3xl lg:text-4xl font-bold text-white mb-4">Type Less. Think More.</h1>
             <p className="font-semibold text-sm md:text-sm lg:text-lg text-neutral-400 max-w-2xl mx-auto">
               anytime. anywhere.
             </p>
@@ -42,22 +42,14 @@ export default function Home() {
           </div>
 
           {/* Download Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 mt-8 md:mt-12">
+          <div className="flex flex-col sm:flex-row gap-4 mt-6 md:mt-8">
             <Button
-              variant="secondary"
-              size="sm"
-              className="flex items-center justify-center hover:scale-98 transition-all duration-300"
+              variant="default"
+              size="lg"
+              className="flex items-center justify-center hover:scale-99 transition-all duration-300"
             >
               <FaApple className="w-4 h-4 md:w-5 md:h-5 mr-1" />
-              Apple Silicon
-            </Button>
-            <Button
-              variant="secondary"
-              size="sm"
-              className="flex items-center justify-center hover:scale-98 transition-all duration-300"
-            >
-              <FaApple className="w-4 h-4 md:w-5 md:h-5 mr-1" />
-              Intel
+              Donwload for Free
             </Button>
           </div>
 
