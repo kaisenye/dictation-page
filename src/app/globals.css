@@ -123,3 +123,31 @@
     @apply bg-background text-foreground bg-black;
   }
 }
+
+@layer utilities {
+  @keyframes scroll-right {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-33.333%);
+    }
+  }
+  
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(-33.333%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  
+  .animate-scroll-right {
+    animation: scroll-right 20s linear infinite;
+  }
+  
+  .animate-scroll-left {
+    animation: scroll-left 20s linear infinite;
+  }
+}

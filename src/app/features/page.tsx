@@ -1,4 +1,6 @@
 import Navbar from '@/components/Navbar'
+import { Card, CardHeader, CardContent, CardTitle, CardDescription } from '@/components/ui/card'
+import AppLogosScroller from '@/components/AppLogosScroller'
 
 export default function Features() {
   return (
@@ -6,58 +8,76 @@ export default function Features() {
       <Navbar />
 
       {/* Content */}
-      <div className="container mx-auto px-4 pt-36 pb-24">
-        <div className="max-w-lg mx-auto">
-          <h1 className="text-2xl md:text-3xl font-bold mb-8 text-center">What makes it different?</h1>
+      <div className="container mx-auto px-4 pt-36 pb-48">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-2xl md:text-3xl font-bold mb-8 text-center">Just Speak.</h1>
 
-          <div className="grid md:grid-cols-1 gap-8">
-            <div className="bg-neutral-900/50 p-6 rounded-lg border border-neutral-800">
-              <h3 className="text-xl font-semibold mb-3">Local AI Assistant</h3>
-              <p className="text-gray-300">
-                Say goodbye to cloud delays and privacy concerns. Everything runs right on your Mac — fast, secure, and
-                offline.
-              </p>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <Card className="bg-neutral-900/50 border-neutral-800">
+              <CardContent className="px-8">
+                <div className="mb-4">
+                  <img
+                    src="/images/feature-1.png"
+                    alt="Local AI Assistant"
+                    className="w-full rounded-lg mb-6 object-cover"
+                  />
+                  <CardTitle className="text-2xl font-semibold text-white">Local AI Models</CardTitle>
+                </div>
+                <CardDescription className="text-base text-neutral-400">
+                  Say goodbye to cloud delays and privacy concerns. Everything runs right on your Mac — fast, secure,
+                  and offline.
+                </CardDescription>
+              </CardContent>
+            </Card>
 
-            <div className="bg-neutral-900/50 p-6 rounded-lg border border-neutral-800">
-              <h3 className="text-xl font-semibold mb-3">Smarter Voice Dictation</h3>
-              <p className="text-gray-300">
-                It doesn’t just transcribe — it listens. Autocorrects typos, formats as you speak, and adapts to how you
-                write emails, to-dos, or blog posts.
-              </p>
-            </div>
+            <Card className="bg-neutral-900/50 border-neutral-800">
+              <CardContent className="px-8">
+                <div className="mb-4">
+                  <img
+                    src="/images/feature-2.png"
+                    alt="Local AI Assistant"
+                    className="w-full rounded-lg mb-6 object-cover"
+                  />
+                  <CardTitle className="text-2xl font-semibold text-white">Smart Voice Dictation</CardTitle>
+                </div>
+                <CardDescription className="text-base text-neutral-400">
+                  It doesn't just transcribe — it listens. Autocorrects typos, formats as you speak, and adapts to how
+                  you write emails, to-dos, or blog posts.
+                </CardDescription>
+              </CardContent>
+            </Card>
 
-            <div className="bg-neutral-900/50 p-6 rounded-lg border border-neutral-800">
-              <h3 className="text-xl font-semibold mb-3">Understands Context</h3>
-              <p className="text-gray-300">
-                Know the difference between a task list and a journal entry. Automatically adjusts tone, structure, and
-                punctuation to fit your intent.
-              </p>
-            </div>
+            <Card className="bg-neutral-900/50 border-neutral-800">
+              <CardContent className="px-8">
+                <div className="mb-4">
+                  <div className="mb-6">
+                    <AppLogosScroller />
+                  </div>
+                  <CardTitle className="text-2xl font-semibold text-white">Fits Right In</CardTitle>
+                </div>
+                <CardDescription className="text-base text-neutral-400">
+                  Drop your notes into Notion or Obsidian, email drafts into Gmail or Outlook, or tasks into Linear or
+                  Jira. It plays nice with your workflow.
+                </CardDescription>
+              </CardContent>
+            </Card>
 
-            <div className="bg-neutral-900/50 p-6 rounded-lg border border-neutral-800">
-              <h3 className="text-xl font-semibold mb-3">Built for macOS</h3>
-              <p className="text-gray-300">
-                Native performance. Zero bloat. Works beautifully on Apple Silicon and Intel — like it was made just for
-                your Mac (because it was).
-              </p>
-            </div>
-
-            <div className="bg-neutral-900/50 p-6 rounded-lg border border-neutral-800">
-              <h3 className="text-xl font-semibold mb-3">Truly Offline</h3>
-              <p className="text-gray-300">
-                No internet? No problem. Dictate anywhere — airplane, cabin, basement bunker. Your data stays with you,
-                always.
-              </p>
-            </div>
-
-            <div className="bg-neutral-900/50 p-6 rounded-lg border border-neutral-800">
-              <h3 className="text-xl font-semibold mb-3">Fits Right In</h3>
-              <p className="text-gray-300">
-                Drop your notes into Notion, email drafts into Apple Mail, or tasks into Things. It plays nice with your
-                workflow.
-              </p>
-            </div>
+            <Card className="bg-neutral-900/50 border-neutral-800">
+              <CardContent className="px-8">
+                <div className="mb-4">
+                  <img
+                    src="/images/feature-3.png"
+                    alt="Local AI Assistant"
+                    className="w-full rounded-lg mb-6 object-cover"
+                  />
+                  <CardTitle className="text-2xl font-semibold text-white">Truly Offline</CardTitle>
+                </div>
+                <CardDescription className="text-base text-neutral-400">
+                  No internet? No problem. Dictate anywhere — airplane, cabin, basement bunker. Your data stays with
+                  you, always.
+                </CardDescription>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>
