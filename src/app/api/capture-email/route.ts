@@ -51,7 +51,6 @@ export async function POST(request: NextRequest) {
     }
 
     // Send email
-    let emailSent = false
     try {
       const emailResponse = await fetch(
         `${request.nextUrl.origin}/api/send-email`,
@@ -70,7 +69,6 @@ export async function POST(request: NextRequest) {
           { status: 500 }
         )
       } else {
-        emailSent = true
         // Update the record to mark email as sent
         await supabase
           .from('user_interests')

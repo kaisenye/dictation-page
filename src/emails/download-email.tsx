@@ -1,11 +1,7 @@
 import { Body, Button, Container, Head, Heading, Html, Preview, Section, Text, Tailwind } from '@react-email/components'
 import * as React from 'react'
 
-interface DownloadEmailProps {
-  email: string
-}
-
-export const DownloadEmail = ({ email }: DownloadEmailProps) => (
+export const DownloadEmail = () => (
   <Html>
     <Head />
     <Preview>Your Romo download link - Free AI dictation tool</Preview>
@@ -25,7 +21,7 @@ export const DownloadEmail = ({ email }: DownloadEmailProps) => (
             </Heading>
 
             <Text className="text-neutral-600 text-base leading-relaxed mt-0 mb-6">
-              You're just one click away from experiencing the future of dictation. Romo is a privacy-focused,
+              You&apos;re just one click away from experiencing the future of dictation. Romo is a privacy-focused,
               offline-capable AI dictation tool that helps you type less and think more.
             </Text>
 
@@ -37,21 +33,6 @@ export const DownloadEmail = ({ email }: DownloadEmailProps) => (
               >
                 Download Now
               </Button>
-            </Section>
-
-            {/* Features */}
-            <Section className="my-8">
-              <Heading className="text-neutral-900 text-lg font-bold mt-8 mb-4">What makes Romo special:</Heading>
-              <Text className="text-neutral-600 text-base leading-relaxed mt-0 mb-2">
-                🎯 Smart AI-powered dictation
-              </Text>
-              <Text className="text-neutral-600 text-base leading-relaxed mt-0 mb-2">
-                🔒 Complete privacy - no data collected
-              </Text>
-              <Text className="text-neutral-600 text-base leading-relaxed mt-0 mb-2">⚡ Works offline</Text>
-              <Text className="text-neutral-600 text-base leading-relaxed mt-0 mb-0">
-                💰 Free forever, no subscriptions
-              </Text>
             </Section>
 
             {/* Getting Started */}

@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { X, Mail, CheckCircle, AlertCircle } from 'lucide-react'
+import { X, CheckCircle, AlertCircle } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 export type InterestType = 'download' | 'waitlist'

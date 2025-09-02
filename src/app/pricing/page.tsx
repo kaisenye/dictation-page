@@ -1,7 +1,6 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import Navbar from '@/components/Navbar'
 import { FaApple } from 'react-icons/fa'
 import { MdOutlineMarkEmailUnread } from 'react-icons/md'

@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Navbar from '@/components/Navbar'
 import { Card, CardContent, CardTitle, CardDescription } from '@/components/ui/card'
 import AppLogosScroller from '@/components/AppLogosScroller'
@@ -16,9 +17,11 @@ export default function Features() {
             <Card className="bg-neutral-900/50 border-neutral-800">
               <CardContent className="px-8">
                 <div className="mb-4">
-                  <img
+                  <Image
                     src="/images/feature-1.png"
                     alt="Local AI Assistant"
+                    width={400}
+                    height={300}
                     className="w-full rounded-lg mb-6 object-cover"
                   />
                   <CardTitle className="text-2xl font-semibold text-white">Local AI Models</CardTitle>
@@ -33,9 +36,11 @@ export default function Features() {
             <Card className="bg-neutral-900/50 border-neutral-800">
               <CardContent className="px-8">
                 <div className="mb-4">
-                  <img
+                  <Image
                     src="/images/feature-2.png"
-                    alt="Local AI Assistant"
+                    alt="Smart Voice Dictation"
+                    width={400}
+                    height={300}
                     className="w-full rounded-lg mb-6 object-cover"
                   />
                   <CardTitle className="text-2xl font-semibold text-white">Smart Voice Dictation</CardTitle>
@@ -65,9 +70,11 @@ export default function Features() {
             <Card className="bg-neutral-900/50 border-neutral-800">
               <CardContent className="px-8">
                 <div className="mb-4">
-                  <img
+                  <Image
                     src="/images/feature-3.png"
-                    alt="Local AI Assistant"
+                    alt="Truly Offline"
+                    width={400}
+                    height={300}
                     className="w-full rounded-lg mb-6 object-cover"
                   />
                   <CardTitle className="text-2xl font-semibold text-white">Truly Offline</CardTitle>
