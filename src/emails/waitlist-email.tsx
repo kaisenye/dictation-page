@@ -23,8 +23,8 @@ export const WaitlistEmail = ({ email }: WaitlistEmailProps) => (
             <Heading className="text-neutral-900 text-xl font-bold mt-0 mb-4">Welcome to the future! ✨</Heading>
 
             <Text className="text-neutral-600 text-base leading-relaxed mt-0 mb-6">
-              You&apos;re now on the exclusive waitlist for <strong className="text-neutral-700">Romo Agent</strong> - the
-              AI-powered assistant that will revolutionize how you interact with your computer through voice.
+              You&apos;re now on the exclusive waitlist for <strong className="text-neutral-700">Romo Agent</strong> -
+              the AI-powered assistant that will revolutionize how you interact with your computer through voice.
             </Text>
 
             {/* What to Expect */}
