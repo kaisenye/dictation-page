@@ -1,10 +1,16 @@
+'use client'
+
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import Navbar from '@/components/Navbar'
 import { FaApple } from 'react-icons/fa'
 import { MdOutlineMarkEmailUnread } from 'react-icons/md'
+import EmailCaptureModal from '@/components/EmailCaptureModal'
+import { useEmailCapture } from '@/hooks/useEmailCapture'
 
 export default function Pricing() {
+  const { modalState, openDownloadModal, openWaitlistModal, closeModal } = useEmailCapture()
+
   return (
     <div className="min-h-screen bg-black text-white">
       <Navbar />
@@ -33,7 +39,7 @@ export default function Pricing() {
                 <li className="flex justify-center items-center">Offline Capable</li>
                 <li className="flex justify-center items-center">No Subscription</li>
               </ul>
-              <Button variant="default" className="w-full">
+              <Button variant="default" className="w-full" onClick={openDownloadModal}>
                 <FaApple className="size-4 mr-0.5" />
                 Download Free
               </Button>
@@ -41,11 +47,12 @@ export default function Pricing() {
 
             {/* Pro Tier */}
             <div className="bg-neutral-900/50 p-8 rounded-lg border border-neutral-800 text-center relative">
-              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+              {/* TODO: Add this back */}
+              {/* <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
                 <span className="bg-neutral-800 text-neutral-100 px-3 py-1 rounded-full text-xs font-medium">
                   Most Popular
                 </span>
-              </div>
+              </div> */}
               <h2 className="text-xl font-bold mb-2">Agent</h2>
               <div className="text-3xl font-bold mb-2 text-neutral-600">??</div>
               <p className="text-neutral-400 mb-6">Coming Soon</p>
@@ -58,7 +65,7 @@ export default function Pricing() {
               </ul>
 
               <div className="space-y-3">
-                <Button variant="secondary" className="w-full font-semibold">
+                <Button variant="secondary" className="w-full font-semibold" onClick={openWaitlistModal}>
                   <MdOutlineMarkEmailUnread className="size-4 mr-0.5 mt-0.5" />
                   Join Waitlist
                 </Button>
@@ -71,6 +78,16 @@ export default function Pricing() {
           </div>
         </div>
       </div>
+
+      {/* Email Capture Modal */}
+      <EmailCaptureModal
+        isOpen={modalState.isOpen}
+        onClose={closeModal}
+        interestType={modalState.interestType}
+        title={modalState.title}
+        description={modalState.description}
+        ctaText={modalState.ctaText}
+      />
     </div>
   )
 }
