@@ -31,7 +31,7 @@ export async function renderEmailTemplate({ email, interestType }: EmailTemplate
 
   switch (interestType) {
     case 'download':
-      emailComponent = DownloadEmail({ email })
+      emailComponent = DownloadEmail()
       textContent = `Thanks for your interest in Romo! Download the free AI dictation tool at: https://github.com/yourusername/romo/releases/latest`
       break
     case 'waitlist':
