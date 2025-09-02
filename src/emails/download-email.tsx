@@ -28,7 +28,7 @@ export const DownloadEmail = () => (
             {/* Download Button */}
             <Section className="text-center my-8">
               <Button
-                href="https://github.com/yourusername/romo/releases/latest"
+                href="https://romo-app-2025.s3.us-west-1.amazonaws.com/Romo-1.0.0-arm64.dmg"
                 className="bg-neutral-900 text-white no-underline px-8 py-3 rounded-md font-medium text-base inline-block"
               >
                 Download Now

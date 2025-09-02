@@ -50,7 +50,7 @@ export const WaitlistEmail = ({ email }: WaitlistEmailProps) => (
               </Text>
               <Section className="text-center">
                 <Button
-                  href="https://github.com/yourusername/romo/releases/latest"
+                  href="https://romo-app-2025.s3.us-west-1.amazonaws.com/Romo-1.0.0-arm64.dmg"
                   className="bg-neutral-800 border border-neutral-700 text-neutral-100 no-underline px-6 py-2.5 rounded-md font-medium text-sm inline-block"
                 >
                   Download Free Version
