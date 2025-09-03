@@ -1,14 +1,14 @@
-"use client"
+'use client'
 
-import { useEffect } from "react"
-import { useRouter } from "next/navigation"
-import Link from "next/link"
-import AuthLayout from "@/components/auth/auth-layout"
-import SignInForm from "@/components/auth/sign-in-form"
-import { useAuth } from "@/components/auth/auth-provider"
-import type { SignInFormData } from "@/lib/validations/auth"
-import { Button } from "@/components/ui/button"
-import { FaGoogle } from "react-icons/fa"
+import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import Link from 'next/link'
+import AuthLayout from '@/components/auth/auth-layout'
+import SignInForm from '@/components/auth/sign-in-form'
+import { useAuth } from '@/components/auth/auth-provider'
+import type { SignInFormData } from '@/lib/validations/auth'
+import { Button } from '@/components/ui/button'
+import { FaGoogle } from 'react-icons/fa'
 
 export default function SignInPage() {
   const router = useRouter()
@@ -17,7 +17,7 @@ export default function SignInPage() {
   // If already signed in, redirect to dashboard
   useEffect(() => {
     if (user) {
-      router.replace("/dashboard")
+      router.replace('/dashboard')
     }
   }, [user, router])
 
@@ -28,7 +28,7 @@ export default function SignInPage() {
       if (error) {
         throw new Error(error)
       }
-      router.push("/dashboard")
+      router.push('/dashboard')
     } catch (error) {
       // Re-throw error so SignInForm can display it
       throw error
@@ -36,10 +36,7 @@ export default function SignInPage() {
   }
 
   return (
-    <AuthLayout 
-      title="Welcome back" 
-      subtitle="Sign in to your account to continue"
-    >
+    <AuthLayout title="Welcome back" subtitle="Sign in to your account to continue">
       <div className="space-y-6">
         {/* OAuth Provider Sign-in */}
         <Button
@@ -61,15 +58,12 @@ export default function SignInPage() {
         </div>
 
         <SignInForm onSubmit={handleSignIn} />
-        
+
         {/* Sign Up Link */}
         <div className="text-center">
           <p className="text-sm text-neutral-400">
-            Don&apos;t have an account?{" "}
-            <Link 
-              href="/auth/sign-up" 
-              className="text-white hover:text-neutral-300 underline transition-colors"
-            >
+            Don&apos;t have an account?{' '}
+            <Link href="/auth/sign-up" className="text-white hover:text-neutral-300 underline transition-colors">
               Create one here
             </Link>
           </p>
@@ -77,8 +71,8 @@ export default function SignInPage() {
 
         {/* Forgot Password Link */}
         <div className="text-center">
-          <Link 
-            href="/auth/forgot-password" 
+          <Link
+            href="/auth/forgot-password"
             className="text-sm text-neutral-400 hover:text-neutral-300 transition-colors"
           >
             Forgot your password?

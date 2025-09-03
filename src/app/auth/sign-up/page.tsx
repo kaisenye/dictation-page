@@ -1,14 +1,14 @@
-"use client"
+'use client'
 
-import { useEffect } from "react"
-import { useRouter } from "next/navigation"
-import Link from "next/link"
-import AuthLayout from "@/components/auth/auth-layout"
-import SignUpForm from "@/components/auth/sign-up-form"
-import { useAuth } from "@/components/auth/auth-provider"
-import type { SignUpFormData } from "@/lib/validations/auth"
-import { Button } from "@/components/ui/button"
-import { FaGoogle } from "react-icons/fa"
+import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import Link from 'next/link'
+import AuthLayout from '@/components/auth/auth-layout'
+import SignUpForm from '@/components/auth/sign-up-form'
+import { useAuth } from '@/components/auth/auth-provider'
+import type { SignUpFormData } from '@/lib/validations/auth'
+import { Button } from '@/components/ui/button'
+import { FaGoogle } from 'react-icons/fa'
 
 export default function SignUpPage() {
   const router = useRouter()
@@ -17,7 +17,7 @@ export default function SignUpPage() {
   // If already signed in, redirect to dashboard
   useEffect(() => {
     if (user) {
-      router.replace("/dashboard")
+      router.replace('/dashboard')
     }
   }, [user, router])
 
@@ -25,15 +25,19 @@ export default function SignUpPage() {
     try {
       // Use Supabase authentication via our auth provider
       const { error } = await signUp(data.email, data.password, data.name)
-      
+
       if (error) {
         const lowered = error.toLowerCase()
-        if (lowered.includes("already registered") || lowered.includes("already exists") || lowered.includes("user exists")) {
-          throw new Error("Email already registered. Please sign in instead.")
+        if (
+          lowered.includes('already registered') ||
+          lowered.includes('already exists') ||
+          lowered.includes('user exists')
+        ) {
+          throw new Error('Email already registered. Please sign in instead.')
         }
         throw new Error(error)
       }
-      router.push("/dashboard")
+      router.push('/dashboard')
     } catch (error) {
       // Re-throw error so SignUpForm can display it
       throw error
@@ -41,10 +45,7 @@ export default function SignUpPage() {
   }
 
   return (
-    <AuthLayout 
-      title="Create your account" 
-      subtitle="Join us and start your journey"
-    >
+    <AuthLayout title="Create your account" subtitle="Join us and start your journey">
       <div className="space-y-6">
         {/* OAuth Provider Sign-up */}
         <Button
@@ -66,15 +67,12 @@ export default function SignUpPage() {
         </div>
 
         <SignUpForm onSubmit={handleSignUp} />
-        
+
         {/* Sign In Link */}
         <div className="text-center">
           <p className="text-sm text-neutral-400">
-            Already have an account?{" "}
-            <Link 
-              href="/auth/sign-in" 
-              className="text-white hover:text-neutral-300 underline transition-colors"
-            >
+            Already have an account?{' '}
+            <Link href="/auth/sign-in" className="text-white hover:text-neutral-300 underline transition-colors">
               Sign in here
             </Link>
           </p>
@@ -83,18 +81,12 @@ export default function SignUpPage() {
         {/* Terms and Privacy */}
         <div className="text-center">
           <p className="text-xs text-neutral-400">
-            By creating an account, you agree to our{" "}
-            <Link 
-              href="/terms" 
-              className="underline hover:text-neutral-300 transition-colors"
-            >
+            By creating an account, you agree to our{' '}
+            <Link href="/terms" className="underline hover:text-neutral-300 transition-colors">
               Terms of Service
-            </Link>
-            {" "}and{" "}
-            <Link 
-              href="/privacy" 
-              className="underline hover:text-neutral-300 transition-colors"
-            >
+            </Link>{' '}
+            and{' '}
+            <Link href="/privacy" className="underline hover:text-neutral-300 transition-colors">
               Privacy Policy
             </Link>
           </p>

@@ -1,8 +1,14 @@
+'use client'
+
 import { Button } from '@/components/ui/button'
 import { FaApple, FaPlay } from 'react-icons/fa'
 import Navbar from '@/components/Navbar'
+import EmailCaptureModal from '@/components/EmailCaptureModal'
+import { useEmailCapture } from '@/hooks/useEmailCapture'
 
 export default function Home() {
+  const { modalState, openDownloadModal, closeModal } = useEmailCapture()
+
   return (
     <div className="h-screen w-screen overflow-hidden bg-black">
       {/* Navbar */}
@@ -47,9 +53,10 @@ export default function Home() {
               variant="default"
               size="lg"
               className="flex items-center justify-center hover:scale-99 transition-all duration-300"
+              onClick={openDownloadModal}
             >
               <FaApple className="w-4 h-4 md:w-5 md:h-5 mr-1" />
-              Donwload for Free
+              Download for Free
             </Button>
           </div>
 
@@ -63,6 +70,16 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Email Capture Modal */}
+      <EmailCaptureModal
+        isOpen={modalState.isOpen}
+        onClose={closeModal}
+        interestType={modalState.interestType}
+        title={modalState.title}
+        description={modalState.description}
+        ctaText={modalState.ctaText}
+      />
     </div>
   )
 }

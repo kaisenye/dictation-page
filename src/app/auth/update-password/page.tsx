@@ -1,20 +1,20 @@
-"use client"
+'use client'
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import AuthLayout from "@/components/auth/auth-layout"
-import { InputWithValidation } from "@/components/ui/input-with-validation"
-import { Label } from "@/components/ui/label"
-import { Button } from "@/components/ui/button"
-import { createClient } from "@/lib/supabase/client"
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import AuthLayout from '@/components/auth/auth-layout'
+import { InputWithValidation } from '@/components/ui/input-with-validation'
+import { Label } from '@/components/ui/label'
+import { Button } from '@/components/ui/button'
+import { createClient } from '@/lib/supabase/client'
 
 export default function UpdatePasswordPage() {
   const supabase = createClient()
   const router = useRouter()
 
-  const [password, setPassword] = useState("")
-  const [confirm, setConfirm] = useState("")
-  const [status, setStatus] = useState<"idle" | "updating" | "updated" | "error">("idle")
+  const [password, setPassword] = useState('')
+  const [confirm, setConfirm] = useState('')
+  const [status, setStatus] = useState<'idle' | 'updating' | 'updated' | 'error'>('idle')
   const [error, setError] = useState<string | null>(null)
 
   const isValidPassword = (val: string) => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(val)
@@ -23,22 +23,22 @@ export default function UpdatePasswordPage() {
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError(null)
-    setStatus("updating")
+    setStatus('updating')
 
     if (!isValidPassword(password) || !passwordsMatch) {
-      setError("Please enter a strong password and confirm it correctly.")
-      setStatus("error")
+      setError('Please enter a strong password and confirm it correctly.')
+      setStatus('error')
       return
     }
 
     try {
       const { error } = await supabase.auth.updateUser({ password })
       if (error) throw error
-      setStatus("updated")
-      setTimeout(() => router.replace("/dashboard"), 800)
+      setStatus('updated')
+      setTimeout(() => router.replace('/dashboard'), 800)
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to update password")
-      setStatus("error")
+      setError(err instanceof Error ? err.message : 'Failed to update password')
+      setStatus('error')
     }
   }
 
@@ -56,7 +56,7 @@ export default function UpdatePasswordPage() {
             isValid={isValidPassword(password)}
             hasError={!!password && !isValidPassword(password)}
             showValidationOnlyAfterSubmit
-            isSubmitted={status !== "idle"}
+            isSubmitted={status !== 'idle'}
           />
         </div>
 
@@ -71,27 +71,28 @@ export default function UpdatePasswordPage() {
             isValid={passwordsMatch}
             hasError={!!confirm && !passwordsMatch}
             showValidationOnlyAfterSubmit
-            isSubmitted={status !== "idle"}
+            isSubmitted={status !== 'idle'}
           />
         </div>
 
         {error && (
           <div className="p-3 bg-red-900/20 border border-red-800 rounded-md">
-            <p className="text-sm text-red-400" role="alert">{error}</p>
+            <p className="text-sm text-red-400" role="alert">
+              {error}
+            </p>
           </div>
         )}
 
-        {status === "updated" && (
+        {status === 'updated' && (
           <div className="p-3 bg-green-900/20 border border-green-800 rounded-md">
             <p className="text-sm text-green-400">Password updated. Redirecting...</p>
           </div>
         )}
 
-        <Button type="submit" className="w-full" disabled={status === "updating"}>
-          {status === "updating" ? "Updating..." : "Update password"}
+        <Button type="submit" className="w-full" disabled={status === 'updating'}>
+          {status === 'updating' ? 'Updating...' : 'Update password'}
         </Button>
       </form>
     </AuthLayout>
   )
 }
-
