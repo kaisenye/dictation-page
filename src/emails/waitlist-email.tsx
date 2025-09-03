@@ -69,9 +69,6 @@ export const WaitlistEmail = ({ email }: WaitlistEmailProps) => (
 
           {/* Footer */}
           <Section className="text-center border-t border-neutral-200 pt-8">
-            <Text className="text-neutral-500 text-sm mt-0 mb-4">
-              Questions? Reply to this email - we&apos;d love to hear from you!
-            </Text>
             <Text className="text-neutral-400 text-xs m-0">
               You joined the Romo Agent waitlist with {email}
               <br />© 2025 Romo. All rights reserved.

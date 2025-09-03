@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
+import { sendEmailService } from '@/lib/email-service'
 import { z } from 'zod'
 
 const captureEmailSchema = z.object({
@@ -50,41 +51,25 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Send email
-    try {
-      const emailResponse = await fetch(
-        `${request.nextUrl.origin}/api/send-email`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, interestType })
-        }
-      )
-
-      if (!emailResponse.ok) {
-        console.error('Email sending failed:', await emailResponse.text())
-        // Return error to frontend so user knows something went wrong
-        return NextResponse.json(
-          { error: 'Unable to send email. Please try again or contact support.' },
-          { status: 500 }
-        )
-      } else {
-        // Update the record to mark email as sent
-        await supabase
-          .from('user_interests')
-          .update({ 
-            email_sent: true, 
-            email_sent_at: new Date().toISOString() 
-          })
-          .eq('id', data[0]?.id)
-      }
-    } catch (emailError) {
-      console.error('Email sending error:', emailError)
+    // Send email using shared service
+    const emailResult = await sendEmailService({ email, interestType })
+    
+    if (!emailResult.success) {
+      console.error('Email sending failed:', emailResult.error)
       // Return error to frontend so user knows something went wrong
       return NextResponse.json(
         { error: 'Unable to send email. Please try again or contact support.' },
         { status: 500 }
       )
+    } else {
+      // Update the record to mark email as sent
+      await supabase
+        .from('user_interests')
+        .update({ 
+          email_sent: true, 
+          email_sent_at: new Date().toISOString() 
+        })
+        .eq('id', data[0]?.id)
     }
 
     return NextResponse.json(

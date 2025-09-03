@@ -48,9 +48,6 @@ export const DownloadEmail = () => (
 
           {/* Footer */}
           <Section className="text-center border-t border-neutral-200 pt-8">
-            <Text className="text-neutral-500 text-sm mt-0 mb-4">
-              Need help? Reply to this email or visit our documentation.
-            </Text>
             <Text className="text-neutral-400 text-xs m-0">
               You received this email because you requested a download link for Romo.
               <br />© 2025 Romo. All rights reserved.
