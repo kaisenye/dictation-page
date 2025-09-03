@@ -4,10 +4,13 @@ import { Button } from '@/components/ui/button'
 import { FaApple, FaPlay } from 'react-icons/fa'
 import Navbar from '@/components/Navbar'
 import EmailCaptureModal from '@/components/EmailCaptureModal'
+import VideoModal from '@/components/VideoModal'
 import { useEmailCapture } from '@/hooks/useEmailCapture'
+import { useVideoModal } from '@/hooks/useVideoModal'
 
 export default function Home() {
   const { modalState, openDownloadModal, closeModal } = useEmailCapture()
+  const { isOpen: isVideoOpen, openModal: openVideoModal, closeModal: closeVideoModal } = useVideoModal()
 
   return (
     <div className="h-screen w-screen overflow-hidden bg-black">
@@ -41,6 +44,7 @@ export default function Home() {
               variant="outline"
               size="sm"
               className="flex items-center justify-center hover:scale-98 transition-all duration-300"
+              onClick={openVideoModal}
             >
               <FaPlay className="size-3 mr-1" />
               Watch Demo
@@ -79,6 +83,13 @@ export default function Home() {
         title={modalState.title}
         description={modalState.description}
         ctaText={modalState.ctaText}
+      />
+
+      {/* Video Modal */}
+      <VideoModal
+        isOpen={isVideoOpen}
+        onClose={closeVideoModal}
+        videoUrl="https://romo-app-2025.s3.us-west-1.amazonaws.com/romo-demo.mp4"
       />
     </div>
   )
