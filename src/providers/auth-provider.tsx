@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import { createContext, useContext, useEffect, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
@@ -6,8 +6,8 @@ import type { User } from '@supabase/supabase-js'
 
 // Define what our auth context will provide
 interface AuthContextType {
-  user: User | null           // Current user or null if not authenticated
-  loading: boolean           // True while checking authentication status
+  user: User | null // Current user or null if not authenticated
+  loading: boolean // True while checking authentication status
   signIn: (email: string, password: string) => Promise<{ error?: string }>
   signUp: (email: string, password: string, name: string) => Promise<{ error?: string }>
   signOut: () => Promise<void>
@@ -36,7 +36,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     // Get initial session when component mounts
     const initializeAuth = async () => {
       try {
-        const { data: { session } } = await supabase.auth.getSession()
+        const {
+          data: { session },
+        } = await supabase.auth.getSession()
         setUser(session?.user ?? null)
       } catch (error) {
         console.error('Error getting session:', error)
@@ -152,9 +154,5 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     signInWithOAuth,
   }
 
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  )
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
