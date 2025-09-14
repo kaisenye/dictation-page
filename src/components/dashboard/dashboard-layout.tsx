@@ -1,10 +1,12 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/providers/auth-provider'
 import { Button } from '@/components/ui/button'
 import { User, CreditCard, Sparkle, LogOut, Mail } from 'lucide-react'
+import { FaRegCircle } from 'react-icons/fa6'
 import { cn } from '@/lib/utils'
 import UserTab from './user-tab'
 import PlanTab from './plan-tab'
@@ -42,13 +44,24 @@ export default function DashboardLayout() {
   }
 
   return (
-    <div className="min-h-screen bg-neutral-900 text-white pt-6">
+    <div className="min-h-screen bg-neutral-900 text-white pt-10">
       <div className="flex justify-center h-90vh max-w-7xl mx-auto">
         {/* Sidebar */}
         <div className="w-78 bg-neutral-900 flex flex-col mt-4">
+          {/* Logo */}
+          <div className="py-4">
+            <Link
+              href="/"
+              className="flex items-center gap-3 text-neutral-400 hover:text-white transition-all duration-300 cursor-pointer"
+            >
+              <FaRegCircle className="w-3 h-3 mt-[2px]" />
+              <span className="text-base font-bold">romo</span>
+            </Link>
+          </div>
+
           {/* User Info */}
-          <div className="p-6">
-            <div className="flex items-center space-x-3">
+          <div className="py-4 border-b border-neutral-800">
+            <div className="flex items-center space-x-2">
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-white truncate">{user?.user_metadata?.name || 'User'}</p>
                 <div className="flex flex-row gap-2 text-sm text-neutral-400 truncate">
@@ -60,7 +73,7 @@ export default function DashboardLayout() {
           </div>
 
           {/* Navigation */}
-          <nav className="flex-1 p-4 space-y-2">
+          <nav className="flex-1 py-4 space-y-2">
             {tabs.map((tab) => {
               const Icon = tab.icon
               return (
@@ -68,7 +81,7 @@ export default function DashboardLayout() {
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
                   className={cn(
-                    'w-full flex items-center space-x-4 px-3 py-2.5 text-left rounded-sm transition-colors cursor-pointer hover:bg-neutral-800',
+                    'w-full flex items-center space-x-3 px-3 py-2.5 text-left rounded-sm transition-colors cursor-pointer hover:bg-neutral-800',
                     activeTab === tab.id
                       ? 'bg-neutral-800 text-white'
                       : 'text-neutral-400 hover:bg-neutral-800/50 hover:text-neutral-300'
@@ -80,15 +93,17 @@ export default function DashboardLayout() {
               )
             })}
 
-            <Button variant="ghost" className="w-full justify-start gap-4 mt-6">
-              <Mail className="w-4 h-4" />
-              <span className="text-sm font-medium">Contact Us</span>
-            </Button>
+            <div className="flex flex-col gap-2 pt-4 border-t border-neutral-800">
+              <Button variant="ghost" className="w-full justify-start gap-3 text-neutral-400 hover:text-white">
+                <Mail className="w-4 h-4" />
+                <span className="text-sm font-medium">Contact Us</span>
+              </Button>
 
-            <Button variant="destructiveGhost" onClick={handleSignOut} className="w-full justify-start gap-4">
-              <LogOut className="w-4 h-4" />
-              <span className="text-sm font-medium">Log Out</span>
-            </Button>
+              <Button variant="destructiveGhost" onClick={handleSignOut} className="w-full justify-start gap-3">
+                <LogOut className="w-4 h-4" />
+                <span className="text-sm font-medium">Log Out</span>
+              </Button>
+            </div>
           </nav>
         </div>
 
