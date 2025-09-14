@@ -1,13 +1,12 @@
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Crown } from 'lucide-react'
 
 export default function PlanTab() {
   return (
     <div className="space-y-6">
       <div>
         <h1 className="text-xl font-bold text-white mb-2">Plans</h1>
-        <p className="text-neutral-400 text-sm">Manage your plans and billing information.</p>
+        <p className="text-neutral-400 text-sm">Manage your plan and subscription.</p>
       </div>
 
       <Card className="bg-neutral-800 border-neutral-800">

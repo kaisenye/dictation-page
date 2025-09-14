@@ -1,9 +1,8 @@
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Crown } from 'lucide-react'
 
 interface UserTabProps {
-  user: any
+  user: object
 }
 
 export default function UserTab({ user }: UserTabProps) {
@@ -36,7 +35,7 @@ export default function UserTab({ user }: UserTabProps) {
             <CardTitle className="text-white">On-Demand Usage is Off</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-neutral-300 mb-4">Go beyond your plan's included quota with on-demand usage</p>
+            <p className="text-neutral-300 mb-4">Go beyond your plan&apos;s included quota with on-demand usage</p>
             <Button variant="outline" className="w-full">
               Enable On-Demand Usage
             </Button>

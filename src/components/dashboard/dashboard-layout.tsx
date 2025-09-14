@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/providers/auth-provider'
 import { Button } from '@/components/ui/button'
-import { User, CreditCard, Settings, LogOut, Mail } from 'lucide-react'
+import { User, CreditCard, Sparkle, LogOut, Mail } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import UserTab from './user-tab'
 import PlanTab from './plan-tab'
@@ -12,17 +12,13 @@ import BillingTab from './billing-tab'
 
 type TabType = 'user' | 'plan' | 'billing'
 
-interface DashboardLayoutProps {
-  children?: React.ReactNode
-}
-
 const tabs = [
   { id: 'user' as TabType, label: 'Overview', icon: User },
-  { id: 'plan' as TabType, label: 'Plans', icon: Settings },
+  { id: 'plan' as TabType, label: 'Plans', icon: Sparkle },
   { id: 'billing' as TabType, label: 'Billing & Invoices', icon: CreditCard },
 ]
 
-export default function DashboardLayout({ children }: DashboardLayoutProps) {
+export default function DashboardLayout() {
   const [activeTab, setActiveTab] = useState<TabType>('user')
   const router = useRouter()
   const { user, signOut } = useAuth()
