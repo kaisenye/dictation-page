@@ -33,7 +33,7 @@ export default function Pricing() {
               <p className="text-neutral-400 mb-6">Free</p>
 
               <ul className="flex flex-col align-center justify-center text-center gap-3 mb-8">
-                <li className="flex justify-center items-center">Smart Dictation</li>
+                <li className="flex justify-center items-center">AI Dictation</li>
                 <li className="flex justify-center items-center">Privacy Focused</li>
                 <li className="flex justify-center items-center">Offline Capable</li>
                 <li className="flex justify-center items-center">No Subscription</li>
@@ -58,7 +58,7 @@ export default function Pricing() {
 
               <ul className="flex flex-col align-center justify-center gap-3 mb-8">
                 <li className="flex justify-center items-center text-lime-300 font-bold">AI Agent Mode</li>
-                <li className="flex justify-center items-center">Everything in Free</li>
+                <li className="flex justify-center items-center text-lime-300 font-bold">Context Aware Dictation</li>
                 <li className="flex justify-center items-center">Lifetime Updates</li>
                 <li className="flex justify-center items-center">Cancel Anytime</li>
               </ul>
