@@ -1,8 +1,9 @@
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import type { User } from '@supabase/supabase-js'
 
 interface UserTabProps {
-  user: object
+  user: User | null
 }
 
 export default function UserTab({ user }: UserTabProps) {
