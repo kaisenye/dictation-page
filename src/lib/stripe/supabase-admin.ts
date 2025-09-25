@@ -105,7 +105,7 @@ export const manageSubscriptionStatusChange = async (
     current_period_end: subscription.current_period_end
       ? new Date(subscription.current_period_end * 1000).toISOString()
       : null,
-    created: new Date(subscription.created * 1000).toISOString(),
+    created_at: new Date(subscription.created * 1000).toISOString(),
     ended_at: subscription.ended_at
       ? new Date(subscription.ended_at * 1000).toISOString()
       : null,

@@ -66,7 +66,7 @@ export function useSubscriptionActions() {
       }
 
       if (data.url) {
-        window.open(data.url, '_blank');
+        window.location.href = data.url;
       }
     } catch (error) {
       console.error('Error opening billing portal:', error);

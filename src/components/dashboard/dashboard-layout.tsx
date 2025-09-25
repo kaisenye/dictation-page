@@ -4,8 +4,9 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/providers/auth-provider';
+import { useSubscription } from '@/providers/subscription-provider';
 import { Button } from '@/components/ui/button';
-import { User, CreditCard, Sparkle, LogOut, Mail } from 'lucide-react';
+import { User, CreditCard, Sparkle, LogOut, Mail, Dot } from 'lucide-react';
 import { FaRegCircle } from 'react-icons/fa6';
 import { cn } from '@/lib/utils';
 import UserTab from './user-tab';
@@ -24,6 +25,7 @@ export default function DashboardLayout() {
   const [activeTab, setActiveTab] = useState<TabType>('user');
   const router = useRouter();
   const { user, signOut } = useAuth();
+  const { subscription, hasActivePaidSubscription } = useSubscription();
 
   const handleSignOut = async () => {
     await signOut();
@@ -66,11 +68,17 @@ export default function DashboardLayout() {
                 <p className="text-sm font-medium text-white truncate">
                   {user?.user_metadata?.name || 'User'}
                 </p>
-                <div className="flex flex-row gap-2 text-sm text-neutral-400 truncate">
-                  <div className="text-neutral-400 truncate">Pro Plan</div>
+                <div className="flex flex-row gap-1 text-sm text-neutral-400 truncate">
                   <div className="text-neutral-400 truncate">
-                    kaisen.ye@usc.edu
+                    {hasActivePaidSubscription && subscription
+                      ? `${subscription.plan_id?.charAt(0).toUpperCase()}${subscription.plan_id?.slice(1)} Plan` ||
+                        'Pro Plan'
+                      : 'Free Plan'}
                   </div>
+                  <div className="flex items-center justify-center text-neutral-400">
+                    <Dot className="w-4 h-4" />
+                  </div>
+                  <div className="text-neutral-400 truncate">{user?.email}</div>
                 </div>
               </div>
             </div>
