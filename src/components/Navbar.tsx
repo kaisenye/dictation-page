@@ -1,5 +1,5 @@
-import Link from 'next/link'
-import { FaRegCircle } from 'react-icons/fa6'
+import Link from 'next/link';
+import { FaRegCircle } from 'react-icons/fa6';
 
 export default function Navbar() {
   return (
@@ -11,16 +11,25 @@ export default function Navbar() {
         >
           <FaRegCircle className="size-full mt-[2px]" />
         </Link>
-        <Link href="/features" className="text-white hover:text-gray-300 transition-colors text-sm font-medium">
+        <Link
+          href="/features"
+          className="text-white hover:text-gray-300 transition-colors text-sm font-medium"
+        >
           Features
         </Link>
-        <Link href="/pricing" className="text-white hover:text-gray-300 transition-colors text-sm font-medium">
+        <Link
+          href="/pricing"
+          className="text-white hover:text-gray-300 transition-colors text-sm font-medium"
+        >
           Pricing
         </Link>
-        <Link href="/about" className="text-white hover:text-gray-300 transition-colors text-sm font-medium">
+        <Link
+          href="/about"
+          className="text-white hover:text-gray-300 transition-colors text-sm font-medium"
+        >
           About
         </Link>
       </div>
     </nav>
-  )
+  );
 }

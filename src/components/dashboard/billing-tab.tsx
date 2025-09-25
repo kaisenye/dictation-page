@@ -1,69 +1,169 @@
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+'use client';
+
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { useSubscription } from '@/providers/subscription-provider';
+import { useSubscriptionActions } from '@/hooks/useSubscriptionActions';
 
 export default function BillingTab() {
+  const { subscription, loading, hasActivePaidSubscription } =
+    useSubscription();
+  const { manageBilling } = useSubscriptionActions();
+
+  const handleManageBilling = async () => {
+    try {
+      await manageBilling();
+    } catch (error) {
+      console.error('Error opening billing portal:', error);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="space-y-6">
+        <div>
+          <h1 className="text-xl font-bold text-white mb-2">
+            Billing & Invoices
+          </h1>
+          <p className="text-neutral-400 text-sm">
+            Loading billing information...
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-xl font-bold text-white mb-2">Billing & Invoices</h1>
-        <p className="text-neutral-400 text-sm">Manage your billing information and view invoice history.</p>
+        <h1 className="text-xl font-bold text-white mb-2">
+          Billing & Invoices
+        </h1>
+        <p className="text-neutral-400 text-sm">
+          Manage your billing information and view invoice history.
+        </p>
       </div>
 
-      <Card className="bg-neutral-800 border-neutral-800">
-        <CardHeader>
-          <CardTitle className="text-white">Payment Method</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <div className="w-10 h-6 bg-gradient-to-r from-blue-600 to-blue-800 rounded flex items-center justify-center mr-3">
-                  <span className="text-xs font-bold text-white">VISA</span>
+      {hasActivePaidSubscription ? (
+        <>
+          <Card className="bg-neutral-800 border-neutral-800">
+            <CardHeader>
+              <CardTitle className="text-white">Billing Information</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <div className="text-white font-medium">Current Plan</div>
+                    <div className="text-sm text-neutral-400">
+                      {subscription!.plan_id || 'Pro Plan'} - Monthly
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-lg font-bold text-white">$20</div>
+                    <div className="text-sm text-neutral-400">per month</div>
+                  </div>
                 </div>
-                <div>
-                  <div className="text-white">•••• •••• •••• 4242</div>
-                  <div className="text-sm text-neutral-400">Expires 12/25</div>
+                <div className="text-xs text-neutral-400">
+                  <p>
+                    Next billing date:{' '}
+                    {subscription!.current_period_end
+                      ? new Date(
+                          subscription!.current_period_end
+                        ).toLocaleDateString()
+                      : 'N/A'}
+                  </p>
+                </div>
+                <div className="pt-4 border-t border-neutral-800">
+                  <Button variant="outline" onClick={handleManageBilling}>
+                    Manage Payment & Invoices
+                  </Button>
+                  <p className="text-xs text-neutral-400 mt-2">
+                    Update payment methods, view invoices, and manage billing
+                    details
+                  </p>
                 </div>
               </div>
-              <Button variant="outline" size="sm">
-                Update
+            </CardContent>
+          </Card>
+
+          <Card className="bg-neutral-800 border-neutral-800">
+            <CardHeader>
+              <CardTitle className="text-white">Subscription Details</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                <div className="flex justify-between items-center">
+                  <span className="text-neutral-400">Status</span>
+                  <Badge
+                    className={
+                      subscription!.status === 'active'
+                        ? 'bg-green-900 text-green-300'
+                        : subscription!.status === 'canceled'
+                          ? 'bg-red-900 text-red-300'
+                          : 'bg-yellow-900 text-yellow-300'
+                    }
+                  >
+                    {subscription!.status.charAt(0).toUpperCase() +
+                      subscription!.status.slice(1)}
+                  </Badge>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-neutral-400">Started</span>
+                  <span className="text-white">
+                    {subscription!.created_at
+                      ? new Date(subscription!.created_at).toLocaleDateString()
+                      : 'N/A'}
+                  </span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-neutral-400">Current Period</span>
+                  <span className="text-white">
+                    {subscription!.current_period_start &&
+                    subscription!.current_period_end
+                      ? `${new Date(subscription!.current_period_start).toLocaleDateString()} - ${new Date(subscription!.current_period_end).toLocaleDateString()}`
+                      : 'N/A'}
+                  </span>
+                </div>
+                {subscription!.cancel_at_period_end &&
+                  subscription!.current_period_end && (
+                    <div className="flex justify-between items-center">
+                      <span className="text-neutral-400">Cancels At</span>
+                      <span className="text-yellow-400">
+                        {new Date(
+                          subscription!.current_period_end
+                        ).toLocaleDateString()}
+                      </span>
+                    </div>
+                  )}
+              </div>
+            </CardContent>
+          </Card>
+        </>
+      ) : (
+        <Card className="bg-neutral-800 border-neutral-800">
+          <CardHeader>
+            <CardTitle className="text-white">
+              Basic Plan - No Billing Required
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-center py-8">
+              <p className="text-neutral-400 mb-4">
+                You&apos;re on the free Basic plan. No payment method or billing
+                information required.
+              </p>
+              <Button
+                className="bg-gradient-to-r from-lime-400 to-lime-500 text-black hover:from-lime-500 hover:to-lime-600"
+                onClick={() => (window.location.href = '/pricing')}
+              >
+                Upgrade to Pro Plan
               </Button>
             </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      <Card className="bg-neutral-800 border-neutral-800">
-        <CardHeader>
-          <CardTitle className="text-white">Billing History</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-3">
-            {[
-              { date: 'Sep 13, 2025', amount: '$20.00', status: 'Paid' },
-              { date: 'Aug 13, 2025', amount: '$20.00', status: 'Paid' },
-              { date: 'Jul 13, 2025', amount: '$20.00', status: 'Paid' },
-            ].map((invoice, index) => (
-              <div
-                key={index}
-                className="flex items-center justify-between py-3 border-b border-neutral-800 last:border-b-0"
-              >
-                <div>
-                  <div className="text-white font-medium">{invoice.date}</div>
-                  <div className="text-sm text-neutral-400">Pro Plan - Monthly</div>
-                </div>
-                <div className="flex items-center space-x-4">
-                  <span className="text-white font-medium">{invoice.amount}</span>
-                  <span className="px-2 py-1 bg-green-900 text-green-300 text-xs rounded">{invoice.status}</span>
-                  <Button variant="ghost" size="sm">
-                    Download
-                  </Button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+      )}
     </div>
-  )
+  );
 }

@@ -1,36 +1,36 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import AuthLayout from '@/components/auth/auth-layout'
-import SignInForm from '@/components/auth/sign-in-form'
-import SignUpForm from '@/components/auth/sign-up-form'
-import { Button } from '@/components/ui/button'
-import type { SignInFormData, SignUpFormData } from '@/lib/validations/auth'
+import { useState } from 'react';
+import AuthLayout from '@/components/auth/auth-layout';
+import SignInForm from '@/components/auth/sign-in-form';
+import SignUpForm from '@/components/auth/sign-up-form';
+import { Button } from '@/components/ui/button';
+import type { SignInFormData, SignUpFormData } from '@/lib/validations/auth';
 
 export default function TestPage() {
-  const [currentForm, setCurrentForm] = useState<'signin' | 'signup'>('signin')
+  const [currentForm, setCurrentForm] = useState<'signin' | 'signup'>('signin');
 
   const handleSignIn = async (data: SignInFormData) => {
-    console.log('Sign in data:', data)
-    await new Promise((resolve) => setTimeout(resolve, 2000))
+    console.log('Sign in data:', data);
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
     if (data.email === 'error@test.com') {
-      throw new Error('Invalid credentials')
+      throw new Error('Invalid credentials');
     }
 
-    alert(`Sign in successful! Email: ${data.email}`)
-  }
+    alert(`Sign in successful! Email: ${data.email}`);
+  };
 
   const handleSignUp = async (data: SignUpFormData) => {
-    console.log('Sign up data:', data)
-    await new Promise((resolve) => setTimeout(resolve, 2000))
+    console.log('Sign up data:', data);
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
     if (data.email === 'taken@test.com') {
-      throw new Error('Email already exists')
+      throw new Error('Email already exists');
     }
 
-    alert(`Account created! Welcome ${data.name}!`)
-  }
+    alert(`Account created! Welcome ${data.name}!`);
+  };
 
   return (
     <AuthLayout
@@ -59,8 +59,12 @@ export default function TestPage() {
         </div>
 
         {/* Forms */}
-        {currentForm === 'signin' ? <SignInForm onSubmit={handleSignIn} /> : <SignUpForm onSubmit={handleSignUp} />}
+        {currentForm === 'signin' ? (
+          <SignInForm onSubmit={handleSignIn} />
+        ) : (
+          <SignUpForm onSubmit={handleSignUp} />
+        )}
       </div>
     </AuthLayout>
-  )
+  );
 }

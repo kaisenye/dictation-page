@@ -1,21 +1,24 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { Button } from "@/components/ui/button"
-import { InputWithValidation } from "@/components/ui/input-with-validation"
-import { Label } from "@/components/ui/label"
-import PasswordStrengthIndicator from "@/components/ui/password-strength-indicator"
-import { signUpSchema, type SignUpFormData } from "@/lib/validations/auth"
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Button } from '@/components/ui/button';
+import { InputWithValidation } from '@/components/ui/input-with-validation';
+import { Label } from '@/components/ui/label';
+import PasswordStrengthIndicator from '@/components/ui/password-strength-indicator';
+import { signUpSchema, type SignUpFormData } from '@/lib/validations/auth';
 
 interface SignUpFormProps {
-  onSubmit: (data: SignUpFormData) => Promise<void>
-  isLoading?: boolean
+  onSubmit: (data: SignUpFormData) => Promise<void>;
+  isLoading?: boolean;
 }
 
-export default function SignUpForm({ onSubmit, isLoading = false }: SignUpFormProps) {
-  const [submitError, setSubmitError] = useState<string | null>(null)
+export default function SignUpForm({
+  onSubmit,
+  isLoading = false,
+}: SignUpFormProps) {
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const {
     register,
@@ -24,47 +27,51 @@ export default function SignUpForm({ onSubmit, isLoading = false }: SignUpFormPr
     watch,
   } = useForm<SignUpFormData>({
     resolver: zodResolver(signUpSchema),
-    mode: "onSubmit", // Only validate when form is submitted
-  })
+    mode: 'onSubmit', // Only validate when form is submitted
+  });
 
   // Watch all fields for validation feedback
-  const watchedFields = watch()
-  const password = watchedFields.password
-  const name = watchedFields.name
-  const email = watchedFields.email
-  const confirmPassword = watchedFields.confirmPassword
+  const watchedFields = watch();
+  const password = watchedFields.password;
+  const name = watchedFields.name;
+  const email = watchedFields.email;
+  const confirmPassword = watchedFields.confirmPassword;
 
   // Helper function to check if field is valid
   const isFieldValid = (fieldName: keyof SignUpFormData, value: string) => {
-    if (!value) return false
+    if (!value) return false;
     try {
       switch (fieldName) {
-        case "name":
-          return value.length >= 2 && /^[a-zA-Z\s'-]+$/.test(value)
-        case "email":
-          return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
-        case "password":
-          return value.length >= 8 && /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(value)
-        case "confirmPassword":
-          return value === password && value.length > 0
+        case 'name':
+          return value.length >= 2 && /^[a-zA-Z\s'-]+$/.test(value);
+        case 'email':
+          return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+        case 'password':
+          return (
+            value.length >= 8 && /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(value)
+          );
+        case 'confirmPassword':
+          return value === password && value.length > 0;
         default:
-          return false
+          return false;
       }
     } catch {
-      return false
+      return false;
     }
-  }
+  };
 
   const onFormSubmit = async (data: SignUpFormData) => {
     try {
-      setSubmitError(null)
-      await onSubmit(data)
+      setSubmitError(null);
+      await onSubmit(data);
     } catch (error) {
-      setSubmitError(error instanceof Error ? error.message : "An error occurred")
+      setSubmitError(
+        error instanceof Error ? error.message : 'An error occurred'
+      );
     }
-  }
+  };
 
-  const isFormDisabled = isLoading || isSubmitting
+  const isFormDisabled = isLoading || isSubmitting;
 
   return (
     <form onSubmit={handleSubmit(onFormSubmit)} className="space-y-4">
@@ -76,12 +83,12 @@ export default function SignUpForm({ onSubmit, isLoading = false }: SignUpFormPr
           type="text"
           placeholder="Enter your full name"
           disabled={isFormDisabled}
-          isValid={isFieldValid("name", name || "")}
+          isValid={isFieldValid('name', name || '')}
           hasError={!!errors.name}
           showValidationOnlyAfterSubmit={true}
           isSubmitted={isSubmitted}
-          value={name || ""}
-          {...register("name")}
+          value={name || ''}
+          {...register('name')}
           aria-invalid={!!errors.name}
         />
         {errors.name && (
@@ -99,12 +106,12 @@ export default function SignUpForm({ onSubmit, isLoading = false }: SignUpFormPr
           type="email"
           placeholder="Enter your email"
           disabled={isFormDisabled}
-          isValid={isFieldValid("email", email || "")}
+          isValid={isFieldValid('email', email || '')}
           hasError={!!errors.email}
           showValidationOnlyAfterSubmit={true}
           isSubmitted={isSubmitted}
-          value={email || ""}
-          {...register("email")}
+          value={email || ''}
+          {...register('email')}
           aria-invalid={!!errors.email}
         />
         {errors.email && (
@@ -122,12 +129,12 @@ export default function SignUpForm({ onSubmit, isLoading = false }: SignUpFormPr
           type="password"
           placeholder="Create a password"
           disabled={isFormDisabled}
-          isValid={isFieldValid("password", password || "")}
+          isValid={isFieldValid('password', password || '')}
           hasError={!!errors.password}
           showValidationOnlyAfterSubmit={true}
           isSubmitted={isSubmitted}
-          value={password || ""}
-          {...register("password")}
+          value={password || ''}
+          {...register('password')}
           aria-invalid={!!errors.password}
         />
         {errors.password && (
@@ -137,7 +144,7 @@ export default function SignUpForm({ onSubmit, isLoading = false }: SignUpFormPr
         )}
         {/* Password Strength Indicator */}
         {!errors.password && (
-          <PasswordStrengthIndicator password={password || ""} />
+          <PasswordStrengthIndicator password={password || ''} />
         )}
         {/* Password Requirements Hint - only show if no password entered */}
         {!errors.password && !password && (
@@ -155,12 +162,12 @@ export default function SignUpForm({ onSubmit, isLoading = false }: SignUpFormPr
           type="password"
           placeholder="Confirm your password"
           disabled={isFormDisabled}
-          isValid={isFieldValid("confirmPassword", confirmPassword || "")}
+          isValid={isFieldValid('confirmPassword', confirmPassword || '')}
           hasError={!!errors.confirmPassword}
           showValidationOnlyAfterSubmit={true}
           isSubmitted={isSubmitted}
-          value={confirmPassword || ""}
-          {...register("confirmPassword")}
+          value={confirmPassword || ''}
+          {...register('confirmPassword')}
           aria-invalid={!!errors.confirmPassword}
         />
         {errors.confirmPassword && (
@@ -170,9 +177,7 @@ export default function SignUpForm({ onSubmit, isLoading = false }: SignUpFormPr
         )}
         {/* Real-time password matching indicator */}
         {password && !errors.confirmPassword && (
-          <p className="text-xs text-neutral-400">
-            Passwords match ✓
-          </p>
+          <p className="text-xs text-neutral-400">Passwords match ✓</p>
         )}
       </div>
 
@@ -186,13 +191,9 @@ export default function SignUpForm({ onSubmit, isLoading = false }: SignUpFormPr
       )}
 
       {/* Submit Button */}
-      <Button
-        type="submit"
-        className="w-full"
-        disabled={isFormDisabled}
-      >
-        {isSubmitting ? "Creating account..." : "Create Account"}
+      <Button type="submit" className="w-full" disabled={isFormDisabled}>
+        {isSubmitting ? 'Creating account...' : 'Create Account'}
       </Button>
     </form>
-  )
+  );
 }
