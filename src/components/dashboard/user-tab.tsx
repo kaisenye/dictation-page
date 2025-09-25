@@ -1,29 +1,28 @@
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import type { User } from '@supabase/supabase-js'
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
-interface UserTabProps {
-  user: User | null
-}
-
-export default function UserTab({ user }: UserTabProps) {
+export default function UserTab() {
   return (
     <div className="space-y-6">
       <div>
         <h1 className="text-xl font-bold text-white mb-2">Overview</h1>
         <p className="text-neutral-400 text-sm">
-          Unlimited Tab completions, extended Agent limits, and access to most features.
+          Unlimited Tab completions, extended Agent limits, and access to most
+          features.
         </p>
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">
         <Card className="bg-neutral-800 border-neutral-800">
           <CardHeader>
-            <CardTitle className="text-white flex items-center">Pro Plan</CardTitle>
+            <CardTitle className="text-white flex items-center">
+              Pro Plan
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <p className="text-neutral-300 mb-4">
-              Unlimited Tab completions, extended Agent limits, and access to most features.
+              Unlimited Tab completions, extended Agent limits, and access to
+              most features.
             </p>
             <Button variant="outline" className="w-full">
               Manage Subscription
@@ -36,7 +35,9 @@ export default function UserTab({ user }: UserTabProps) {
             <CardTitle className="text-white">On-Demand Usage is Off</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-neutral-300 mb-4">Go beyond your plan&apos;s included quota with on-demand usage</p>
+            <p className="text-neutral-300 mb-4">
+              Go beyond your plan&apos;s included quota with on-demand usage
+            </p>
             <Button variant="outline" className="w-full">
               Enable On-Demand Usage
             </Button>
@@ -61,11 +62,12 @@ export default function UserTab({ user }: UserTabProps) {
           </div>
           <div className="mt-4 p-3 bg-neutral-800 rounded-lg">
             <p className="text-xs text-neutral-400">
-              We are working on a new analytics system that will be available in the next few weeks.
+              We are working on a new analytics system that will be available in
+              the next few weeks.
             </p>
           </div>
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

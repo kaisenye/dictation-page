@@ -1,24 +1,24 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { X, CheckCircle, AlertCircle } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { X, CheckCircle, AlertCircle } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
-export type InterestType = 'download' | 'waitlist'
+export type InterestType = 'download' | 'waitlist';
 
 interface EmailCaptureModalProps {
-  isOpen: boolean
-  onClose: () => void
-  interestType: InterestType
-  title: string
-  description: string
-  ctaText: string
+  isOpen: boolean;
+  onClose: () => void;
+  interestType: InterestType;
+  title: string;
+  description: string;
+  ctaText: string;
 }
 
 interface SubmitState {
-  status: 'idle' | 'loading' | 'success' | 'error'
-  message?: string
+  status: 'idle' | 'loading' | 'success' | 'error';
+  message?: string;
 }
 
 export default function EmailCaptureModal({
@@ -29,62 +29,70 @@ export default function EmailCaptureModal({
   description,
   ctaText,
 }: EmailCaptureModalProps) {
-  const [email, setEmail] = useState('')
-  const [submitState, setSubmitState] = useState<SubmitState>({ status: 'idle' })
+  const [email, setEmail] = useState('');
+  const [submitState, setSubmitState] = useState<SubmitState>({
+    status: 'idle',
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (!email || !email.includes('@')) {
-      setSubmitState({ status: 'error', message: 'Please enter a valid email address' })
-      return
+      setSubmitState({
+        status: 'error',
+        message: 'Please enter a valid email address',
+      });
+      return;
     }
 
-    setSubmitState({ status: 'loading' })
+    setSubmitState({ status: 'loading' });
 
     try {
       const response = await fetch('/api/capture-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, interestType }),
-      })
+      });
 
       if (!response.ok) {
         // Try to get error message from server response
-        const errorData = await response.json().catch(() => ({}))
-        const serverMessage = errorData.error || 'Failed to process request'
-        throw new Error(serverMessage)
+        const errorData = await response.json().catch(() => ({}));
+        const serverMessage = errorData.error || 'Failed to process request';
+        throw new Error(serverMessage);
       }
 
-      const data = await response.json()
+      const data = await response.json();
       setSubmitState({
         status: 'success',
         message: data.message || 'Check your email for the next steps!',
-      })
-      setEmail('')
+      });
+      setEmail('');
 
       // Close modal after 2 seconds on success
       setTimeout(() => {
-        onClose()
-        setSubmitState({ status: 'idle' })
-      }, 2000)
+        onClose();
+        setSubmitState({ status: 'idle' });
+      }, 2000);
     } catch (error) {
       setSubmitState({
         status: 'error',
-        message: error instanceof Error ? error.message : 'Something went wrong. Please try again.',
-      })
+        message:
+          error instanceof Error
+            ? error.message
+            : 'Something went wrong. Please try again.',
+      });
     }
-  }
+  };
 
   const handleClose = () => {
     if (submitState.status !== 'loading') {
-      onClose()
-      setEmail('')
-      setSubmitState({ status: 'idle' })
+      onClose();
+      setEmail('');
+      setSubmitState({ status: 'idle' });
     }
-  }
+  };
 
-  if (!isOpen) return null
+  if (!isOpen) return null;
 
   return (
     <div
@@ -115,7 +123,9 @@ export default function EmailCaptureModal({
           {submitState.status === 'success' && (
             <div className="text-center mb-6">
               <CheckCircle className="w-8 h-8 text-green-400 mx-auto mb-3" />
-              <p className="text-green-400 font-medium">{submitState.message}</p>
+              <p className="text-green-400 font-medium">
+                {submitState.message}
+              </p>
             </div>
           )}
 
@@ -160,10 +170,12 @@ export default function EmailCaptureModal({
 
           {/* Footer */}
           <div className="mt-6 text-center">
-            <p className="text-xs text-neutral-500">No spam. Unsubscribe anytime.</p>
+            <p className="text-xs text-neutral-500">
+              No spam. Unsubscribe anytime.
+            </p>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }

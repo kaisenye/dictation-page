@@ -1,14 +1,14 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import type { InterestType } from '@/components/EmailCaptureModal'
+import { useState } from 'react';
+import type { InterestType } from '@/components/EmailCaptureModal';
 
 interface EmailCaptureModalState {
-  isOpen: boolean
-  interestType: InterestType
-  title: string
-  description: string
-  ctaText: string
+  isOpen: boolean;
+  interestType: InterestType;
+  title: string;
+  description: string;
+  ctaText: string;
 }
 
 const modalConfigs = {
@@ -22,7 +22,7 @@ const modalConfigs = {
     description: 'Be the first to know when Romo Agent is available.',
     ctaText: 'Join Waitlist',
   },
-} as const
+} as const;
 
 export function useEmailCapture() {
   const [modalState, setModalState] = useState<EmailCaptureModalState>({
@@ -31,31 +31,31 @@ export function useEmailCapture() {
     title: '',
     description: '',
     ctaText: '',
-  })
+  });
 
   const openModal = (interestType: InterestType) => {
-    const config = modalConfigs[interestType]
+    const config = modalConfigs[interestType];
     setModalState({
       isOpen: true,
       interestType,
       ...config,
-    })
-  }
+    });
+  };
 
   const closeModal = () => {
     setModalState((prev) => ({
       ...prev,
       isOpen: false,
-    }))
-  }
+    }));
+  };
 
-  const openDownloadModal = () => openModal('download')
-  const openWaitlistModal = () => openModal('waitlist')
+  const openDownloadModal = () => openModal('download');
+  const openWaitlistModal = () => openModal('waitlist');
 
   return {
     modalState,
     openDownloadModal,
     openWaitlistModal,
     closeModal,
-  }
+  };
 }

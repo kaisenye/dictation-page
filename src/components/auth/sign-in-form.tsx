@@ -1,20 +1,23 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { Button } from "@/components/ui/button"
-import { InputWithValidation } from "@/components/ui/input-with-validation"
-import { Label } from "@/components/ui/label"
-import { signInSchema, type SignInFormData } from "@/lib/validations/auth"
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Button } from '@/components/ui/button';
+import { InputWithValidation } from '@/components/ui/input-with-validation';
+import { Label } from '@/components/ui/label';
+import { signInSchema, type SignInFormData } from '@/lib/validations/auth';
 
 interface SignInFormProps {
-  onSubmit: (data: SignInFormData) => Promise<void>
-  isLoading?: boolean
+  onSubmit: (data: SignInFormData) => Promise<void>;
+  isLoading?: boolean;
 }
 
-export default function SignInForm({ onSubmit, isLoading = false }: SignInFormProps) {
-  const [submitError, setSubmitError] = useState<string | null>(null)
+export default function SignInForm({
+  onSubmit,
+  isLoading = false,
+}: SignInFormProps) {
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const {
     register,
@@ -23,41 +26,43 @@ export default function SignInForm({ onSubmit, isLoading = false }: SignInFormPr
     watch,
   } = useForm<SignInFormData>({
     resolver: zodResolver(signInSchema),
-    mode: "onSubmit", // Only validate when form is submitted
-  })
+    mode: 'onSubmit', // Only validate when form is submitted
+  });
 
   // Watch fields for validation feedback
-  const watchedFields = watch()
-  const email = watchedFields.email
-  const password = watchedFields.password
+  const watchedFields = watch();
+  const email = watchedFields.email;
+  const password = watchedFields.password;
 
   // Helper function to check if field is valid
   const isFieldValid = (fieldName: keyof SignInFormData, value: string) => {
-    if (!value) return false
+    if (!value) return false;
     try {
       switch (fieldName) {
-        case "email":
-          return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
-        case "password":
-          return value.length > 0
+        case 'email':
+          return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+        case 'password':
+          return value.length > 0;
         default:
-          return false
+          return false;
       }
     } catch {
-      return false
+      return false;
     }
-  }
+  };
 
   const onFormSubmit = async (data: SignInFormData) => {
     try {
-      setSubmitError(null)
-      await onSubmit(data)
+      setSubmitError(null);
+      await onSubmit(data);
     } catch (error) {
-      setSubmitError(error instanceof Error ? error.message : "An error occurred")
+      setSubmitError(
+        error instanceof Error ? error.message : 'An error occurred'
+      );
     }
-  }
+  };
 
-  const isFormDisabled = isLoading || isSubmitting
+  const isFormDisabled = isLoading || isSubmitting;
 
   return (
     <form onSubmit={handleSubmit(onFormSubmit)} className="space-y-4">
@@ -69,12 +74,12 @@ export default function SignInForm({ onSubmit, isLoading = false }: SignInFormPr
           type="email"
           placeholder="Enter your email"
           disabled={isFormDisabled}
-          isValid={isFieldValid("email", email || "")}
+          isValid={isFieldValid('email', email || '')}
           hasError={!!errors.email}
           showValidationOnlyAfterSubmit={true}
           isSubmitted={isSubmitted}
-          value={email || ""}
-          {...register("email")}
+          value={email || ''}
+          {...register('email')}
           aria-invalid={!!errors.email}
         />
         {errors.email && (
@@ -92,12 +97,12 @@ export default function SignInForm({ onSubmit, isLoading = false }: SignInFormPr
           type="password"
           placeholder="Enter your password"
           disabled={isFormDisabled}
-          isValid={isFieldValid("password", password || "")}
+          isValid={isFieldValid('password', password || '')}
           hasError={!!errors.password}
           showValidationOnlyAfterSubmit={true}
           isSubmitted={isSubmitted}
-          value={password || ""}
-          {...register("password")}
+          value={password || ''}
+          {...register('password')}
           aria-invalid={!!errors.password}
         />
         {errors.password && (
@@ -117,13 +122,9 @@ export default function SignInForm({ onSubmit, isLoading = false }: SignInFormPr
       )}
 
       {/* Submit Button */}
-      <Button
-        type="submit"
-        className="w-full"
-        disabled={isFormDisabled}
-      >
-        {isSubmitting ? "Signing in..." : "Sign In"}
+      <Button type="submit" className="w-full" disabled={isFormDisabled}>
+        {isSubmitting ? 'Signing in...' : 'Sign In'}
       </Button>
     </form>
-  )
+  );
 }

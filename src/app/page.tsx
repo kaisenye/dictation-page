@@ -1,16 +1,20 @@
-'use client'
+'use client';
 
-import { Button } from '@/components/ui/button'
-import { FaApple, FaPlay } from 'react-icons/fa'
-import Navbar from '@/components/Navbar'
-import EmailCaptureModal from '@/components/EmailCaptureModal'
-import VideoModal from '@/components/VideoModal'
-import { useEmailCapture } from '@/hooks/useEmailCapture'
-import { useVideoModal } from '@/hooks/useVideoModal'
+import { Button } from '@/components/ui/button';
+import { FaApple, FaPlay } from 'react-icons/fa';
+import Navbar from '@/components/Navbar';
+import EmailCaptureModal from '@/components/EmailCaptureModal';
+import VideoModal from '@/components/VideoModal';
+import { useEmailCapture } from '@/hooks/useEmailCapture';
+import { useVideoModal } from '@/hooks/useVideoModal';
 
 export default function Home() {
-  const { modalState, openDownloadModal, closeModal } = useEmailCapture()
-  const { isOpen: isVideoOpen, openModal: openVideoModal, closeModal: closeVideoModal } = useVideoModal()
+  const { modalState, openDownloadModal, closeModal } = useEmailCapture();
+  const {
+    isOpen: isVideoOpen,
+    openModal: openVideoModal,
+    closeModal: closeVideoModal,
+  } = useVideoModal();
 
   return (
     <div className="h-screen w-screen overflow-hidden bg-black">
@@ -20,7 +24,13 @@ export default function Home() {
       {/* Video Banner Section - Full Screen */}
       <section className="relative h-full w-full">
         {/* Video Background */}
-        <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
           <source src="/demo.mp4" type="video/mp4" />
           {/* Fallback for browsers that don't support video */}
           <div className="absolute inset-0 bg-gradient-to-br from-blue-900 to-purple-900"></div>
@@ -33,7 +43,9 @@ export default function Home() {
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
           {/* Logo and Title */}
           <div className="mb-8">
-            <h1 className="text-3xl md:text-3xl lg:text-4xl font-bold text-white mb-4">Type Less. Think More.</h1>
+            <h1 className="text-3xl md:text-3xl lg:text-4xl font-bold text-white mb-4">
+              Type Less. Think More.
+            </h1>
             <p className="font-semibold text-sm md:text-sm lg:text-lg text-neutral-400 max-w-2xl mx-auto">
               anytime. anywhere.
             </p>
@@ -69,8 +81,12 @@ export default function Home() {
             <div className="flex items-center justify-center space-x-2 mb-2">
               <span className="text-sm font-bold text-white">romo.</span>
             </div>
-            <p className="text-xs text-gray-400 mb-1">we value your privacy, no data collected!</p>
-            <p className="text-xs text-gray-500">&copy; 2025 Romo. All rights reserved.</p>
+            <p className="text-xs text-gray-400 mb-1">
+              we value your privacy, no data collected!
+            </p>
+            <p className="text-xs text-gray-500">
+              &copy; 2025 Romo. All rights reserved.
+            </p>
           </div>
         </div>
       </section>
@@ -92,5 +108,5 @@ export default function Home() {
         videoUrl="https://romo-app-2025.s3.us-west-1.amazonaws.com/romo-demo.mp4"
       />
     </div>
-  )
+  );
 }

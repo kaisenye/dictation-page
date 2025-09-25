@@ -1,8 +1,8 @@
-import * as React from 'react'
-import { Slot } from '@radix-ui/react-slot'
-import { cva, type VariantProps } from 'class-variance-authority'
+import * as React from 'react';
+import { Slot } from '@radix-ui/react-slot';
+import { cva, type VariantProps } from 'class-variance-authority';
 
-import { cn } from '@/lib/utils'
+import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive cursor-pointer",
@@ -10,10 +10,14 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: 'bg-neutral-100 text-black shadow-xs hover:bg-neutral-300',
-        destructive: 'bg-red-600 text-white shadow-xs hover:bg-red-700 focus-visible:ring-red-600/20',
-        destructiveOutline: 'border border-red-700 text-red-700 shadow-xs hover:bg-red-700 hover:text-white',
-        destructiveGhost: 'text-red-700 shadow-xs hover:bg-red-700 hover:text-white',
-        outline: 'border border-white/20 bg-transparent text-white shadow-xs hover:bg-white/10 hover:border-white/30',
+        destructive:
+          'bg-red-600 text-white shadow-xs hover:bg-red-700 focus-visible:ring-red-600/20',
+        destructiveOutline:
+          'border border-red-700 text-red-700 shadow-xs hover:bg-red-700 hover:text-white',
+        destructiveGhost:
+          'text-red-700 shadow-xs hover:bg-red-700 hover:text-white',
+        outline:
+          'border border-white/20 bg-transparent text-white shadow-xs hover:bg-white/10 hover:border-white/30',
         secondary: 'bg-lime-400 text-lime-950 shadow-xs hover:bg-lime-500',
         ghost: 'text-white hover:bg-white/10',
         link: 'text-white underline-offset-4 hover:underline',
@@ -30,7 +34,7 @@ const buttonVariants = cva(
       size: 'default',
     },
   }
-)
+);
 
 function Button({
   className,
@@ -40,11 +44,17 @@ function Button({
   ...props
 }: React.ComponentProps<'button'> &
   VariantProps<typeof buttonVariants> & {
-    asChild?: boolean
+    asChild?: boolean;
   }) {
-  const Comp = asChild ? Slot : 'button'
+  const Comp = asChild ? Slot : 'button';
 
-  return <Comp data-slot="button" className={cn(buttonVariants({ variant, size, className }))} {...props} />
+  return (
+    <Comp
+      data-slot="button"
+      className={cn(buttonVariants({ variant, size, className }))}
+      {...props}
+    />
+  );
 }
 
-export { Button, buttonVariants }
+export { Button, buttonVariants };

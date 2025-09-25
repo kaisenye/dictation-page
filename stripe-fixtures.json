@@ -1,0 +1,45 @@
+{
+  "fixtures": [
+    {
+      "name": "pro_product",
+      "path": "/v1/products",
+      "method": "post",
+      "params": {
+        "name": "Pro Plan",
+        "description": "Professional AI dictation with advanced features",
+        "active": true,
+        "metadata": {
+          "features": "Advanced AI Features,Context Aware Dictation,Lifetime Updates"
+        }
+      }
+    },
+    {
+      "name": "pro_monthly_price",
+      "path": "/v1/prices",
+      "method": "post",
+      "params": {
+        "product": "${pro_product:id}",
+        "unit_amount": 1000,
+        "currency": "usd",
+        "recurring": {
+          "interval": "month"
+        },
+        "active": true
+      }
+    },
+    {
+      "name": "pro_yearly_price",
+      "path": "/v1/prices",
+      "method": "post",
+      "params": {
+        "product": "${pro_product:id}",
+        "unit_amount": 10000,
+        "currency": "usd",
+        "recurring": {
+          "interval": "year"
+        },
+        "active": true
+      }
+    }
+  ]
+}

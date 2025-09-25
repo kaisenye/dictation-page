@@ -1,5 +1,16 @@
-import { Body, Button, Container, Head, Heading, Html, Preview, Section, Text, Tailwind } from '@react-email/components'
-import * as React from 'react'
+import {
+  Body,
+  Button,
+  Container,
+  Head,
+  Heading,
+  Html,
+  Preview,
+  Section,
+  Text,
+  Tailwind,
+} from '@react-email/components';
+import * as React from 'react';
 
 export const DownloadEmail = () => (
   <Html>
@@ -10,8 +21,12 @@ export const DownloadEmail = () => (
         <Container className="mx-auto py-10 px-5 max-w-2xl">
           {/* Header */}
           <Section className="text-center mb-10">
-            <Heading className="text-neutral-700 text-2xl font-bold m-0">romo.</Heading>
-            <Text className="text-neutral-500 mt-2 mb-0 text-base">Type Less. Think More.</Text>
+            <Heading className="text-neutral-700 text-2xl font-bold m-0">
+              romo.
+            </Heading>
+            <Text className="text-neutral-500 mt-2 mb-0 text-base">
+              Type Less. Think More.
+            </Text>
           </Section>
 
           {/* Main Content */}
@@ -21,8 +36,9 @@ export const DownloadEmail = () => (
             </Heading>
 
             <Text className="text-neutral-600 text-base leading-relaxed mt-0 mb-6">
-              You&apos;re just one click away from experiencing the future of dictation. Romo is a privacy-focused,
-              offline-capable AI dictation tool that helps you type less and think more.
+              You&apos;re just one click away from experiencing the future of
+              dictation. Romo is a privacy-focused, offline-capable AI dictation
+              tool that helps you type less and think more.
             </Text>
 
             {/* Download Button */}
@@ -37,19 +53,26 @@ export const DownloadEmail = () => (
 
             {/* Getting Started */}
             <Section className="bg-neutral-100 rounded-md px-4 py-6">
-              <Heading className="text-neutral-700 text-base font-bold">Getting Started:</Heading>
-              <Text className="text-neutral-600 text-base leading-relaxed mt-0 mb-2">1. Download and install Romo</Text>
+              <Heading className="text-neutral-700 text-base font-bold">
+                Getting Started:
+              </Heading>
+              <Text className="text-neutral-600 text-base leading-relaxed mt-0 mb-2">
+                1. Download and install Romo
+              </Text>
               <Text className="text-neutral-600 text-base leading-relaxed mt-0 mb-2">
                 2. Grant microphone permissions
               </Text>
-              <Text className="text-neutral-600 text-base leading-relaxed mt-0 mb-0">3. Start dictating anywhere!</Text>
+              <Text className="text-neutral-600 text-base leading-relaxed mt-0 mb-0">
+                3. Start dictating anywhere!
+              </Text>
             </Section>
           </Section>
 
           {/* Footer */}
           <Section className="text-center border-t border-neutral-200 pt-8">
             <Text className="text-neutral-400 text-xs m-0">
-              You received this email because you requested a download link for Romo.
+              You received this email because you requested a download link for
+              Romo.
               <br />© 2025 Romo. All rights reserved.
             </Text>
           </Section>
@@ -57,6 +80,6 @@ export const DownloadEmail = () => (
       </Body>
     </Tailwind>
   </Html>
-)
+);
 
-export default DownloadEmail
+export default DownloadEmail;

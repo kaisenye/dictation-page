@@ -1,49 +1,57 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import AuthLayout from '@/components/auth/auth-layout'
-import { InputWithValidation } from '@/components/ui/input-with-validation'
-import { Label } from '@/components/ui/label'
-import { Button } from '@/components/ui/button'
-import { createClient } from '@/lib/supabase/client'
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import AuthLayout from '@/components/auth/auth-layout';
+import { InputWithValidation } from '@/components/ui/input-with-validation';
+import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
+import { createClient } from '@/lib/supabase/client';
 
 export default function UpdatePasswordPage() {
-  const supabase = createClient()
-  const router = useRouter()
+  const supabase = createClient();
+  const router = useRouter();
 
-  const [password, setPassword] = useState('')
-  const [confirm, setConfirm] = useState('')
-  const [status, setStatus] = useState<'idle' | 'updating' | 'updated' | 'error'>('idle')
-  const [error, setError] = useState<string | null>(null)
+  const [password, setPassword] = useState('');
+  const [confirm, setConfirm] = useState('');
+  const [status, setStatus] = useState<
+    'idle' | 'updating' | 'updated' | 'error'
+  >('idle');
+  const [error, setError] = useState<string | null>(null);
 
-  const isValidPassword = (val: string) => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(val)
-  const passwordsMatch = password.length > 0 && password === confirm
+  const isValidPassword = (val: string) =>
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(val);
+  const passwordsMatch = password.length > 0 && password === confirm;
 
   const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError(null)
-    setStatus('updating')
+    e.preventDefault();
+    setError(null);
+    setStatus('updating');
 
     if (!isValidPassword(password) || !passwordsMatch) {
-      setError('Please enter a strong password and confirm it correctly.')
-      setStatus('error')
-      return
+      setError('Please enter a strong password and confirm it correctly.');
+      setStatus('error');
+      return;
     }
 
     try {
-      const { error } = await supabase.auth.updateUser({ password })
-      if (error) throw error
-      setStatus('updated')
-      setTimeout(() => router.replace('/dashboard'), 800)
+      const { error } = await supabase.auth.updateUser({ password });
+      if (error) throw error;
+      setStatus('updated');
+      setTimeout(() => router.replace('/dashboard'), 800);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to update password')
-      setStatus('error')
+      setError(
+        err instanceof Error ? err.message : 'Failed to update password'
+      );
+      setStatus('error');
     }
-  }
+  };
 
   return (
-    <AuthLayout title="Set a new password" subtitle="Enter and confirm your new password">
+    <AuthLayout
+      title="Set a new password"
+      subtitle="Enter and confirm your new password"
+    >
       <form onSubmit={onSubmit} className="space-y-4">
         <div className="space-y-2">
           <Label htmlFor="password">New Password</Label>
@@ -85,14 +93,20 @@ export default function UpdatePasswordPage() {
 
         {status === 'updated' && (
           <div className="p-3 bg-green-900/20 border border-green-800 rounded-md">
-            <p className="text-sm text-green-400">Password updated. Redirecting...</p>
+            <p className="text-sm text-green-400">
+              Password updated. Redirecting...
+            </p>
           </div>
         )}
 
-        <Button type="submit" className="w-full" disabled={status === 'updating'}>
+        <Button
+          type="submit"
+          className="w-full"
+          disabled={status === 'updating'}
+        >
           {status === 'updating' ? 'Updating...' : 'Update password'}
         </Button>
       </form>
     </AuthLayout>
-  )
+  );
 }

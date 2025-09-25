@@ -9,7 +9,6 @@
    ```
 
 2. **Add your video:**
-
    - Place `demo.mp4` in the `public/` folder
    - Or update the video source in `src/app/page.tsx`
 

@@ -1,37 +1,41 @@
-'use client'
+'use client';
 
-import { useEffect, useRef } from 'react'
-import { Play } from 'lucide-react'
+import { useEffect, useRef } from 'react';
+import { Play } from 'lucide-react';
 
 interface VideoModalProps {
-  isOpen: boolean
-  onClose: () => void
-  videoUrl: string
+  isOpen: boolean;
+  onClose: () => void;
+  videoUrl: string;
 }
 
-export default function VideoModal({ isOpen, onClose, videoUrl }: VideoModalProps) {
-  const videoRef = useRef<HTMLVideoElement>(null)
+export default function VideoModal({
+  isOpen,
+  onClose,
+  videoUrl,
+}: VideoModalProps) {
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     if (isOpen && videoRef.current) {
-      videoRef.current.currentTime = 0
+      videoRef.current.currentTime = 0;
     }
-  }, [isOpen])
+  }, [isOpen]);
 
   const handleClose = () => {
     if (videoRef.current) {
-      videoRef.current.pause()
+      videoRef.current.pause();
     }
-    onClose()
-  }
+    onClose();
+  };
 
   const handleBackdropClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
-      handleClose()
+      handleClose();
     }
-  }
+  };
 
-  if (!isOpen) return null
+  if (!isOpen) return null;
 
   return (
     <div
@@ -54,12 +58,14 @@ export default function VideoModal({ isOpen, onClose, videoUrl }: VideoModalProp
             <div className="flex items-center justify-center h-64 bg-neutral-900 text-white">
               <div className="text-center">
                 <Play className="w-12 h-12 mx-auto mb-4 text-neutral-400" />
-                <p className="text-neutral-400">Video cannot be played in this browser</p>
+                <p className="text-neutral-400">
+                  Video cannot be played in this browser
+                </p>
               </div>
             </div>
           </video>
         </div>
       </div>
     </div>
-  )
+  );
 }
