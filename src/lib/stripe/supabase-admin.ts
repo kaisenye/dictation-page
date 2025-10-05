@@ -1,11 +1,5 @@
-import { createClient } from '@supabase/supabase-js';
-import { getPlanByStripePrice } from '@/config/plans';
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
-
-// Create a single supabase client for interacting with your database
-export const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey);
+import { createAdminClient } from '@/lib/supabase/server';
+import type { Database } from '@/types/database';
 
 export const createOrRetrieveCustomer = async ({
   email,
@@ -14,7 +8,9 @@ export const createOrRetrieveCustomer = async ({
   email: string;
   uuid: string;
 }) => {
-  const { data, error } = await supabaseAdmin
+  const supabase = createAdminClient();
+
+  const { data, error } = await supabase
     .from('customers')
     .select('stripe_customer_id')
     .eq('id', uuid)
@@ -29,7 +25,7 @@ export const createOrRetrieveCustomer = async ({
     });
 
     // Insert the customer ID into our Supabase table
-    const { error: supabaseError } = await supabaseAdmin
+    const { error: supabaseError } = await supabase
       .from('customers')
       .insert([{ id: uuid, stripe_customer_id: customer.id }]);
 
@@ -63,8 +59,10 @@ export const manageSubscriptionStatusChange = async (
   customerId: string,
   createAction = false
 ) => {
+  const supabase = createAdminClient();
+
   // Get customer's UUID from mapping table
-  const { data: customerData, error: customerError } = await supabaseAdmin
+  const { data: customerData, error: customerError } = await supabase
     .from('customers')
     .select('id')
     .eq('stripe_customer_id', customerId)
@@ -79,18 +77,17 @@ export const manageSubscriptionStatusChange = async (
     subscriptionId
   )) as unknown as StripeSubscription;
 
-  // Get our internal plan ID from the Stripe price ID
+  // Get the Stripe price ID
   const stripePriceId = subscription.items.data[0].price.id;
-  const plan = getPlanByStripePrice(stripePriceId);
-  const planId = plan?.id || 'unknown';
 
   // Upsert the latest status of the subscription object
   const subscriptionData = {
     id: subscription.id,
     user_id: uuid,
-    status: subscription.status,
-    stripe_price_id: stripePriceId,
-    plan_id: planId,
+    status:
+      subscription.status as Database['public']['Enums']['subscription_status'],
+    metadata: {},
+    price_id: stripePriceId,
     quantity: subscription.items.data[0].quantity ?? null,
     cancel_at_period_end: subscription.cancel_at_period_end ?? null,
     cancel_at: subscription.cancel_at
@@ -117,7 +114,7 @@ export const manageSubscriptionStatusChange = async (
       : null,
   };
 
-  const { error } = await supabaseAdmin
+  const { error } = await supabase
     .from('subscriptions')
     .upsert([subscriptionData]);
 
