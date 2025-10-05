@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { useSubscription } from '@/providers/subscription-provider';
 import { useSubscriptionActions } from '@/hooks/useSubscriptionActions';
 import { PLANS } from '@/config/plans';
+import EmergeAnimation from '@/components/EmergeAnimation';
 
 export default function PlanTab() {
   const { subscription, loading, hasActivePaidSubscription } =
@@ -61,104 +62,108 @@ export default function PlanTab() {
         </p>
       </div>
 
-      <Card className="bg-neutral-800 border-neutral-800">
-        <CardHeader>
-          <CardTitle className="text-white">Current Plan</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            {hasActivePaidSubscription && subscription ? (
-              <>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-white font-medium">
-                        {subscription.plan_id
-                          ? `${subscription.plan_id.charAt(0).toUpperCase()}${subscription.plan_id.slice(1)} Plan`
-                          : 'Pro Plan'}
-                      </span>
-                      {getStatusBadge(subscription.status)}
+      <EmergeAnimation delay={100} duration={1000} className="space-y-6">
+        <Card className="bg-neutral-800 border-neutral-800">
+          <CardHeader>
+            <CardTitle className="text-white">Current Plan</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {hasActivePaidSubscription && subscription ? (
+                <>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-white font-medium">
+                          {subscription.plan_id
+                            ? `${subscription.plan_id.charAt(0).toUpperCase()}${subscription.plan_id.slice(1)} Plan`
+                            : 'Pro Plan'}
+                        </span>
+                        {getStatusBadge(subscription.status)}
+                      </div>
+                      <p className="text-sm text-neutral-400 mt-1">
+                        Professional AI dictation with advanced features
+                      </p>
+                      {subscription.cancel_at_period_end &&
+                        subscription.current_period_end && (
+                          <p className="text-sm text-yellow-400 mt-1">
+                            Cancels at period end:{' '}
+                            {new Date(
+                              subscription.current_period_end
+                            ).toLocaleDateString()}
+                          </p>
+                        )}
                     </div>
-                    <p className="text-sm text-neutral-400 mt-1">
-                      Professional AI dictation with advanced features
-                    </p>
-                    {subscription.cancel_at_period_end &&
-                      subscription.current_period_end && (
-                        <p className="text-sm text-yellow-400 mt-1">
-                          Cancels at period end:{' '}
-                          {new Date(
+                    <div className="text-right">
+                      <div className="text-lg font-bold text-white">
+                        {subscription.plan_id &&
+                        PLANS[subscription.plan_id as keyof typeof PLANS]
+                          ? `$${PLANS[subscription.plan_id as keyof typeof PLANS].price}`
+                          : '$10'}
+                      </div>
+                      <div className="text-sm text-neutral-400">
+                        per{' '}
+                        {subscription.plan_id?.includes('yearly')
+                          ? 'year'
+                          : 'month'}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="text-xs text-neutral-400">
+                    <p>
+                      Next billing:{' '}
+                      {subscription.current_period_end
+                        ? new Date(
                             subscription.current_period_end
-                          ).toLocaleDateString()}
-                        </p>
-                      )}
-                  </div>
-                  <div className="text-right">
-                    <div className="text-lg font-bold text-white">
-                      {subscription.plan_id &&
-                      PLANS[subscription.plan_id as keyof typeof PLANS]
-                        ? `$${PLANS[subscription.plan_id as keyof typeof PLANS].price}`
-                        : '$10'}
-                    </div>
-                    <div className="text-sm text-neutral-400">
-                      per{' '}
-                      {subscription.plan_id?.includes('yearly')
-                        ? 'year'
-                        : 'month'}
-                    </div>
-                  </div>
-                </div>
-                <div className="text-xs text-neutral-400">
-                  <p>
-                    Next billing:{' '}
-                    {subscription.current_period_end
-                      ? new Date(
-                          subscription.current_period_end
-                        ).toLocaleDateString()
-                      : 'N/A'}
-                  </p>
-                </div>
-                <div className="pt-4 border-t border-neutral-800">
-                  <Button
-                    variant="outline"
-                    className="mr-3"
-                    onClick={handleManageBilling}
-                  >
-                    Manage Billing
-                  </Button>
-                </div>
-              </>
-            ) : (
-              <>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-white font-medium">Basic Plan</span>
-                      <Badge className="bg-green-900 text-green-300">
-                        Active
-                      </Badge>
-                    </div>
-                    <p className="text-sm text-neutral-400 mt-1">
-                      AI dictation, privacy focused, offline capable
+                          ).toLocaleDateString()
+                        : 'N/A'}
                     </p>
                   </div>
-                  <div className="text-right">
-                    <div className="text-lg font-bold text-white">$0</div>
-                    <div className="text-sm text-neutral-400">forever</div>
+                  <div className="pt-4 border-t border-neutral-800">
+                    <Button
+                      variant="outline"
+                      className="mr-3"
+                      onClick={handleManageBilling}
+                    >
+                      Manage Billing
+                    </Button>
                   </div>
-                </div>
-                <div className="pt-4 border-t border-neutral-800">
-                  <Button
-                    className="bg-gradient-to-r from-lime-400 to-lime-500 text-black hover:from-lime-500 hover:to-lime-600"
-                    onClick={() => (window.location.href = '/pricing')}
-                  >
-                    Upgrade to Pro Plan
-                  </Button>
-                </div>
-              </>
-            )}
-          </div>
-        </CardContent>
-      </Card>
+                </>
+              ) : (
+                <>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-white font-medium">
+                          Basic Plan
+                        </span>
+                        <Badge className="bg-green-900 text-green-300">
+                          Active
+                        </Badge>
+                      </div>
+                      <p className="text-sm text-neutral-400 mt-1">
+                        AI dictation, privacy focused, offline capable
+                      </p>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-lg font-bold text-white">$0</div>
+                      <div className="text-sm text-neutral-400">forever</div>
+                    </div>
+                  </div>
+                  <div className="pt-4 border-t border-neutral-800">
+                    <Button
+                      className="bg-gradient-to-r from-lime-400 to-lime-500 text-black hover:from-lime-500 hover:to-lime-600"
+                      onClick={() => (window.location.href = '/pricing')}
+                    >
+                      Upgrade to Pro Plan
+                    </Button>
+                  </div>
+                </>
+              )}
+            </div>
+          </CardContent>
+        </Card>
+      </EmergeAnimation>
     </div>
   );
 }
