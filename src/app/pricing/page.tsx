@@ -18,7 +18,7 @@ export default function Pricing() {
   const router = useRouter();
   const supabase = createClient();
   const { subscribe, loading } = useSubscriptionActions();
-  const { subscription, hasActivePaidSubscription } = useSubscription();
+  const { hasActivePaidSubscription } = useSubscription();
 
   useEffect(() => {
     const getUser = async () => {
