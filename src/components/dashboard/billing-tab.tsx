@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useSubscription } from '@/providers/subscription-provider';
 import { useSubscriptionActions } from '@/hooks/useSubscriptionActions';
+import { PLANS } from '@/config/plans';
 
 export default function BillingTab() {
   const { subscription, loading, hasActivePaidSubscription } =
@@ -57,23 +58,30 @@ export default function BillingTab() {
                   <div>
                     <div className="text-white font-medium">Current Plan</div>
                     <div className="text-sm text-neutral-400">
-                      {subscription!.plan_id || 'Pro Plan'} - Monthly
+                      {subscription!.plan_id ? (
+                        `${subscription!.plan_id.charAt(0).toUpperCase()}${subscription!.plan_id.slice(1)} Plan - ${subscription!.plan_id?.includes('yearly') ? 'Yearly' : 'Monthly'}`
+                      ) : (
+                        <span className="text-red-400">N/A</span>
+                      )}
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-lg font-bold text-white">$20</div>
-                    <div className="text-sm text-neutral-400">per month</div>
+                    <div className="text-lg font-bold text-white">
+                      {subscription!.plan_id &&
+                      PLANS[subscription!.plan_id as keyof typeof PLANS] ? (
+                        `$${PLANS[subscription!.plan_id as keyof typeof PLANS].price}`
+                      ) : (
+                        <span className="text-red-400">N/A</span>
+                      )}
+                    </div>
+                    <div className="text-sm text-neutral-400">
+                      {subscription!.plan_id ? (
+                        `per ${subscription!.plan_id?.includes('yearly') ? 'year' : 'month'}`
+                      ) : (
+                        <span className="text-red-400">N/A</span>
+                      )}
+                    </div>
                   </div>
-                </div>
-                <div className="text-xs text-neutral-400">
-                  <p>
-                    Next billing date:{' '}
-                    {subscription!.current_period_end
-                      ? new Date(
-                          subscription!.current_period_end
-                        ).toLocaleDateString()
-                      : 'N/A'}
-                  </p>
                 </div>
                 <div className="pt-4 border-t border-neutral-800">
                   <Button variant="outline" onClick={handleManageBilling}>

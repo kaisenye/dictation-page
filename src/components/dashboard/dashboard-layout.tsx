@@ -6,23 +6,21 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/providers/auth-provider';
 import { useSubscription } from '@/providers/subscription-provider';
 import { Button } from '@/components/ui/button';
-import { User, CreditCard, Sparkle, LogOut, Mail, Dot } from 'lucide-react';
+import { CreditCard, Sparkle, LogOut, Mail, Dot } from 'lucide-react';
 import { FaRegCircle } from 'react-icons/fa6';
 import { cn } from '@/lib/utils';
-import UserTab from './user-tab';
 import PlanTab from './plan-tab';
 import BillingTab from './billing-tab';
 
-type TabType = 'user' | 'plan' | 'billing';
+type TabType = 'plan' | 'billing';
 
 const tabs = [
-  { id: 'user' as TabType, label: 'Overview', icon: User },
   { id: 'plan' as TabType, label: 'Plans', icon: Sparkle },
   { id: 'billing' as TabType, label: 'Billing & Invoices', icon: CreditCard },
 ];
 
 export default function DashboardLayout() {
-  const [activeTab, setActiveTab] = useState<TabType>('user');
+  const [activeTab, setActiveTab] = useState<TabType>('plan');
   const router = useRouter();
   const { user, signOut } = useAuth();
   const { subscription, hasActivePaidSubscription } = useSubscription();
@@ -34,14 +32,12 @@ export default function DashboardLayout() {
 
   const renderTabContent = () => {
     switch (activeTab) {
-      case 'user':
-        return <UserTab />;
       case 'plan':
         return <PlanTab />;
       case 'billing':
         return <BillingTab />;
       default:
-        return <UserTab />;
+        return <PlanTab />;
     }
   };
 
