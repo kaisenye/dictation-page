@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
 import { useSubscriptionActions } from '@/hooks/useSubscriptionActions';
+import { useSubscription } from '@/providers/subscription-provider';
 import { PLANS } from '@/config/plans';
 import type { User } from '@supabase/supabase-js';
 
@@ -17,6 +18,7 @@ export default function Pricing() {
   const router = useRouter();
   const supabase = createClient();
   const { subscribe, loading } = useSubscriptionActions();
+  const { subscription, hasActivePaidSubscription } = useSubscription();
 
   useEffect(() => {
     const getUser = async () => {
@@ -84,9 +86,19 @@ export default function Pricing() {
               </ul>
 
               {user ? (
-                <Button variant="outline" className="w-full" disabled>
-                  ✓ Current Plan
-                </Button>
+                !hasActivePaidSubscription ? (
+                  <Button variant="outline" className="w-full" disabled>
+                    ✓ Current Plan
+                  </Button>
+                ) : (
+                  <Button
+                    variant="default"
+                    className="w-full"
+                    onClick={() => router.push('/dashboard')}
+                  >
+                    Manage Account
+                  </Button>
+                )
               ) : (
                 <Button
                   variant="default"
@@ -126,13 +138,23 @@ export default function Pricing() {
 
               <div className="space-y-3">
                 {user ? (
-                  <Button
-                    className="w-full font-semibold bg-gradient-to-r from-lime-400 to-lime-500 text-black hover:from-lime-500 hover:to-lime-600"
-                    onClick={() => handleSubscribe('pro')}
-                    disabled={loading}
-                  >
-                    {loading ? 'Processing...' : 'Subscribe Monthly'}
-                  </Button>
+                  hasActivePaidSubscription ? (
+                    <Button
+                      variant="outline"
+                      className="w-full font-semibold"
+                      disabled
+                    >
+                      ✓ Current Plan
+                    </Button>
+                  ) : (
+                    <Button
+                      className="w-full font-semibold bg-gradient-to-r from-lime-400 to-lime-500 text-black hover:from-lime-500 hover:to-lime-600"
+                      onClick={() => handleSubscribe('pro')}
+                      disabled={loading}
+                    >
+                      {loading ? 'Processing...' : 'Subscribe Monthly'}
+                    </Button>
+                  )
                 ) : (
                   <Button
                     variant="secondary"
@@ -144,21 +166,23 @@ export default function Pricing() {
                     Sign In to Subscribe
                   </Button>
                 )}
-                <div className="text-xs text-neutral-400">
-                  Or save with yearly: $
-                  {(PLANS.proYearly.price / 12).toFixed(0)}/month
-                  {user && (
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="ml-2 text-lime-400 hover:text-lime-300"
-                      onClick={() => handleSubscribe('proYearly')}
-                      disabled={loading}
-                    >
-                      Choose Yearly
-                    </Button>
-                  )}
-                </div>
+                {!hasActivePaidSubscription && (
+                  <div className="text-xs text-neutral-400">
+                    Or save with yearly: $
+                    {(PLANS.proYearly.price / 12).toFixed(0)}/month
+                    {user && (
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="ml-2 text-lime-400 hover:text-lime-300"
+                        onClick={() => handleSubscribe('proYearly')}
+                        disabled={loading}
+                      >
+                        Choose Yearly
+                      </Button>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           </div>
