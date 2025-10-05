@@ -4,6 +4,9 @@ import Stripe from 'stripe';
 import stripe from '@/lib/stripe/server';
 import { manageSubscriptionStatusChange } from '@/lib/stripe/supabase-admin';
 
+// Force dynamic rendering for this API route
+export const dynamic = 'force-dynamic';
+
 const relevantEvents = new Set([
   'checkout.session.completed',
   'customer.subscription.created',

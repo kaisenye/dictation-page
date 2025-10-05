@@ -1,7 +1,9 @@
 import { createServerClient } from '@supabase/ssr';
+import { createClient } from '@supabase/supabase-js';
 import { cookies } from 'next/headers';
+import type { Database } from '@/types/database';
 
-export async function createClient() {
+export async function createServerClientFromCookies() {
   const cookieStore = await cookies();
 
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -32,6 +34,26 @@ export async function createClient() {
           // user sessions.
         }
       },
+    },
+  });
+}
+
+// Backwards compatibility
+export { createServerClientFromCookies as createClient };
+
+// Admin client for server-side operations that need elevated permissions
+export function createAdminClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!url || !serviceKey) {
+    throw new Error('Missing Supabase admin environment variables');
+  }
+
+  return createClient<Database>(url, serviceKey, {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false,
     },
   });
 }

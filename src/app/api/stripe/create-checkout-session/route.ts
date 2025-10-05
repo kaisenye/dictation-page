@@ -4,6 +4,9 @@ import { cookies } from 'next/headers';
 import { createCheckoutSession } from '@/lib/stripe/server';
 import { createOrRetrieveCustomer } from '@/lib/stripe/supabase-admin';
 
+// Force dynamic rendering for this API route
+export const dynamic = 'force-dynamic';
+
 export async function POST(request: NextRequest) {
   try {
     const { priceId, metadata = {} } = await request.json();
