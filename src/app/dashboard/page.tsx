@@ -1,5 +1,5 @@
-import DashboardLayout from '@/components/dashboard/dashboard-layout'
+import DashboardLayout from '@/components/dashboard/dashboard-layout';
 
 export default function DashboardPage() {
-  return <DashboardLayout />
+  return <DashboardLayout />;
 }

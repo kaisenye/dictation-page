@@ -1,42 +1,45 @@
-'use client'
+'use client';
 
-import { useEffect } from 'react'
-import { useRouter } from 'next/navigation'
-import Link from 'next/link'
-import AuthLayout from '@/components/auth/auth-layout'
-import SignInForm from '@/components/auth/sign-in-form'
-import { useAuth } from '@/providers/auth-provider'
-import type { SignInFormData } from '@/lib/validations/auth'
-import { Button } from '@/components/ui/button'
-import { FaGoogle } from 'react-icons/fa'
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import AuthLayout from '@/components/auth/auth-layout';
+import SignInForm from '@/components/auth/sign-in-form';
+import { useAuth } from '@/providers/auth-provider';
+import type { SignInFormData } from '@/lib/validations/auth';
+import { Button } from '@/components/ui/button';
+import { FaGoogle } from 'react-icons/fa';
 
 export default function SignInPage() {
-  const router = useRouter()
-  const { signIn, signInWithOAuth, user } = useAuth()
+  const router = useRouter();
+  const { signIn, signInWithOAuth, user } = useAuth();
 
   // If already signed in, redirect to dashboard
   useEffect(() => {
     if (user) {
-      router.replace('/dashboard')
+      router.replace('/dashboard');
     }
-  }, [user, router])
+  }, [user, router]);
 
   const handleSignIn = async (data: SignInFormData) => {
     try {
       // Use Supabase authentication via our auth provider
-      const { error } = await signIn(data.email, data.password)
+      const { error } = await signIn(data.email, data.password);
       if (error) {
-        throw new Error(error)
+        throw new Error(error);
       }
-      router.push('/dashboard')
+      router.push('/dashboard');
     } catch (error) {
       // Re-throw error so SignInForm can display it
-      throw error
+      throw error;
     }
-  }
+  };
 
   return (
-    <AuthLayout title="Welcome back" subtitle="Sign in to your account to continue">
+    <AuthLayout
+      title="Welcome back"
+      subtitle="Sign in to your account to continue"
+    >
       <div className="space-y-6">
         {/* OAuth Provider Sign-in */}
         <Button
@@ -44,8 +47,8 @@ export default function SignInPage() {
           variant="outline"
           className="w-full"
           onClick={async () => {
-            const { error } = await signInWithOAuth('google')
-            if (error) throw new Error(error)
+            const { error } = await signInWithOAuth('google');
+            if (error) throw new Error(error);
           }}
         >
           <FaGoogle className="mr-2 h-4 w-4" />
@@ -53,7 +56,9 @@ export default function SignInPage() {
         </Button>
 
         <div className="relative flex items-center justify-center">
-          <span className="text-xs text-neutral-500 px-2 bg-neutral-900/60">or</span>
+          <span className="text-xs text-neutral-500 px-2 bg-neutral-900/60">
+            or
+          </span>
           <div className="absolute inset-x-0 top-1/2 h-px bg-neutral-800 -z-10" />
         </div>
 
@@ -63,7 +68,10 @@ export default function SignInPage() {
         <div className="text-center">
           <p className="text-sm text-neutral-400">
             Don&apos;t have an account?{' '}
-            <Link href="/auth/sign-up" className="text-white hover:text-neutral-300 underline transition-colors">
+            <Link
+              href="/auth/sign-up"
+              className="text-white hover:text-neutral-300 underline transition-colors"
+            >
               Create one here
             </Link>
           </p>
@@ -80,5 +88,5 @@ export default function SignInPage() {
         </div>
       </div>
     </AuthLayout>
-  )
+  );
 }

@@ -1,18 +1,18 @@
-import { RxNotionLogo } from 'react-icons/rx'
-import { BiLogoGmail } from 'react-icons/bi'
-import { FaSquareXTwitter } from 'react-icons/fa6'
-import { BsMedium } from 'react-icons/bs'
-import { PiMicrosoftOutlookLogoFill } from 'react-icons/pi'
-import { VscVscode } from 'react-icons/vsc'
-import { SiObsidian } from 'react-icons/si'
-import { FaSquareWhatsapp } from 'react-icons/fa6'
-import { FaFileWord } from 'react-icons/fa'
-import { IoLogoLinkedin } from 'react-icons/io5'
-import { SiOpenai } from 'react-icons/si'
-import { FaFacebookMessenger } from 'react-icons/fa'
+import { RxNotionLogo } from 'react-icons/rx';
+import { BiLogoGmail } from 'react-icons/bi';
+import { FaSquareXTwitter } from 'react-icons/fa6';
+import { BsMedium } from 'react-icons/bs';
+import { PiMicrosoftOutlookLogoFill } from 'react-icons/pi';
+import { VscVscode } from 'react-icons/vsc';
+import { SiObsidian } from 'react-icons/si';
+import { FaSquareWhatsapp } from 'react-icons/fa6';
+import { FaFileWord } from 'react-icons/fa';
+import { IoLogoLinkedin } from 'react-icons/io5';
+import { SiOpenai } from 'react-icons/si';
+import { FaFacebookMessenger } from 'react-icons/fa';
 
 interface AppLogoProps {
-  icon: React.ReactNode
+  icon: React.ReactNode;
 }
 
 function AppLogo({ icon }: AppLogoProps) {
@@ -20,16 +20,17 @@ function AppLogo({ icon }: AppLogoProps) {
     <div className="flex-none bg-neutral-900/0 w-22 h-22 flex items-center justify-center">
       <div className="text-neutral-300 text-[48px]">{icon}</div>
     </div>
-  )
+  );
 }
 
 interface ScrollingRowProps {
-  apps: AppLogoProps[]
-  direction: 'left' | 'right'
+  apps: AppLogoProps[];
+  direction: 'left' | 'right';
 }
 
 function ScrollingRow({ apps, direction }: ScrollingRowProps) {
-  const animationClass = direction === 'right' ? 'animate-scroll-right' : 'animate-scroll-left'
+  const animationClass =
+    direction === 'right' ? 'animate-scroll-right' : 'animate-scroll-left';
 
   return (
     <div className="flex overflow-hidden">
@@ -48,7 +49,7 @@ function ScrollingRow({ apps, direction }: ScrollingRowProps) {
         ))}
       </div>
     </div>
-  )
+  );
 }
 
 export default function AppLogosScroller() {
@@ -61,7 +62,7 @@ export default function AppLogosScroller() {
     { icon: <VscVscode /> },
     { icon: <SiObsidian /> },
     { icon: <FaSquareWhatsapp /> },
-  ]
+  ];
 
   const row2Apps: AppLogoProps[] = [
     { icon: <FaFileWord /> },
@@ -73,7 +74,7 @@ export default function AppLogosScroller() {
     { icon: <SiObsidian /> },
     { icon: <FaSquareWhatsapp /> },
     { icon: <FaFacebookMessenger /> },
-  ]
+  ];
 
   return (
     <div className="w-full bg-neutral-900/0 rounded-lg p-4 overflow-hidden">
@@ -82,5 +83,5 @@ export default function AppLogosScroller() {
         <ScrollingRow apps={row2Apps} direction="left" />
       </div>
     </div>
-  )
+  );
 }

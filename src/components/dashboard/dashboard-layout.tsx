@@ -1,47 +1,45 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { useAuth } from '@/providers/auth-provider'
-import { Button } from '@/components/ui/button'
-import { User, CreditCard, Sparkle, LogOut, Mail } from 'lucide-react'
-import { FaRegCircle } from 'react-icons/fa6'
-import { cn } from '@/lib/utils'
-import UserTab from './user-tab'
-import PlanTab from './plan-tab'
-import BillingTab from './billing-tab'
+import { useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/providers/auth-provider';
+import { useSubscription } from '@/providers/subscription-provider';
+import { Button } from '@/components/ui/button';
+import { CreditCard, Sparkle, LogOut, Mail, Dot } from 'lucide-react';
+import { FaRegCircle } from 'react-icons/fa6';
+import { cn } from '@/lib/utils';
+import PlanTab from './plan-tab';
+import BillingTab from './billing-tab';
 
-type TabType = 'user' | 'plan' | 'billing'
+type TabType = 'plan' | 'billing';
 
 const tabs = [
-  { id: 'user' as TabType, label: 'Overview', icon: User },
   { id: 'plan' as TabType, label: 'Plans', icon: Sparkle },
   { id: 'billing' as TabType, label: 'Billing & Invoices', icon: CreditCard },
-]
+];
 
 export default function DashboardLayout() {
-  const [activeTab, setActiveTab] = useState<TabType>('user')
-  const router = useRouter()
-  const { user, signOut } = useAuth()
+  const [activeTab, setActiveTab] = useState<TabType>('plan');
+  const router = useRouter();
+  const { user, signOut } = useAuth();
+  const { subscription, hasActivePaidSubscription } = useSubscription();
 
   const handleSignOut = async () => {
-    await signOut()
-    router.replace('/auth/sign-in')
-  }
+    await signOut();
+    router.replace('/auth/sign-in');
+  };
 
   const renderTabContent = () => {
     switch (activeTab) {
-      case 'user':
-        return <UserTab user={user} />
       case 'plan':
-        return <PlanTab />
+        return <PlanTab />;
       case 'billing':
-        return <BillingTab />
+        return <BillingTab />;
       default:
-        return <UserTab user={user} />
+        return <PlanTab />;
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-neutral-900 text-white pt-10">
@@ -63,10 +61,20 @@ export default function DashboardLayout() {
           <div className="py-4 border-b border-neutral-800">
             <div className="flex items-center space-x-2">
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-white truncate">{user?.user_metadata?.name || 'User'}</p>
-                <div className="flex flex-row gap-2 text-sm text-neutral-400 truncate">
-                  <div className="text-neutral-400 truncate">Pro Plan</div>
-                  <div className="text-neutral-400 truncate">kaisen.ye@usc.edu</div>
+                <p className="text-sm font-medium text-white truncate">
+                  {user?.user_metadata?.name || 'User'}
+                </p>
+                <div className="flex flex-row gap-1 text-sm text-neutral-400 truncate">
+                  <div className="text-neutral-400 truncate">
+                    {hasActivePaidSubscription && subscription
+                      ? `${subscription.plan_id?.charAt(0).toUpperCase()}${subscription.plan_id?.slice(1)} Plan` ||
+                        'Pro Plan'
+                      : 'Free Plan'}
+                  </div>
+                  <div className="flex items-center justify-center text-neutral-400">
+                    <Dot className="w-4 h-4" />
+                  </div>
+                  <div className="text-neutral-400 truncate">{user?.email}</div>
                 </div>
               </div>
             </div>
@@ -75,7 +83,7 @@ export default function DashboardLayout() {
           {/* Navigation */}
           <nav className="flex-1 py-4 space-y-2">
             {tabs.map((tab) => {
-              const Icon = tab.icon
+              const Icon = tab.icon;
               return (
                 <button
                   key={tab.id}
@@ -90,16 +98,23 @@ export default function DashboardLayout() {
                   <Icon className="w-4 h-4" />
                   <span className="text-sm font-medium">{tab.label}</span>
                 </button>
-              )
+              );
             })}
 
             <div className="flex flex-col gap-2 pt-4 border-t border-neutral-800">
-              <Button variant="ghost" className="w-full justify-start gap-3 text-neutral-400 hover:text-white">
+              <Button
+                variant="ghost"
+                className="w-full justify-start gap-3 text-neutral-400 hover:text-white"
+              >
                 <Mail className="w-4 h-4" />
                 <span className="text-sm font-medium">Contact Us</span>
               </Button>
 
-              <Button variant="destructiveGhost" onClick={handleSignOut} className="w-full justify-start gap-3">
+              <Button
+                variant="destructiveGhost"
+                onClick={handleSignOut}
+                className="w-full justify-start gap-3"
+              >
                 <LogOut className="w-4 h-4" />
                 <span className="text-sm font-medium">Log Out</span>
               </Button>
@@ -113,5 +128,5 @@ export default function DashboardLayout() {
         </div>
       </div>
     </div>
-  )
+  );
 }
