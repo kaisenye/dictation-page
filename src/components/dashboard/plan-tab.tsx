@@ -88,9 +88,9 @@ export default function PlanTab() {
                         subscription?.current_period_end && (
                           <p className="text-sm text-yellow-400 mt-1">
                             Cancels at period end:{' '}
-                            {new Date(
-                              subscription?.current_period_end!
-                            ).toLocaleDateString()}
+                            {subscription?.current_period_end
+                              ? new Date(subscription.current_period_end).toLocaleDateString()
+                              : 'N/A'}
                           </p>
                         )}
                     </div>
