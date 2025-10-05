@@ -127,10 +127,10 @@ export default function Pricing() {
 
                 <ul className="flex flex-col align-center justify-center gap-3 mb-8">
                   <li className="flex justify-center items-center text-lime-300 font-bold">
-                    Advanced AI Features
+                    Agent Mode
                   </li>
                   <li className="flex justify-center items-center text-lime-300 font-bold">
-                    Context Aware Dictation
+                    Screen Aware
                   </li>
                   <li className="flex justify-center items-center">
                     Lifetime Updates
@@ -193,8 +193,8 @@ export default function Pricing() {
 
             <div className="text-sm text-center mt-8 text-neutral-400">
               <p>
-                We make this AI dictation tool free where alternatives cost $10+
-                per month.
+                We make AI dictation FREE where alternatives cost $10+ per
+                month.
               </p>
             </div>
           </div>
