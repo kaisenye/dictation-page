@@ -75,35 +75,35 @@ export default function PlanTab() {
                     <div>
                       <div className="flex items-center gap-2">
                         <span className="text-white font-medium">
-                          {subscription.plan_id
+                          {subscription?.plan_id
                             ? `${subscription.plan_id.charAt(0).toUpperCase()}${subscription.plan_id.slice(1)} Plan`
                             : 'Pro Plan'}
                         </span>
-                        {getStatusBadge(subscription.status)}
+                        {getStatusBadge(subscription?.status || 'unknown')}
                       </div>
                       <p className="text-sm text-neutral-400 mt-1">
                         Professional AI dictation with advanced features
                       </p>
-                      {subscription.cancel_at_period_end &&
-                        subscription.current_period_end && (
+                      {subscription?.cancel_at_period_end &&
+                        subscription?.current_period_end && (
                           <p className="text-sm text-yellow-400 mt-1">
                             Cancels at period end:{' '}
                             {new Date(
-                              subscription.current_period_end
+                              subscription?.current_period_end!
                             ).toLocaleDateString()}
                           </p>
                         )}
                     </div>
                     <div className="text-right">
                       <div className="text-lg font-bold text-white">
-                        {subscription.plan_id &&
+                        {subscription?.plan_id &&
                         PLANS[subscription.plan_id as keyof typeof PLANS]
                           ? `$${PLANS[subscription.plan_id as keyof typeof PLANS].price}`
                           : '$10'}
                       </div>
                       <div className="text-sm text-neutral-400">
                         per{' '}
-                        {subscription.plan_id?.includes('yearly')
+                        {subscription?.plan_id?.includes('yearly')
                           ? 'year'
                           : 'month'}
                       </div>
@@ -112,7 +112,7 @@ export default function PlanTab() {
                   <div className="text-xs text-neutral-400">
                     <p>
                       Next billing:{' '}
-                      {subscription.current_period_end
+                      {subscription?.current_period_end
                         ? new Date(
                             subscription.current_period_end
                           ).toLocaleDateString()
