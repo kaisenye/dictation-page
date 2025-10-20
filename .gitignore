@@ -47,3 +47,6 @@ next-env.d.ts
 # status tracking scripts
 update-status.bat
 update-status.sh
+
+# docs
+/docs

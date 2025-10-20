@@ -14,7 +14,7 @@ export default function AuthLayout({
   subtitle,
 }: AuthLayoutProps) {
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col items-center justify-start px-4 pt-32">
+    <div className="min-h-screen bg-black text-white flex flex-col items-center justify-start px-4 py-16">
       {/* Romo Logo - Above the card */}
       <div className="mb-8">
         <Link href="/">

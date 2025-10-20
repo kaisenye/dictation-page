@@ -58,10 +58,23 @@ export async function updateSession(request: NextRequest) {
   const isApiRoute = request.nextUrl.pathname.startsWith('/api');
   const isNextInternalRoute = request.nextUrl.pathname.startsWith('/_next');
 
-  // Redirect authenticated users away from auth pages
-  if (user && isAuthRoute && !isRecoveryRoute) {
+  // Handle desktop login: redirect authenticated users to callback with desktop flag
+  const isCallbackRoute = request.nextUrl.pathname === '/auth/callback';
+  const isDesktopLogin =
+    request.nextUrl.searchParams.get('source') === 'desktop';
+
+  if (user && isAuthRoute && !isRecoveryRoute && !isCallbackRoute) {
     const url = request.nextUrl.clone();
-    url.pathname = '/dashboard'; // Where authenticated users should go
+
+    // If this is a desktop login, redirect to callback to generate deep link
+    if (isDesktopLogin) {
+      url.pathname = '/auth/callback';
+      url.searchParams.set('source', 'desktop');
+      return NextResponse.redirect(url);
+    }
+
+    // Normal web login: redirect to dashboard
+    url.pathname = '/dashboard';
     return NextResponse.redirect(url);
   }
 

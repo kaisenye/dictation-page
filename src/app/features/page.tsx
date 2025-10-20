@@ -36,12 +36,12 @@ export default function Features() {
                       className="w-full rounded-lg mb-6 object-cover"
                     />
                     <CardTitle className="text-2xl font-semibold text-white">
-                      Local AI Models
+                      Instant Dictation
                     </CardTitle>
                   </div>
                   <CardDescription className="text-base text-neutral-400">
-                    Say goodbye to cloud delays and privacy concerns. Everything
-                    runs right on your Mac — fast, secure, and offline.
+                    Say goodbye to cloud delays and privacy concerns. Just
+                    speak, and Romo will transcribe it instantly (and smartly).
                   </CardDescription>
                 </CardContent>
               </Card>

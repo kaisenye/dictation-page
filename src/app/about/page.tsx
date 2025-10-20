@@ -3,12 +3,12 @@ import EmergeAnimation from '@/components/EmergeAnimation';
 
 export default function About() {
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="bg-black text-white ">
       <Navbar />
 
       {/* Content */}
       <EmergeAnimation delay={100}>
-        <div className="container mx-auto px-4 pt-36 pb-8">
+        <div className="container mx-auto px-4 pt-36 pb-12 md:pb-24">
           <div className="max-w-sm mx-auto">
             <h1 className="text-2xl md:text-3xl font-bold mb-12 text-center">
               About Romo
