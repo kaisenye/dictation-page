@@ -1,10 +1,10 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 
-export default function AuthCallbackPage() {
+function AuthCallbackContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [status, setStatus] = useState<'loading' | 'redirecting' | 'error'>(
@@ -79,7 +79,7 @@ export default function AuthCallbackPage() {
         setStatus('redirecting');
 
         // Store deep link for manual fallback
-        (window as unknown as { deepLink: string }).deepLink = deepLinkUrl;
+        (window as typeof window & { deepLink: string }).deepLink = deepLinkUrl;
 
         // Open desktop app via deep link
         console.log('[Callback] Opening desktop app...');
@@ -229,5 +229,31 @@ export default function AuthCallbackPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function AuthCallbackPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950">
+          <div className="w-full max-w-md p-8">
+            <div className="bg-neutral-900/50 backdrop-blur-xl rounded-2xl border border-neutral-800 p-8 shadow-2xl">
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-500/20 mb-6 animate-pulse">
+                  <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
+                </div>
+                <h2 className="text-2xl font-semibold text-white mb-2">
+                  Loading...
+                </h2>
+                <p className="text-neutral-400 text-sm">Please wait</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    >
+      <AuthCallbackContent />
+    </Suspense>
   );
 }

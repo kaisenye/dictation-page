@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import AuthLayout from '@/components/auth/auth-layout';
@@ -10,7 +10,7 @@ import type { SignUpFormData } from '@/lib/validations/auth';
 import { Button } from '@/components/ui/button';
 import { FaGoogle } from 'react-icons/fa';
 
-export default function SignUpPage() {
+function SignUpContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { signUp, user } = useAuth();
@@ -164,5 +164,21 @@ export default function SignUpPage() {
         </div>
       </div>
     </AuthLayout>
+  );
+}
+
+export default function SignUpPage() {
+  return (
+    <Suspense
+      fallback={
+        <AuthLayout title="Sign Up" subtitle="Loading...">
+          <div className="flex justify-center py-8">
+            <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
+          </div>
+        </AuthLayout>
+      }
+    >
+      <SignUpContent />
+    </Suspense>
   );
 }
