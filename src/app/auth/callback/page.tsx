@@ -79,7 +79,7 @@ export default function AuthCallbackPage() {
         setStatus('redirecting');
 
         // Store deep link for manual fallback
-        (window as any).deepLink = deepLinkUrl;
+        (window as unknown as { deepLink: string }).deepLink = deepLinkUrl;
 
         // Open desktop app via deep link
         console.log('[Callback] Opening desktop app...');
