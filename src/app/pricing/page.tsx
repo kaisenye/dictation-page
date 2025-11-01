@@ -14,7 +14,7 @@ import EmergeAnimation from '@/components/EmergeAnimation';
 import type { User } from '@supabase/supabase-js';
 
 export default function Pricing() {
-  const { modalState, closeModal } = useEmailCapture();
+  const { modalState, openDownloadModal, closeModal } = useEmailCapture();
   const [user, setUser] = useState<User | null>(null);
   const router = useRouter();
   const supabase = createClient();
@@ -105,7 +105,7 @@ export default function Pricing() {
                   <Button
                     variant="default"
                     className="w-full"
-                    onClick={() => router.push('/auth/sign-up')}
+                    onClick={openDownloadModal}
                   >
                     Get Started Free
                   </Button>

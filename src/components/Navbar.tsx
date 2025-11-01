@@ -50,7 +50,7 @@ export default function Navbar() {
               <User className="w-4 h-4 text-white" />
             </Link>
           ) : (
-            <Link href="/pricing">
+            <Link href="/auth/sign-up">
               <Button
                 variant="outline"
                 size="sm"
