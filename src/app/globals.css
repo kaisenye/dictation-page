@@ -115,6 +115,8 @@
 @layer base {
   html {
     @apply bg-black;
+    /* Always show scrollbar gutter to prevent layout shift */
+    scrollbar-gutter: stable;
   }
   * {
     @apply border-border outline-ring/50;
