@@ -85,7 +85,7 @@ export default function Home() {
               title="Email & Messaging"
               description="Speak your thoughts and instantly turn them into clean, professional messages; no editing marathon needed."
               mediaType="video"
-              mediaSrc="/videos/email.mov"
+              mediaSrc="/videos/email.mp4"
               delay={500}
             />
 
@@ -93,7 +93,7 @@ export default function Home() {
               title="Code by Voice"
               description="Talk through logic, functions, and changes while Romo structures clean, editable code. Surprisingly natural, especially in flow."
               mediaType="video"
-              mediaSrc="/videos/coding.mov"
+              mediaSrc="/videos/coding.mp4"
               reverse={true}
               delay={400}
             />
@@ -102,7 +102,7 @@ export default function Home() {
               title="Note Taking"
               description="Capture ideas in real time. Perfect for meetings, research, and flashes of inspiration—when typing slows you down."
               mediaType="video"
-              mediaSrc="/videos/notion.mov"
+              mediaSrc="/videos/notion.mp4"
               delay={300}
             />
 
@@ -110,7 +110,7 @@ export default function Home() {
               title="Smart Search"
               description="Say detailed search queries and jump straight to relevant results. Long-tail searches without fighting the keyboard."
               mediaType="video"
-              mediaSrc="/videos/search.mov"
+              mediaSrc="/videos/search.mp4"
               reverse={true}
               delay={600}
             />
@@ -119,7 +119,7 @@ export default function Home() {
               title="Prompt by Voice"
               description="Stop typing long prompts. Speak them naturally—Romo formats, expands, and makes them prompt-engineer-clean."
               mediaType="video"
-              mediaSrc="/videos/chat.mov"
+              mediaSrc="/videos/chat.mp4"
               delay={700}
             />
           </div>
