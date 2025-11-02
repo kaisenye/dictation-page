@@ -100,7 +100,7 @@ export default function EmailCaptureModal({
       onClick={handleClose}
     >
       <div
-        className="relative w-full max-w-sm mx-4 bg-neutral-900 border border-neutral-800 rounded-lg shadow-xl animate-in zoom-in-95 duration-300 ease-out"
+        className="relative w-full max-w-sm px-4 py-6 bg-neutral-950 rounded-lg shadow-xl animate-in zoom-in-95 duration-300 ease-out"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close button */}
@@ -115,7 +115,7 @@ export default function EmailCaptureModal({
         <div className="py-8 px-6">
           {/* Header */}
           <div className="text-center mb-6">
-            <h2 className="text-xl font-bold text-white mb-2">{title}</h2>
+            <h2 className="text-xl font-medium text-white mb-2">{title}</h2>
             <p className="text-sm text-neutral-400">{description}</p>
           </div>
 

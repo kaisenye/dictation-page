@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { AuthProvider } from '@/providers/auth-provider';
 import { SubscriptionProvider } from '@/providers/subscription-provider';
+import { EmailCaptureProvider } from '@/providers/email-capture-provider';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -36,7 +37,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AuthProvider>
-          <SubscriptionProvider>{children}</SubscriptionProvider>
+          <SubscriptionProvider>
+            <EmailCaptureProvider>{children}</EmailCaptureProvider>
+          </SubscriptionProvider>
         </AuthProvider>
       </body>
     </html>
