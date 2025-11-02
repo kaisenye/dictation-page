@@ -1,7 +1,8 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { FaApple } from 'react-icons/fa';
+// TODO: Restore FaApple import when restoring download button
+// import { FaApple } from 'react-icons/fa';
 import Navbar from '@/components/Navbar';
 import EmailCaptureModal from '@/components/EmailCaptureModal';
 import VideoModal from '@/components/VideoModal';
@@ -11,7 +12,8 @@ import EmergeAnimation from '@/components/EmergeAnimation';
 import UseCaseCard from '@/components/UseCaseCard';
 
 export default function Home() {
-  const { modalState, openDownloadModal, closeModal } = useEmailCapture();
+  // TODO: Restore openDownloadModal when ready to launch download feature
+  const { modalState, openWaitlistModal, closeModal } = useEmailCapture();
   const { isOpen: isVideoOpen, closeModal: closeVideoModal } = useVideoModal();
 
   return (
@@ -52,8 +54,9 @@ export default function Home() {
                 </p>
               </div>
 
-              {/* Download Buttons */}
+              {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 mt-6 md:mt-8">
+                {/* TODO: Restore download button when ready to launch
                 <Button
                   variant="default"
                   size="lg"
@@ -62,6 +65,15 @@ export default function Home() {
                 >
                   <FaApple className="w-4 h-4 md:w-5 md:h-5 mr-1" />
                   Download for Free
+                </Button>
+                */}
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="flex !w-[200px] bg-white/10 hover:bg-white/20 items-center justify-center hover:scale-99 transition-all duration-300"
+                  onClick={openWaitlistModal}
+                >
+                  Join Waitlist
                 </Button>
               </div>
             </div>

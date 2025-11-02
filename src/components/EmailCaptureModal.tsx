@@ -115,7 +115,7 @@ export default function EmailCaptureModal({
         <div className="py-8 px-6">
           {/* Header */}
           <div className="text-center mb-6">
-            <h2 className="text-xl font-bold text-white mb-2">{title}</h2>
+            <h2 className="text-xl font-medium text-white mb-2">{title}</h2>
             <p className="text-sm text-neutral-400">{description}</p>
           </div>
 

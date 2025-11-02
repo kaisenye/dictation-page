@@ -2,7 +2,6 @@
 
 import { Button } from '@/components/ui/button';
 import Navbar from '@/components/Navbar';
-import EmailCaptureModal from '@/components/EmailCaptureModal';
 import { useEmailCapture } from '@/hooks/useEmailCapture';
 import { useEffect, useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
@@ -14,9 +13,17 @@ import EmergeAnimation from '@/components/EmergeAnimation';
 import type { User } from '@supabase/supabase-js';
 
 export default function Pricing() {
-  const { modalState, openDownloadModal, closeModal } = useEmailCapture();
-  const [user, setUser] = useState<User | null>(null);
+  // TODO: Remove redirect when ready to launch pricing page
   const router = useRouter();
+
+  useEffect(() => {
+    router.push('/');
+  }, [router]);
+
+  // TODO: Restore openDownloadModal when ready to launch
+  // Email modal is now rendered globally in Navbar component
+  const { openWaitlistModal } = useEmailCapture();
+  const [user, setUser] = useState<User | null>(null);
   const supabase = createClient();
   const { subscribe, loading } = useSubscriptionActions();
   const { hasActivePaidSubscription } = useSubscription();
@@ -105,9 +112,9 @@ export default function Pricing() {
                   <Button
                     variant="default"
                     className="w-full"
-                    onClick={openDownloadModal}
+                    onClick={openWaitlistModal}
                   >
-                    Get Started Free
+                    Join Waitlist
                   </Button>
                 )}
               </div>
@@ -200,16 +207,6 @@ export default function Pricing() {
           </div>
         </div>
       </EmergeAnimation>
-
-      {/* Email Capture Modal */}
-      <EmailCaptureModal
-        isOpen={modalState.isOpen}
-        onClose={closeModal}
-        interestType={modalState.interestType}
-        title={modalState.title}
-        description={modalState.description}
-        ctaText={modalState.ctaText}
-      />
     </div>
   );
 }

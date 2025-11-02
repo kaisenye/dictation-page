@@ -18,6 +18,14 @@ function SignUpContent() {
   // Check if this is a signup from desktop app
   const isDesktopLogin = searchParams.get('source') === 'desktop';
 
+  // TODO: Remove redirect when ready to launch auth pages
+  // Redirect non-desktop users to home page (preserve desktop app flow)
+  useEffect(() => {
+    if (!isDesktopLogin) {
+      router.push('/');
+    }
+  }, [isDesktopLogin, router]);
+
   // If already signed in, redirect appropriately
   useEffect(() => {
     if (user) {
