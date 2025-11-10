@@ -18,7 +18,7 @@ export default function Features() {
       <div className="container mx-auto px-4 pt-36 pb-48">
         <div className="max-w-4xl mx-auto">
           <EmergeAnimation delay={100}>
-            <h1 className="text-2xl md:text-3xl font-bold mb-8 text-center">
+            <h1 className="text-2xl md:text-3xl font-medium mb-12 text-center">
               Just Speak.
             </h1>
           </EmergeAnimation>

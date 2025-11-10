@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button';
 // TODO: Restore FaApple import when restoring download button
 // import { FaApple } from 'react-icons/fa';
 import Navbar from '@/components/Navbar';
-import EmailCaptureModal from '@/components/EmailCaptureModal';
 import VideoModal from '@/components/VideoModal';
 import { useEmailCapture } from '@/hooks/useEmailCapture';
 import { useVideoModal } from '@/hooks/useVideoModal';
@@ -13,7 +12,8 @@ import UseCaseCard from '@/components/UseCaseCard';
 
 export default function Home() {
   // TODO: Restore openDownloadModal when ready to launch download feature
-  const { modalState, openWaitlistModal, closeModal } = useEmailCapture();
+  // Email modal is now rendered globally at app level
+  const { openWaitlistModal } = useEmailCapture();
   const { isOpen: isVideoOpen, closeModal: closeVideoModal } = useVideoModal();
 
   return (
@@ -143,23 +143,13 @@ export default function Home() {
             <span className="text-sm font-bold text-white">Romo</span>
           </div>
           <p className="text-xs text-gray-400 mb-1">
-            We value your privacy, no data collected!
+            We value your privacy, no data being sold!
           </p>
           <p className="text-xs text-gray-500">
             &copy; 2025 Romo. All rights reserved.
           </p>
         </footer>
       </main>
-
-      {/* Email Capture Modal */}
-      <EmailCaptureModal
-        isOpen={modalState.isOpen}
-        onClose={closeModal}
-        interestType={modalState.interestType}
-        title={modalState.title}
-        description={modalState.description}
-        ctaText={modalState.ctaText}
-      />
 
       {/* Video Modal */}
       <VideoModal

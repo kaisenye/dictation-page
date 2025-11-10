@@ -4,6 +4,7 @@ import './globals.css';
 import { AuthProvider } from '@/providers/auth-provider';
 import { SubscriptionProvider } from '@/providers/subscription-provider';
 import { EmailCaptureProvider } from '@/providers/email-capture-provider';
+import GlobalEmailModal from '@/components/GlobalEmailModal';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -38,7 +39,10 @@ export default function RootLayout({
       >
         <AuthProvider>
           <SubscriptionProvider>
-            <EmailCaptureProvider>{children}</EmailCaptureProvider>
+            <EmailCaptureProvider>
+              {children}
+              <GlobalEmailModal />
+            </EmailCaptureProvider>
           </SubscriptionProvider>
         </AuthProvider>
       </body>
