@@ -1,4 +1,5 @@
 import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -28,6 +29,7 @@ export default function PrivacyPage() {
           <p>Contact us if you have questions about privacy.</p>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

@@ -8,6 +8,7 @@ import {
 } from '@/components/ui/card';
 import AppLogosScroller from '@/components/AppLogosScroller';
 import EmergeAnimation from '@/components/EmergeAnimation';
+import Footer from '@/components/Footer';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -126,6 +127,8 @@ export default function Features() {
           </div>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 }

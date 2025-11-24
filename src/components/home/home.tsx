@@ -10,6 +10,8 @@ import { useVideoModal } from '@/hooks/useVideoModal';
 import EmergeAnimation from '@/components/EmergeAnimation';
 import UseCaseCard from '@/components/UseCaseCard';
 
+import Footer from '@/components/Footer';
+
 export default function Home() {
   // TODO: Restore openDownloadModal when ready to launch download feature
   // Email modal is now rendered globally at app level
@@ -17,12 +19,12 @@ export default function Home() {
   const { isOpen: isVideoOpen, closeModal: closeVideoModal } = useVideoModal();
 
   return (
-    <div className="min-h-screen max-w-7xl mx-auto w-full overflow-x-hidden bg-black">
+    <div className="min-h-screen max-w-7xl mx-auto w-full overflow-x-hidden bg-black flex flex-col">
       {/* Navbar */}
       <Navbar />
 
       {/* Main Content Container */}
-      <main className="container mx-auto px-4 pt-22">
+      <main className="container mx-auto px-4 pt-22 flex-1 flex flex-col">
         {/* Video Banner Section */}
         <EmergeAnimation delay={100}>
           <section className="relative w-full h-[500px] md:h-[600px] overflow-hidden rounded-xl">
@@ -138,17 +140,7 @@ export default function Home() {
         </section>
 
         {/* Footer Section */}
-        <footer className="text-center mt-12 mb-12">
-          <div className="flex items-center justify-center space-x-2 mb-2">
-            <span className="text-sm font-bold text-white">Romo</span>
-          </div>
-          <p className="text-xs text-gray-400 mb-1">
-            We value your privacy, no data being sold!
-          </p>
-          <p className="text-xs text-gray-500">
-            &copy; 2025 Romo. All rights reserved.
-          </p>
-        </footer>
+        <Footer />
       </main>
 
       {/* Video Modal */}
@@ -160,4 +152,3 @@ export default function Home() {
     </div>
   );
 }
-
