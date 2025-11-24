@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://romo.app'),
+  metadataBase: new URL('https://tryromo.com'),
   title: {
     default: "Romo - Don't type. Just Talk.",
     template: '%s | Romo',

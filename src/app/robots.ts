@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/dashboard/', '/api/'],
     },
-    sitemap: 'https://romo.app/sitemap.xml',
+    sitemap: 'https://tryromo.com/sitemap.xml',
   };
 }
