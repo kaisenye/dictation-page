@@ -1,4 +1,10 @@
 import Navbar from '@/components/Navbar';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Terms of Service - Romo',
+  description: 'Read the terms of service for Romo, the local AI dictation assistant for Mac.',
+};
 
 export default function TermsPage() {
   return (

@@ -8,6 +8,13 @@ import {
 } from '@/components/ui/card';
 import AppLogosScroller from '@/components/AppLogosScroller';
 import EmergeAnimation from '@/components/EmergeAnimation';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Features - Instant Dictation & Smart Formatting',
+  description:
+    'Discover how Romo handles instant dictation, smart voice formatting, and offline privacy for Mac users. Best dictation software for Mac.',
+};
 
 export default function Features() {
   return (
@@ -33,6 +40,7 @@ export default function Features() {
                       alt="Local AI Assistant"
                       width={400}
                       height={300}
+                      sizes="(max-width: 768px) 100vw, 50vw"
                       className="w-full rounded-lg mb-6 object-cover"
                     />
                     <CardTitle className="text-2xl font-semibold text-white">
@@ -56,6 +64,7 @@ export default function Features() {
                       alt="Smart Voice Dictation"
                       width={400}
                       height={300}
+                      sizes="(max-width: 768px) 100vw, 50vw"
                       className="w-full rounded-lg mb-6 object-cover"
                     />
                     <CardTitle className="text-2xl font-semibold text-white">
@@ -100,6 +109,7 @@ export default function Features() {
                       alt="Truly Offline"
                       width={400}
                       height={300}
+                      sizes="(max-width: 768px) 100vw, 50vw"
                       className="w-full rounded-lg mb-6 object-cover"
                     />
                     <CardTitle className="text-2xl font-semibold text-white">
