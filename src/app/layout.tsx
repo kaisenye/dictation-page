@@ -4,6 +4,7 @@ import './globals.css';
 import { AuthProvider } from '@/providers/auth-provider';
 import { SubscriptionProvider } from '@/providers/subscription-provider';
 import { EmailCaptureProvider } from '@/providers/email-capture-provider';
+import { PostHogProvider } from '@/providers/posthog-provider';
 import GlobalEmailModal from '@/components/GlobalEmailModal';
 
 const geistSans = Geist({
@@ -37,14 +38,16 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <AuthProvider>
-          <SubscriptionProvider>
-            <EmailCaptureProvider>
-              {children}
-              <GlobalEmailModal />
-            </EmailCaptureProvider>
-          </SubscriptionProvider>
-        </AuthProvider>
+        <PostHogProvider>
+          <AuthProvider>
+            <SubscriptionProvider>
+              <EmailCaptureProvider>
+                {children}
+                <GlobalEmailModal />
+              </EmailCaptureProvider>
+            </SubscriptionProvider>
+          </AuthProvider>
+        </PostHogProvider>
       </body>
     </html>
   );
