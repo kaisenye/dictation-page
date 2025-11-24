@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://romo.app',
+    url: 'https://tryromo.com',
     title: "Romo - Don't type. Just Talk.",
     description:
       'Local AI assistant, dictation, and a friendly companion. Privacy-focused and built for Mac.',
