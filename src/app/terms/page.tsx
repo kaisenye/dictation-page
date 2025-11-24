@@ -1,4 +1,12 @@
 import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Terms of Service - Romo',
+  description:
+    'Read the terms of service for Romo, the local AI dictation assistant for Mac.',
+};
 
 export default function TermsPage() {
   return (
@@ -23,6 +31,7 @@ export default function TermsPage() {
           </p>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

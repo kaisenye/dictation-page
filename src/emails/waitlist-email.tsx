@@ -10,6 +10,7 @@ import {
   Tailwind,
 } from '@react-email/components';
 import * as React from 'react';
+import Image from 'next/image';
 
 interface WaitlistEmailProps {
   email: string;
@@ -48,10 +49,12 @@ export const WaitlistEmail = ({ email }: WaitlistEmailProps) => (
             </Text>
 
             <Section className="mb-6">
-              <img
+              <Image
                 src="https://tryromo.com/gifs/notion.gif"
-                alt="Romo dictation demo"
+                alt="Romo AI Agent Mode dictation demo"
                 className="max-w-full h-auto rounded-md"
+                width={500}
+                height={500}
               />
             </Section>
 

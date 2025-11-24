@@ -12,7 +12,7 @@ export default function Navbar() {
   const { openWaitlistModal } = useEmailCapture();
 
   return (
-    <nav className="fixed top-0 left-1/2 transform -translate-x-1/2 z-50 w-full md:max-w-[400px] px-4 py-4">
+    <nav className="fixed top-0 left-1/2 transform -translate-x-1/2 z-50 w-full md:max-w-[500px] px-4 py-4">
       <div className="flex items-center justify-between h-12 md:h-fit bg-black/10 backdrop-blur-sm rounded-xl px-4 py-2 ">
         <div>
           <Link
@@ -42,6 +42,12 @@ export default function Navbar() {
             className="text-white hover:text-gray-300 transition-colors text-sm font-medium"
           >
             About
+          </Link>
+          <Link
+            href="/blog"
+            className="text-white hover:text-gray-300 transition-colors text-sm font-medium"
+          >
+            Blog
           </Link>
         </div>
 

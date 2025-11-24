@@ -1,5 +1,13 @@
 import Navbar from '@/components/Navbar';
 import EmergeAnimation from '@/components/EmergeAnimation';
+import Footer from '@/components/Footer';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'About Romo - Local AI Assistant',
+  description:
+    'Romo is built for everyone who values privacy. Learn about our mission to create a local-first AI assistant for Mac.',
+};
 
 export default function About() {
   return (
@@ -49,6 +57,8 @@ export default function About() {
           </div>
         </div>
       </EmergeAnimation>
+
+      <Footer />
     </div>
   );
 }

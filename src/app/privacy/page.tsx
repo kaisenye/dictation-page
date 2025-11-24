@@ -1,4 +1,12 @@
 import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Privacy Policy - Romo',
+  description:
+    'We value your privacy. Learn how Romo keeps your data local to your device with no cloud processing. The secure dictation software.',
+};
 
 export default function PrivacyPage() {
   return (
@@ -21,6 +29,7 @@ export default function PrivacyPage() {
           <p>Contact us if you have questions about privacy.</p>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
