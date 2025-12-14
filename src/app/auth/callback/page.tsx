@@ -35,8 +35,10 @@ function AuthCallbackContent() {
         // Check if this is a desktop login (from URL param or localStorage)
         const urlSource = searchParams?.get('source');
         const storageSource = localStorage.getItem('auth_source');
+        const callbackUrl = searchParams?.get('callback'); // DevAuthServer callback URL
         console.log('[Callback] URL source:', urlSource);
         console.log('[Callback] Storage source:', storageSource);
+        console.log('[Callback] Callback URL:', callbackUrl);
         console.log('[Callback] Full URL:', window.location.href);
 
         // Prefer URL parameter, fall back to localStorage
@@ -67,7 +69,25 @@ function AuthCallbackContent() {
 
         const { hashed_token, email } = await response.json();
 
-        // Build deep link for desktop app
+        // If callback URL is provided (DevAuthServer), redirect there instead of deep link
+        if (callbackUrl) {
+          console.log('[Callback] Using DevAuthServer callback URL');
+          const callbackUrlWithParams = new URL(callbackUrl);
+          callbackUrlWithParams.searchParams.set('hashed_token', hashed_token);
+          callbackUrlWithParams.searchParams.set('email', email);
+
+          console.log(
+            '[Callback] Redirecting to:',
+            callbackUrlWithParams.toString()
+          );
+          setStatus('redirecting');
+
+          // Redirect to DevAuthServer callback
+          window.location.href = callbackUrlWithParams.toString();
+          return;
+        }
+
+        // Fallback to deep link if no callback URL
         const deepLinkUrl = `romo://auth?hashed_token=${hashed_token}&email=${encodeURIComponent(email)}`;
 
         console.log(

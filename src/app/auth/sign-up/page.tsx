@@ -17,6 +17,7 @@ function SignUpContent() {
 
   // Check if this is a signup from desktop app
   const isDesktopLogin = searchParams.get('source') === 'desktop';
+  const callbackUrl = searchParams.get('callback'); // Preserve callback URL
 
   // TODO: Remove redirect when ready to launch auth pages
   // Redirect non-desktop users to home page (preserve desktop app flow)
@@ -30,12 +31,16 @@ function SignUpContent() {
   useEffect(() => {
     if (user) {
       if (isDesktopLogin) {
-        router.replace('/auth/callback?source=desktop');
+        const callbackParams = new URLSearchParams({ source: 'desktop' });
+        if (callbackUrl) {
+          callbackParams.set('callback', callbackUrl);
+        }
+        router.replace(`/auth/callback?${callbackParams.toString()}`);
       } else {
         router.replace('/dashboard');
       }
     }
-  }, [user, router, isDesktopLogin]);
+  }, [user, router, isDesktopLogin, callbackUrl]);
 
   const handleSignUp = async (data: SignUpFormData) => {
     try {
@@ -55,7 +60,11 @@ function SignUpContent() {
       }
       // Redirect based on signup source
       if (isDesktopLogin) {
-        router.push('/auth/callback?source=desktop');
+        const callbackParams = new URLSearchParams({ source: 'desktop' });
+        if (callbackUrl) {
+          callbackParams.set('callback', callbackUrl);
+        }
+        router.push(`/auth/callback?${callbackParams.toString()}`);
       } else {
         router.push('/dashboard');
       }
@@ -109,8 +118,14 @@ function SignUpContent() {
             const supabase = (
               await import('@/lib/supabase/client')
             ).createClient();
+
+            // Build callback URL with all necessary parameters
+            const callbackParams = new URLSearchParams({ source: 'desktop' });
+            if (callbackUrl) {
+              callbackParams.set('callback', callbackUrl);
+            }
             const redirectTo = isDesktopLogin
-              ? `${window.location.origin}/auth/callback?source=desktop`
+              ? `${window.location.origin}/auth/callback?${callbackParams.toString()}`
               : `${window.location.origin}/dashboard`;
 
             const { error } = await supabase.auth.signInWithOAuth({
@@ -141,7 +156,7 @@ function SignUpContent() {
             <Link
               href={
                 isDesktopLogin
-                  ? '/auth/sign-in?source=desktop'
+                  ? `/auth/sign-in?source=desktop${callbackUrl ? `&callback=${encodeURIComponent(callbackUrl)}` : ''}`
                   : '/auth/sign-in'
               }
               className="text-white hover:text-neutral-300 underline transition-colors"
