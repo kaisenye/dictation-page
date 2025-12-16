@@ -51,6 +51,12 @@ export const postType = defineType({
       title: 'Body',
       type: 'blockContent',
     }),
+    // SEO fields
+    defineField({
+      name: 'seo',
+      title: 'SEO',
+      type: 'seoMetaFields',
+    }),
   ],
 
   preview: {
