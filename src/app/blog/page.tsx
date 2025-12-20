@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar';
 import EmergeAnimation from '@/components/EmergeAnimation';
 import { client } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
+import type { Metadata } from 'next';
 
 // Interface for the data we are fetching
 interface Post {
@@ -23,6 +24,25 @@ interface Post {
 
 // Revalidate the page every 60 seconds to show new posts
 export const revalidate = 60;
+
+export const metadata: Metadata = {
+  title: 'Blog - Romo',
+  description:
+    'Read the latest articles, news, and insights from Romo. Tracking the news, decoding the media, shaping the conversation.',
+  openGraph: {
+    title: 'Blog - Romo',
+    description:
+      'Read the latest articles, news, and insights from Romo. Tracking the news, decoding the media, shaping the conversation.',
+    url: 'https://www.tryromo.com/blog',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Blog - Romo',
+    description:
+      'Read the latest articles, news, and insights from Romo. Tracking the news, decoding the media, shaping the conversation.',
+  },
+};
 
 async function getPosts() {
   // GROQ query to fetch posts
@@ -53,8 +73,7 @@ export default async function BlogPage() {
           </EmergeAnimation>
           <EmergeAnimation delay={100}>
             <p className="text-neutral-400 text-center mb-8 max-w-md mx-auto">
-              &quot;Tracking the news, decoding the media, shaping the
-              conversation.&rdquo;
+              tracking the news, decoding the media
             </p>
           </EmergeAnimation>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
