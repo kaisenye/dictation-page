@@ -58,7 +58,14 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: "Romo - Don't type. Just Talk.",
     description: 'Local AI assistant, dictation, and a friendly companion.',
-    images: ['/og-image.png'],
+    images: [
+      {
+        url: 'https://tryromo.com/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Romo - Local AI Assistant',
+      },
+    ],
     creator: '@romo_app',
   },
   icons: {
