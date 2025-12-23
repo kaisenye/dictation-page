@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     siteName: 'Romo',
     images: [
       {
-        url: '/og-image.png',
+        url: 'https://tryromo.com/og-image.jpg',
         width: 1200,
         height: 630,
         alt: 'Romo - Local AI Assistant',
