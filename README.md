@@ -20,6 +20,15 @@
 
 4. **Open** [http://localhost:3000](http://localhost:3000)
 
+## Email Preview
+
+Preview email templates in your browser:
+
+- **Waitlist email**: [http://localhost:3000/api/preview-email?type=waitlist](http://localhost:3000/api/preview-email?type=waitlist)
+- **Download email**: [http://localhost:3000/api/preview-email?type=download](http://localhost:3000/api/preview-email?type=download)
+
+Add `&email=your@email.com` to customize the email address shown.
+
 ## Customize
 
 - **Brand name**: Update "TechFlow" in `src/app/page.tsx`

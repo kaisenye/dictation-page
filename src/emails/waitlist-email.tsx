@@ -4,13 +4,13 @@ import {
   Head,
   Heading,
   Html,
+  Img,
   Preview,
   Section,
   Text,
   Tailwind,
 } from '@react-email/components';
 import * as React from 'react';
-import Image from 'next/image';
 
 interface WaitlistEmailProps {
   email: string;
@@ -49,12 +49,12 @@ export const WaitlistEmail = ({ email }: WaitlistEmailProps) => (
             </Text>
 
             <Section className="mb-6">
-              <Image
+              <Img
                 src="https://tryromo.com/gifs/notion.gif"
                 alt="Romo AI Agent Mode dictation demo"
-                className="max-w-full h-auto rounded-md"
                 width={500}
                 height={500}
+                className="max-w-full h-auto rounded-md"
               />
             </Section>
 
@@ -83,7 +83,7 @@ export const WaitlistEmail = ({ email }: WaitlistEmailProps) => (
                 Timeline:
               </Heading>
               <Text className="text-neutral-500 text-base leading-relaxed m-0">
-                We&apos;re aiming for December 2025. You&apos;ll receive updates
+                We&apos;re aiming for March 2026. You&apos;ll receive updates
                 as we get closer to launch.
               </Text>
             </Section>
@@ -93,7 +93,7 @@ export const WaitlistEmail = ({ email }: WaitlistEmailProps) => (
           <Section className="text-center border-t border-neutral-200 pt-8">
             <Text className="text-neutral-400 text-xs m-0">
               You joined the Romo waitlist with {email}
-              <br />© 2025 Romo. All rights reserved.
+              <br />© 2026 Romo. All rights reserved.
             </Text>
           </Section>
         </Container>
