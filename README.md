@@ -33,7 +33,6 @@ Add `&email=your@email.com` to customize the email address shown.
 
 - **Brand name**: Update "TechFlow" in `src/app/page.tsx`
 - **Download links**: Replace button URLs with actual download links
-- **Video**: Replace `demo.mp4` with your video file
 
 ## Tech Stack
 
