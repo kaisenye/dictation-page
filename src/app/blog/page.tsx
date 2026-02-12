@@ -62,17 +62,17 @@ export default async function BlogPage() {
   const posts = await getPosts();
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-white text-gray-900">
       <Navbar />
       <main className="container mx-auto px-4 pt-36 pb-20">
         <div className="max-w-4xl mx-auto">
           <EmergeAnimation>
-            <h1 className="text-4xl font-medium mb-4 text-white text-center">
+            <h1 className="text-4xl font-medium mb-4 text-gray-900 text-center">
               Blog
             </h1>
           </EmergeAnimation>
           <EmergeAnimation delay={100}>
-            <p className="text-neutral-400 text-center mb-8 max-w-md mx-auto">
+            <p className="text-gray-600 text-center mb-8 max-w-md mx-auto">
               tracking the news, decoding the media
             </p>
           </EmergeAnimation>
@@ -81,10 +81,10 @@ export default async function BlogPage() {
               <EmergeAnimation key={post._id} delay={150 + index * 50}>
                 <Link
                   href={`/blog/${post.slug.current}`}
-                  className="block p-6 rounded-md bg-neutral-900/50 hover:bg-neutral-900/70 transition-colors group"
+                  className="block p-6 rounded-md bg-gray-50 hover:bg-gray-100 transition-colors group border border-gray-200"
                 >
                   {post.mainImage && (
-                    <div className="relative w-full h-64 mb-6 rounded-sm overflow-hidden bg-neutral-800">
+                    <div className="relative w-full h-64 mb-6 rounded-sm overflow-hidden bg-gray-200">
                       <Image
                         src={urlFor(post.mainImage)
                           .width(800)
@@ -96,10 +96,10 @@ export default async function BlogPage() {
                       />
                     </div>
                   )}
-                  <h2 className="text-xl font-medium text-white mb-2">
+                  <h2 className="text-xl font-medium text-gray-900 mb-2">
                     {post.title}
                   </h2>
-                  <p className="text-sm text-neutral-400 mb-4">
+                  <p className="text-sm text-gray-600 mb-4">
                     {new Date(post.publishedAt).toLocaleDateString('en-US', {
                       year: 'numeric',
                       month: 'long',
@@ -107,7 +107,7 @@ export default async function BlogPage() {
                     })}
                   </p>
                   {post.excerpt && (
-                    <p className="text-sm text-neutral-400 line-clamp-2">
+                    <p className="text-sm text-gray-600 line-clamp-2">
                       {post.excerpt}
                     </p>
                   )}
@@ -119,7 +119,7 @@ export default async function BlogPage() {
           {posts.length === 0 && (
             <EmergeAnimation delay={200}>
               <div className="flex items-center justify-center w-full mt-8 ">
-                <p className="text-neutral-400 text-center w-fit border border-neutral-800 rounded-md px-8 py-6">
+                <p className="text-gray-600 text-center w-fit border border-gray-300 rounded-md px-8 py-6">
                   No posts found. Check back later!
                 </p>
               </div>

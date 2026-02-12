@@ -121,20 +121,18 @@ function AuthCallbackContent() {
   }, [router, searchParams]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 via-white to-gray-50">
       <div className="w-full max-w-md p-8">
-        <div className="bg-neutral-900/50 backdrop-blur-xl rounded-2xl border border-neutral-800 p-8 shadow-2xl">
+        <div className="bg-white backdrop-blur-xl rounded-2xl border border-gray-200 p-8 shadow-2xl">
           {status === 'loading' && (
             <div className="text-center">
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-500/20 mb-6 animate-pulse">
                 <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
               </div>
-              <h2 className="text-2xl font-semibold text-white mb-2">
+              <h2 className="text-2xl font-semibold text-gray-900 mb-2">
                 Authenticating...
               </h2>
-              <p className="text-neutral-400 text-sm">
-                Setting up your session
-              </p>
+              <p className="text-gray-600 text-sm">Setting up your session</p>
             </div>
           )}
 
@@ -142,7 +140,7 @@ function AuthCallbackContent() {
             <div className="text-center">
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-500/20 mb-6">
                 <svg
-                  className="w-8 h-8 text-green-400"
+                  className="w-8 h-8 text-green-600"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -155,20 +153,20 @@ function AuthCallbackContent() {
                   />
                 </svg>
               </div>
-              <h2 className="text-2xl font-semibold text-white mb-2">
+              <h2 className="text-2xl font-semibold text-gray-900 mb-2">
                 Success!
               </h2>
-              <p className="text-neutral-400 text-sm mb-4">
+              <p className="text-gray-600 text-sm mb-4">
                 Opening Romo desktop app...
               </p>
-              <div className="mt-6 p-4 bg-neutral-800/50 rounded-lg border border-neutral-700 space-y-3">
-                <p className="text-xs text-neutral-400 mb-2">
+              <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200 space-y-3">
+                <p className="text-xs text-gray-600 mb-2">
                   Desktop app not opening?
                 </p>
 
                 {/* Manual deep link for development */}
                 <div className="space-y-2">
-                  <p className="text-xs text-neutral-500">
+                  <p className="text-xs text-gray-500">
                     Desktop app not opening? Use manual method:
                   </p>
                   <div className="flex gap-2">
@@ -185,28 +183,28 @@ function AuthCallbackContent() {
                     </button>
                     <a
                       href={deepLink}
-                      className="px-3 py-2 bg-neutral-800 hover:bg-neutral-700 text-neutral-300 text-xs rounded transition-colors"
+                      className="px-3 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 text-xs rounded transition-colors"
                     >
                       Try Deep Link
                     </a>
                   </div>
-                  <details className="text-xs text-neutral-500">
-                    <summary className="cursor-pointer hover:text-neutral-400">
+                  <details className="text-xs text-gray-500">
+                    <summary className="cursor-pointer hover:text-gray-700">
                       Show full URL
                     </summary>
-                    <code className="block mt-2 p-2 bg-neutral-900/50 rounded break-all">
+                    <code className="block mt-2 p-2 bg-gray-100 rounded break-all">
                       {deepLink}
                     </code>
                   </details>
                 </div>
 
-                <div className="border-t border-neutral-700 pt-3">
-                  <p className="text-xs text-neutral-500 mb-2">
+                <div className="border-t border-gray-200 pt-3">
+                  <p className="text-xs text-gray-500 mb-2">
                     Redirecting to dashboard...
                   </p>
                   <button
                     onClick={() => router.push('/dashboard')}
-                    className="text-xs text-blue-400 hover:text-blue-300 underline transition-colors"
+                    className="text-xs text-blue-600 hover:text-blue-700 underline transition-colors"
                   >
                     Go to dashboard now
                   </button>
@@ -219,7 +217,7 @@ function AuthCallbackContent() {
             <div className="text-center">
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-500/20 mb-6">
                 <svg
-                  className="w-8 h-8 text-red-400"
+                  className="w-8 h-8 text-red-600"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -232,10 +230,10 @@ function AuthCallbackContent() {
                   />
                 </svg>
               </div>
-              <h2 className="text-2xl font-semibold text-white mb-2">
+              <h2 className="text-2xl font-semibold text-gray-900 mb-2">
                 Authentication Failed
               </h2>
-              <p className="text-neutral-400 text-sm mb-6">
+              <p className="text-gray-600 text-sm mb-6">
                 Unable to complete authentication
               </p>
               <button
@@ -256,17 +254,17 @@ export default function AuthCallbackPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950">
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 via-white to-gray-50">
           <div className="w-full max-w-md p-8">
-            <div className="bg-neutral-900/50 backdrop-blur-xl rounded-2xl border border-neutral-800 p-8 shadow-2xl">
+            <div className="bg-white backdrop-blur-xl rounded-2xl border border-gray-200 p-8 shadow-2xl">
               <div className="text-center">
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-500/20 mb-6 animate-pulse">
                   <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
                 </div>
-                <h2 className="text-2xl font-semibold text-white mb-2">
+                <h2 className="text-2xl font-semibold text-gray-900 mb-2">
                   Loading...
                 </h2>
-                <p className="text-neutral-400 text-sm">Please wait</p>
+                <p className="text-gray-600 text-sm">Please wait</p>
               </div>
             </div>
           </div>

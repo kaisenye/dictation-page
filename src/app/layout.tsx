@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Inter } from 'next/font/google';
 import './globals.css';
 import { AuthProvider } from '@/providers/auth-provider';
 import { SubscriptionProvider } from '@/providers/subscription-provider';
@@ -8,13 +8,8 @@ import { PostHogProvider } from '@/providers/posthog-provider';
 import GlobalEmailModal from '@/components/GlobalEmailModal';
 import JsonLd from '@/components/JsonLd';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const inter = Inter({
+  variable: '--font-inter',
   subsets: ['latin'],
 });
 
@@ -94,9 +89,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${inter.variable} antialiased`}>
         <PostHogProvider>
           <AuthProvider>
             <SubscriptionProvider>

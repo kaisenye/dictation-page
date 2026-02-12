@@ -134,17 +134,15 @@ function SignInContent() {
         </Button>
 
         <div className="relative flex items-center justify-center">
-          <span className="text-xs text-neutral-500 px-2 bg-neutral-900/60">
-            or
-          </span>
-          <div className="absolute inset-x-0 top-1/2 h-px bg-neutral-800 -z-10" />
+          <span className="text-xs text-gray-500 px-2 bg-gray-100">or</span>
+          <div className="absolute inset-x-0 top-1/2 h-px bg-gray-300 -z-10" />
         </div>
 
         <SignInForm onSubmit={handleSignIn} />
 
         {/* Sign Up Link */}
         <div className="text-center">
-          <p className="text-sm text-neutral-400">
+          <p className="text-sm text-gray-600">
             Don&apos;t have an account?{' '}
             <Link
               href={
@@ -152,7 +150,7 @@ function SignInContent() {
                   ? '/auth/sign-up?source=desktop'
                   : '/auth/sign-up'
               }
-              className="text-white hover:text-neutral-300 underline transition-colors"
+              className="text-gray-900 hover:text-gray-700 underline transition-colors"
             >
               Create one here
             </Link>
@@ -163,7 +161,7 @@ function SignInContent() {
         <div className="text-center">
           <Link
             href="/auth/forgot-password"
-            className="text-sm text-neutral-400 hover:text-neutral-300 transition-colors"
+            className="text-sm text-gray-600 hover:text-gray-700 transition-colors"
           >
             Forgot your password?
           </Link>

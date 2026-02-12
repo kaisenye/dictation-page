@@ -27,10 +27,10 @@ export default function UseCaseCard({
 }: UseCaseCardProps) {
   const textContent = (
     <div className="flex flex-col justify-center space-y-4 md:space-y-4">
-      <h2 className="text-xl md:text-xl lg:text-2xl font-mediun text-white">
+      <h2 className="text-xl md:text-xl lg:text-2xl font-mediun text-gray-900">
         {title}
       </h2>
-      <div className="text-sm md:text-base text-neutral-400 leading-relaxed">
+      <div className="text-sm md:text-base text-gray-600 leading-relaxed">
         {description}
       </div>
     </div>
@@ -64,7 +64,7 @@ export default function UseCaseCard({
   return (
     <EmergeAnimation delay={delay}>
       <section
-        className={`grid grid-cols-1 md:grid-cols-20 gap-8 md:gap-12 items-center bg-stone-950 px-4 md:px-6 py-4 rounded-lg md:rounded-xl ${className}`}
+        className={`grid grid-cols-1 md:grid-cols-20 gap-8 md:gap-12 items-center bg-gray-50 px-4 md:px-6 py-4 rounded-lg md:rounded-xl border border-gray-200 ${className}`}
       >
         {reverse ? (
           <>

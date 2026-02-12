@@ -83,8 +83,8 @@ export const WaitlistEmail = ({ email }: WaitlistEmailProps) => (
                 Timeline:
               </Heading>
               <Text className="text-neutral-500 text-base leading-relaxed m-0">
-                We&apos;re aiming for March 2026. You&apos;ll receive updates
-                as we get closer to launch.
+                We&apos;re aiming for March 2026. You&apos;ll receive updates as
+                we get closer to launch.
               </Text>
             </Section>
           </Section>

@@ -25,7 +25,7 @@ const modalConfigs = {
     ctaText: 'Send Download Link',
   },
   waitlist: {
-    title: 'Join the Waitlist',
+    title: 'Join the waitlist',
     description: 'Be the first to try Romo for free!',
     ctaText: 'Join Waitlist',
   },

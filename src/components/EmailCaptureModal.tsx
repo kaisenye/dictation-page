@@ -100,30 +100,32 @@ export default function EmailCaptureModal({
       onClick={handleClose}
     >
       <div
-        className="relative w-full max-w-sm px-4 py-6 bg-neutral-950 rounded-lg shadow-xl animate-in zoom-in-95 duration-300 ease-out"
+        className="relative w-full max-w-sm px-6 py-8 bg-white rounded-xl shadow-xl animate-in zoom-in-95 duration-300 ease-out border border-gray-200"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close button */}
         <button
           onClick={handleClose}
           disabled={submitState.status === 'loading'}
-          className="absolute right-4 top-4 p-1 text-neutral-400 hover:text-white transition-colors disabled:opacity-50 cursor-pointer"
+          className="absolute right-4 top-4 p-1 text-gray-400 hover:text-gray-900 transition-colors disabled:opacity-50 cursor-pointer"
         >
           <X className="w-4 h-4" />
         </button>
 
         <div className="py-8 px-6">
           {/* Header */}
-          <div className="text-center mb-6">
-            <h2 className="text-xl font-medium text-white mb-2">{title}</h2>
-            <p className="text-sm text-neutral-400">{description}</p>
+          <div className="text-center mb-8">
+            <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-3">
+              {title}
+            </h2>
+            <p className="text-sm md:text-base text-gray-600">{description}</p>
           </div>
 
           {/* Success State */}
           {submitState.status === 'success' && (
             <div className="text-center mb-6">
-              <CheckCircle className="w-8 h-8 text-green-400 mx-auto mb-3" />
-              <p className="text-green-400 font-medium">
+              <CheckCircle className="w-8 h-8 text-green-600 mx-auto mb-3" />
+              <p className="text-green-600 font-medium">
                 {submitState.message}
               </p>
             </div>
@@ -139,7 +141,7 @@ export default function EmailCaptureModal({
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email address"
                   className={cn(
-                    'w-full px-4 py-3 bg-neutral-800 border border-neutral-700 rounded-md text-white placeholder-neutral-400 focus:outline-none focus:ring-1 focus:ring-neutral-100 focus:border-transparent transition-colors',
+                    'w-full px-4 py-3 bg-white border border-gray-300 rounded-md text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent transition-colors',
                     submitState.status === 'error' && 'border-red-500'
                   )}
                   disabled={submitState.status === 'loading'}
@@ -149,7 +151,7 @@ export default function EmailCaptureModal({
 
               {/* Error Message */}
               {submitState.status === 'error' && (
-                <div className="flex items-center gap-2 text-red-400 text-sm">
+                <div className="flex items-center gap-2 text-red-600 text-sm">
                   <AlertCircle className="w-4 h-4" />
                   <span>{submitState.message}</span>
                 </div>
@@ -170,7 +172,7 @@ export default function EmailCaptureModal({
 
           {/* Footer */}
           <div className="mt-6 text-center">
-            <p className="text-xs text-neutral-500">
+            <p className="text-xs text-gray-500">
               No spam. Unsubscribe anytime.
             </p>
           </div>

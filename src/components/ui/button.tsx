@@ -17,10 +17,10 @@ const buttonVariants = cva(
         destructiveGhost:
           'text-red-700 shadow-xs hover:bg-red-700 hover:text-white',
         outline:
-          'border border-white/20 bg-transparent text-white shadow-xs hover:bg-white/10 hover:border-white/30',
+          'border border-gray-300 bg-transparent text-gray-900 shadow-xs hover:bg-gray-50 hover:border-gray-400',
         secondary: 'bg-lime-400 text-lime-950 shadow-xs hover:bg-lime-500',
-        ghost: 'text-white hover:bg-white/10',
-        link: 'text-white underline-offset-4 hover:underline',
+        ghost: 'text-gray-900 hover:bg-gray-100',
+        link: 'text-gray-900 underline-offset-4 hover:underline',
       },
       size: {
         default: 'h-9 px-4 py-2 has-[>svg]:px-3',
