@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 // TODO: Restore FaApple import when restoring download button
 // import { FaApple } from 'react-icons/fa';
@@ -9,6 +10,8 @@ import { useEmailCapture } from '@/hooks/useEmailCapture';
 import { useVideoModal } from '@/hooks/useVideoModal';
 import EmergeAnimation from '@/components/EmergeAnimation';
 import ColourfulText from '@/components/ColourfulText';
+import LoopingVideo from '@/components/LoopingVideo';
+import SoundWavePill from '@/components/SoundWavePill';
 
 import Footer from '@/components/Footer';
 
@@ -17,6 +20,54 @@ export default function Home() {
   // Email modal is now rendered globally at app level
   const { openWaitlistModal } = useEmailCapture();
   const { isOpen: isVideoOpen, closeModal: closeVideoModal } = useVideoModal();
+  const [isVideoSectionVisible, setIsVideoSectionVisible] = useState(false);
+  const [hasScrolledDown, setHasScrolledDown] = useState(false);
+  const videoSectionRef = useRef<HTMLDivElement>(null);
+  const lastScrollY = useRef(0);
+
+  // Track scroll down action
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // Only set hasScrolledDown if user has scrolled down (not up)
+      if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+        setHasScrolledDown(true);
+      }
+      
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Intersection Observer to detect when video section comes into view
+  useEffect(() => {
+    const videoSection = videoSectionRef.current;
+    if (!videoSection) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          // Only show if section is visible AND user has scrolled down
+          if (entry.isIntersecting && hasScrolledDown) {
+            setIsVideoSectionVisible(true);
+          }
+        });
+      },
+      {
+        threshold: 0.2, // Trigger when 20% of the section is visible
+        rootMargin: '0px',
+      }
+    );
+
+    observer.observe(videoSection);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [hasScrolledDown]);
 
   return (
     <div className="min-h-screen max-w-7xl mx-auto w-full overflow-x-hidden bg-white flex flex-col">
@@ -29,14 +80,14 @@ export default function Home() {
         <EmergeAnimation delay={100}>
           <section className="relative w-full py-24 md:py-32 flex flex-col items-center justify-center text-center px-4">
             {/* Title and Description */}
-            <div className="max-w-3xl mx-auto mb-12">
+            <div className="max-w-3xl mx-auto mb-8">
               <h1 className="text-5xl lg:text-6xl font-semibold text-gray-900 mb-6">
                 Your best <ColourfulText text="ideas" />
                 <br />
                 die in your <span className="text-gray-500">keyboard</span>
               </h1>
               <p className="text-md md:text-md lg:text-lg text-gray-600 max-w-lg mx-auto leading-relaxed">
-                Just speak mumble, Romo turns it into polished output.
+                Just mumble, Romo turns it into polished output.
               </p>
               <p className="text-md md:text-md lg:text-lg text-gray-600 max-w-lg mx-auto leading-relaxed0">
                 Ideas. Notes. Emails. Code. Docs. Done.
@@ -54,6 +105,26 @@ export default function Home() {
                 Join Waitlist
               </Button>
               <p className="text-sm text-gray-500 mt-3">Built for Mac.</p>
+            </div>
+
+            {/* Demo Video */}
+            <div
+              ref={videoSectionRef}
+              className="mt-12 md:mt-16 w-full max-w-5xl mx-auto relative"
+            >
+              {/* Sound Wave Pill - positioned at top edge of video */}
+              <SoundWavePill
+                isVisible={isVideoSectionVisible}
+                className="-top-6"
+              />
+              <div className="w-full aspect-[3/2] rounded-2xl overflow-hidden">
+                <LoopingVideo
+                  src="/romo.webm"
+                  webmSrc="/romo.webm"
+                  className="w-full h-full"
+                  preload="metadata"
+                />
+              </div>
             </div>
           </section>
         </EmergeAnimation>
