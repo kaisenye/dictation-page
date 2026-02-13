@@ -63,13 +63,16 @@ export default function Home() {
           {/* THE PROBLEM */}
           <EmergeAnimation delay={100}>
             <div className="max-w-5xl mx-auto px-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
-                <div>
-                  <h2 className="text-xs md:text-sm font-medium text-gray-400 uppercase tracking-wider mb-4">
-                    THE PROBLEM
-                  </h2>
-                  <h3 className="text-2xl md:text-3xl font-semibold text-gray-900 leading-tight">
-                    You think in ideas. You type in characters.
+              <h2 className="text-xs md:text-sm font-medium text-gray-400 uppercase tracking-wider mb-4">
+                THE PROBLEM
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-start">
+                <div className="pt-0">
+                  <h3 className="text-4xl font-semibold text-gray-900 leading-tight">
+                    You think in ideas
+                  </h3>
+                  <h3 className="text-4xl font-semibold text-gray-900 leading-tight">
+                    You type in characters
                   </h3>
                 </div>
                 <div className="pt-8 md:pt-0">
@@ -90,13 +93,13 @@ export default function Home() {
           {/* WHAT EXISTS */}
           <EmergeAnimation delay={200}>
             <div className="max-w-5xl mx-auto px-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
-                <div>
-                  <h2 className="text-xs md:text-sm font-medium text-gray-400 uppercase tracking-wider mb-4">
-                    WHAT EXISTS
-                  </h2>
-                  <h3 className="text-2xl md:text-3xl font-semibold text-gray-900 leading-tight mb-2">
-                    Current tools just transcribe.
+              <h2 className="text-xs md:text-sm font-medium text-gray-400 uppercase tracking-wider mb-4">
+                WHAT EXISTS
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-start">
+                <div className="pt-0">
+                  <h3 className="text-4xl font-semibold text-gray-900 leading-tight mb-2">
+                    Current tools just transcribe
                   </h3>
                   <p className="text-xl md:text-2xl text-gray-700">
                     Word for word. Uh for uh.
@@ -126,16 +129,18 @@ export default function Home() {
               id="how-it-works"
               className="max-w-5xl mx-auto px-4 scroll-mt-24"
             >
-              <div>
-                <h2 className="text-xs md:text-sm font-medium text-gray-400 uppercase tracking-wider mb-4">
-                  HOW IT WORKS
-                </h2>
-                <h3 className="text-2xl md:text-3xl font-semibold text-gray-900 leading-tight mb-6">
-                  Romo understands what you{' '}
-                  <span className="underline">meant</span>.<br />
-                  Not just what you said.
-                </h3>
-                <div className="max-w-3xl space-y-4">
+              <h2 className="text-xs md:text-sm font-medium text-gray-400 uppercase tracking-wider mb-4">
+                HOW IT WORKS
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-start">
+                <div className="pt-0">
+                  <h3 className="text-4xl font-semibold text-gray-900 leading-tight">
+                    Romo understands what you{' '}
+                    <span className="underline">meant</span>, not just what you
+                    said
+                  </h3>
+                </div>
+                <div className="pt-8 md:pt-0 space-y-4">
                   <p className="text-base md:text-lg text-gray-600 leading-relaxed">
                     Speak naturally. Mumble. Think out loud. Jump around.
                   </p>
@@ -151,19 +156,29 @@ export default function Home() {
           {/* FEATURES */}
           <EmergeAnimation delay={400}>
             <div id="features" className="max-w-5xl mx-auto px-4 scroll-mt-24">
-              <div>
-                <h2 className="text-xs md:text-sm font-medium text-gray-400 uppercase tracking-wider mb-4">
-                  CONTEXT AWARE
-                </h2>
-                <h3 className="text-2xl md:text-3xl font-semibold text-gray-900 leading-tight mb-6">
-                  Romo knows what you <span className="underline">work on</span>
-                  .<br />
-                  Not just your voice.
-                </h3>
-                <div className="max-w-3xl">
+              <h2 className="text-xs md:text-sm font-medium text-gray-400 uppercase tracking-wider mb-4">
+                CONTEXT AWARE
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-start">
+                <div className="pt-0">
+                  <h3 className="text-4xl font-semibold text-gray-900 leading-tight">
+                    Romo knows what you{' '}
+                    <span className="underline">work on</span>, not just your
+                    voice
+                  </h3>
+                </div>
+                <div className="pt-8 md:pt-0">
                   <p className="text-base md:text-lg text-gray-600 leading-relaxed">
-                    Open in Gmail? Romo formats for email. In VS Code? It writes
-                    code. Browsing docs? It matches the style.
+                    In Gmail? Romo formats for email.
+                  </p>
+                  <p className="text-base md:text-lg text-gray-600 leading-relaxed">
+                    In Cursor? It writes code.
+                  </p>
+                  <p className="text-base md:text-lg text-gray-600 leading-relaxed">
+                    In Slack? Romo adds your style and emojis.
+                  </p>
+                  <p className="text-base md:text-lg text-gray-600 leading-relaxed">
+                    Browsing docs? It matches the style.
                   </p>
                 </div>
               </div>
@@ -173,13 +188,16 @@ export default function Home() {
           {/* USE CASES */}
           <EmergeAnimation delay={500}>
             <div id="use-cases" className="max-w-5xl mx-auto px-4 scroll-mt-24">
-              <div>
-                <h2 className="text-xs md:text-sm font-medium text-gray-400 uppercase tracking-wider mb-4">
-                  USE CASES
-                </h2>
-                <p className="text-base md:text-lg text-gray-600 leading-relaxed">
-                  {/* Placeholder for use cases section */}
-                </p>
+              <h2 className="text-xs md:text-sm font-medium text-gray-400 uppercase tracking-wider mb-4">
+                USE CASES
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-start">
+                <div className="pt-0">{/* Title placeholder if needed */}</div>
+                <div className="pt-8 md:pt-0">
+                  <p className="text-base md:text-lg text-gray-600 leading-relaxed">
+                    {/* Placeholder for use cases section */}
+                  </p>
+                </div>
               </div>
             </div>
           </EmergeAnimation>
