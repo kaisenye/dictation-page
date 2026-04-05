@@ -7,8 +7,10 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
+  --font-mono:
+    ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono',
+    monospace;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -115,19 +117,37 @@
 
 @layer base {
   html {
-    @apply bg-black;
+    @apply bg-background;
     /* Always show scrollbar gutter to prevent layout shift */
     scrollbar-gutter: stable;
+    scroll-behavior: smooth;
   }
   * {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground bg-black;
+    @apply bg-background text-foreground;
   }
 }
 
 @layer utilities {
+  @keyframes nav-item-blur-in {
+    0% {
+      opacity: 0;
+      filter: blur(8px);
+      transform: translateY(8px);
+    }
+    100% {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0);
+    }
+  }
+
+  .nav-item-animate {
+    animation: nav-item-blur-in 0.35s ease-out both;
+  }
+
   @keyframes scroll-right {
     0% {
       transform: translateX(0);

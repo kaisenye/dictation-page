@@ -14,7 +14,7 @@ export default function AuthLayout({
   subtitle,
 }: AuthLayoutProps) {
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col items-center justify-start px-4 py-16">
+    <div className="min-h-screen bg-white text-gray-900 flex flex-col items-center justify-start px-4 py-16">
       {/* Romo Logo - Above the card */}
       <div className="mb-8">
         <Link href="/">
@@ -29,9 +29,9 @@ export default function AuthLayout({
       </div>
 
       <div className="w-full max-w-md">
-        <div className="bg-neutral-900/60 border border-neutral-800 rounded-xl p-6 shadow-xl backdrop-blur-sm">
+        <div className="bg-gray-50 border border-gray-200 rounded-xl p-6 shadow-xl">
           <h1 className="text-2xl font-bold mb-2">{title}</h1>
-          {subtitle && <p className="text-neutral-400 mb-6">{subtitle}</p>}
+          {subtitle && <p className="text-gray-600 mb-6">{subtitle}</p>}
           {children}
         </div>
       </div>
